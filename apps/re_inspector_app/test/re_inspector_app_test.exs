@@ -1,7 +1,9 @@
 defmodule ReInspector.AppTest do
   use ExUnit.Case
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  test "returns the config version" do
+    version = ReInspector.App.version
+
+    assert version == ReInspector.App.Mixfile.project[:version]
   end
 end
