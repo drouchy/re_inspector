@@ -1,13 +1,6 @@
 defmodule ReInspector.Backend.Integration.VersionTest do
   use ExUnit.Case, async: true
 
-  setup do
-    Plug.Adapters.Cowboy.http ReInspector.Backend.Routers.MainRouter, []
-
-    on_exit fn ->
-    end
-    :ok
-  end
   test "requests the version of the app" do
     body = fetch('/version')
 

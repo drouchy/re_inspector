@@ -1,12 +1,12 @@
-defmodule ReInspector.Backend.Routers.VersionRouterTest do
+defmodule ReInspector.Backend.RouterTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias ReInspector.Backend.Routers.VersionRouter
+  alias ReInspector.Backend.Router
 
   # init/1
   test "returns the options" do
-    :options = VersionRouter.init :options
+    :options = Router.init :options
   end
 
   # get /version
@@ -27,5 +27,5 @@ defmodule ReInspector.Backend.Routers.VersionRouterTest do
     assert connection.resp_body == "{\"version\":{\"app\":\"0.0.1\",\"backend\":\"0.0.1\"}}"
   end
 
-  defp connection, do: VersionRouter.call(conn(:get, "/"), [])
+  defp connection, do: Router.call(conn(:get, "/version"), [])
 end

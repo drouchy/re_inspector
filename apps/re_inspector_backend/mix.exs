@@ -16,7 +16,10 @@ defmodule ReInspector.Backend.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:re_inspector_app, :cowboy, :plug]]
+    [
+      applications: [:re_inspector_app, :cowboy, :plug],
+      mod: { ReInspector.Backend, [] }
+    ]
   end
 
   defp deps(:test) do

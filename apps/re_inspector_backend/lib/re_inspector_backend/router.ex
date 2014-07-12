@@ -1,4 +1,4 @@
-defmodule ReInspector.Backend.Routers.VersionRouter do
+defmodule ReInspector.Backend.Router do
   import Plug.Conn
   use Plug.Router
   use Jazz
@@ -6,16 +6,14 @@ defmodule ReInspector.Backend.Routers.VersionRouter do
   plug :match
   plug :dispatch
 
-  get "/" do
+  get "/version" do
+    {:ok, json} = JSON.encode version
+
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(200, response_body)
+    |> send_resp(200, json)
   end
 
-  defp response_body do
-    {:ok, json} = JSON.encode version
-    json
-  end
 
   defp version do
     %{
@@ -29,4 +27,5 @@ defmodule ReInspector.Backend.Routers.VersionRouter do
   match _ do
     raise NotFound
   end
+
 end
