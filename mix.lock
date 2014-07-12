@@ -1,2 +1,7 @@
-%{"meck": {:git, "git://github.com/eproxus/meck.git", "dde759050eff19a1a80fd854d7375174b191665d", [tag: "0.8.2"]},
-  "mock": {:git, "git://github.com/jjh42/mock.git", "275109db347caf3449b6d123bd4da720fb08b28e", []}}
+%{"cowboy": {:git, "git://github.com/extend/cowboy.git", "e2b5c21443a53b3bc98c90e41b8ccf08d5731db7", []},
+  "cowlib": {:git, "git://github.com/extend/cowlib.git", "e2ffefe828b918486e2cd76e44c54ae9b62c616e", [ref: "0.6.2"]},
+  "jazz": {:package, "0.1.2"},
+  "meck": {:git, "git://github.com/eproxus/meck.git", "dde759050eff19a1a80fd854d7375174b191665d", [tag: "0.8.2"]},
+  "mock": {:git, "git://github.com/jjh42/mock.git", "275109db347caf3449b6d123bd4da720fb08b28e", []},
+  "plug": {:package, "0.5.1"},
+  "ranch": {:git, "git://github.com/extend/ranch.git", "3189ef2d47843945efc96c224963380462c33d40", [ref: "0.10.0"]}}
