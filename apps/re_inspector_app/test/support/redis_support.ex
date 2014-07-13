@@ -15,7 +15,7 @@ defmodule ReInspector.Support.Redis do
     redis_connection |> query(args)
   end
 
-  def redis_list,   do: "REDIS_LIST"
+  def redis_list,   do: Application.get_env(:redis, :list)
   def failure_list, do: "REDIS_FAILURE_LIST"
 
 end
