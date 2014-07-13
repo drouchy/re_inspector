@@ -8,7 +8,8 @@ defmodule ReInspector.App.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 0.14.2",
-      deps: deps(Mix.env)
+      deps: deps(Mix.env),
+      elixirc_paths: src_paths(Mix.env)
     ]
   end
 
@@ -20,6 +21,14 @@ defmodule ReInspector.App.Mixfile do
       applications: [:postgrex, :ecto],
       mod: {ReInspector.App, [] }
     ]
+  end
+
+  def src_paths(:test) do
+    src_paths(:dev) ++ ["test/support"]
+  end
+
+  def src_paths(_) do
+    ["lib"]
   end
 
   defp deps(:test) do
