@@ -1,5 +1,7 @@
 %{"cowboy": {:git, "git://github.com/extend/cowboy.git", "e2b5c21443a53b3bc98c90e41b8ccf08d5731db7", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "e2ffefe828b918486e2cd76e44c54ae9b62c616e", [ref: "0.6.2"]},
+  "decimal": {:package, "0.2.2"},
+  "ecto": {:package, "0.2.2"},
   "hackney": {:git, "git://github.com/benoitc/hackney.git", "fd2158b39b0aa139bb90f0c867f246ddfec072e6", []},
   "httpoison": {:package, "0.3.0"},
   "idna": {:git, "git://github.com/benoitc/erlang-idna.git", "21aa158b7f36bf2a000f12fe40d7f21eece9cf65", [tag: "hackney-0.11.2"]},
@@ -7,4 +9,6 @@
   "meck": {:git, "git://github.com/eproxus/meck.git", "dde759050eff19a1a80fd854d7375174b191665d", [tag: "0.8.2"]},
   "mock": {:git, "git://github.com/jjh42/mock.git", "275109db347caf3449b6d123bd4da720fb08b28e", []},
   "plug": {:package, "0.5.1"},
+  "poolboy": {:package, "1.2.1"},
+  "postgrex": {:package, "0.5.2"},
   "ranch": {:git, "git://github.com/extend/ranch.git", "3189ef2d47843945efc96c224963380462c33d40", [ref: "0.10.0"]}}

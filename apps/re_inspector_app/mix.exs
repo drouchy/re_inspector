@@ -16,8 +16,10 @@ defmodule ReInspector.App.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [],
-     mod: {ReInspector.App, []}]
+    [
+      applications: [:postgrex, :ecto],
+      mod: {ReInspector.App, [] }
+    ]
   end
 
   defp deps(:test) do
@@ -27,6 +29,9 @@ defmodule ReInspector.App.Mixfile do
   end
 
   defp deps(_) do
-    []
+    [
+      {:postgrex, "~> 0.5.2"},
+      {:ecto, "~> 0.2.0"}
+    ]
   end
 end
