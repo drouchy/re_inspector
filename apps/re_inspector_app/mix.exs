@@ -41,7 +41,9 @@ defmodule ReInspector.App.Mixfile do
     [
       {:postgrex, "~> 0.5.2"},
       {:ecto, "~> 0.2.0"},
-      {:exredis, github: "artemeff/exredis"}
+      {:exredis, github: "artemeff/exredis"},
+      {:exlager, github: "khia/exlager"},
+      {:jazz, "~> 0.1.2"}
     ]
   end
 end
