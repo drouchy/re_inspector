@@ -7,7 +7,8 @@ defmodule ReInspector.App.Supervisors.MainSupervisor do
 
   def init([]) do
     children = [
-      worker(ReInspector.App.Workers.ConfigWorker, [])
+      worker(ReInspector.App.Workers.ConfigWorker, []),
+      worker(ReInspector.App.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/Supervisor.Behaviour.html
