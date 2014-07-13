@@ -1,3 +1,3 @@
 ExUnit.start()
 
-:application.start(:inets)
+HTTPoison.start

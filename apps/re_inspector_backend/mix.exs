@@ -24,7 +24,9 @@ defmodule ReInspector.Backend.Mixfile do
 
   defp deps(:test) do
     [
-      { :mock, github: "jjh42/mock" }
+      { :mock, github: "jjh42/mock" },
+      { :httpoison, "~> 0.3.0"},
+      { :hackney, github: "benoitc/hackney" }
     ] ++ deps(:default)
   end
 

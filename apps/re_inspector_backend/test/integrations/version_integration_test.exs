@@ -7,8 +7,8 @@ defmodule ReInspector.Backend.Integration.VersionTest do
     assert Regex.run(~r/"version"/, body) != nil
   end
 
-  def fetch(url) do
-    { :ok, {{_version, 200, _reason_phrase}, _headers, body } } = :httpc.request('http://localhost:4000/' ++ url )
-    to_string body
+  def fetch(path) do
+    response = HTTPoison.get "http://localhost:4000#{path}"
+    response.body
   end
 end
