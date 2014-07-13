@@ -1,0 +1,25 @@
+{
+  "requestedAt": "2014-01-03T14:30:00Z",
+  "time_to_execute": 1230,
+  "service": {
+    "name": "booking_service",
+    "version": "4.10.3",
+    "environment": "sandbox"
+  },
+  "request": {
+     "method": "POST",
+     "path": "/bookings",
+     "headers": {
+       "Authorization": "Bearer 234......4",
+       "Content-type": "application/json"
+     },
+     "body": "{ \"booking\" : { \"quote_id\": \"1a2b3c-asap\", \"booking_type\": \"general\" } }"
+  },
+  "response": {
+     "status": 200,
+     "headers": {
+       "content-type": "application/json"
+     },
+     "body": "{ \"booking\": { \"reference\": \"SHU31-24C43\" } }"
+  }
+}

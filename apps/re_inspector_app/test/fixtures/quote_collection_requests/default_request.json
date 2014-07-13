@@ -1,0 +1,25 @@
+{
+  "requestedAt": "2014-01-03T14:30:00Z",
+  "time_to_execute": 1230,
+  "service": {
+    "name": "quote_service",
+    "version": "4.10.3",
+    "environment": "sandbox"
+  },
+  "request": {
+     "method": "POST",
+     "path": "/quote_collections",
+     "headers": {
+       "Authorization": "Bearer 234......4",
+       "Content-type": "application/json"
+     },
+     "body": "{ \"quote_collection\": { \"delay_time\": 15, \"channel\": \"pos\", \"page\": \"product\", \"session_id\": \"example123\", \"customer_id\": \"cookie1\", \"basket_value\": 1295 } }"
+  },
+  "response": {
+     "status": 200,
+     "headers": {
+       "content-type": "application/json"
+     },
+     "body": "{ \"quote_collection\": { \"id\": \"1a2b3c\", \"created_at\": \"2014-07-09T12:42+01:00\", \"time_zone\": \"Europe/London\", \"distance\": 0.4, \"no_coverage\": false, \"shop_and_pay_by_card\": false } }"
+  }
+}

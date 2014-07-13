@@ -1,0 +1,27 @@
+{
+  "requested_at": "2014-07-09T18:21:00+01:00",
+  "time_to_execute": 1,
+  "service": {
+    "name": "booking_service",
+    "version": "fb208ac\n",
+    "environment": "test"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/job_status/123",
+    "headers": {
+      "HTTP_VERSION": "HTTP/1.1",
+      "HTTP_AUTHORIZATION": "Bearer TSd0w22n....g",
+      "HTTP_CONNECTION": "close",
+      "HTTP_HOST": "localhost:4000"
+    },
+    "body": "{\"job_update\":{\"carrier_id\":\"dhl\",\"tracking_code\":\"ABCD\",\"total_wait_time\":32,\"time_zone\":\"Europe/London\",\"courier\":{\"name\":\"Joe Bloggs\",\"email\":\"joe@ecourier.co.uk\",\"phone\":\"07840539999\",\"callsign\":\"GrumpySquirrel3\",\"numberplate\":\"VGC 32 A5\"}}}"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    "body": "{\"errors\":{\"base\":[\"Sinatra::NotFound\"]}}"
+  }
+}
