@@ -2,7 +2,7 @@ defmodule ReInspector.App do
   use Application
 
   @lagger_formatter [:time, ' [', :severity, '] ', :message, '\n']
-  @lager_level :debug
+  @lager_level Application.get_env(:exlager, :level)
 
   def start(_type, _args) do
     configure_lager
