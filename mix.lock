@@ -2,6 +2,8 @@
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "e2ffefe828b918486e2cd76e44c54ae9b62c616e", [ref: "0.6.2"]},
   "decimal": {:package, "0.2.2"},
   "ecto": {:package, "0.2.2"},
+  "eredis": {:git, "git://github.com/wooga/eredis.git", "471dd471060daa1d98391cb69ae006f8ba79a042", [ref: "471dd"]},
+  "exredis": {:git, "git://github.com/artemeff/exredis.git", "e59e3dc31290f3d5a6bb345b4b25e460458e1f31", []},
   "hackney": {:git, "git://github.com/benoitc/hackney.git", "fd2158b39b0aa139bb90f0c867f246ddfec072e6", []},
   "httpoison": {:package, "0.3.0"},
   "idna": {:git, "git://github.com/benoitc/erlang-idna.git", "21aa158b7f36bf2a000f12fe40d7f21eece9cf65", [tag: "hackney-0.11.2"]},

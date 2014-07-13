@@ -40,7 +40,8 @@ defmodule ReInspector.App.Mixfile do
   defp deps(_) do
     [
       {:postgrex, "~> 0.5.2"},
-      {:ecto, "~> 0.2.0"}
+      {:ecto, "~> 0.2.0"},
+      {:exredis, github: "artemeff/exredis"}
     ]
   end
 end
