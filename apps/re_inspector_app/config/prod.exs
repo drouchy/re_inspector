@@ -6,3 +6,6 @@ config :database,
 config :exlager,
   level: :info,
   truncation_size: 8096
+
+config :re_inspector,
+  correlators: []
