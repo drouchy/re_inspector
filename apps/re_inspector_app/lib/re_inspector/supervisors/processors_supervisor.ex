@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Supervisors.MainSupervisor do
+defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   use Supervisor
 
   def start_link do
@@ -7,9 +7,8 @@ defmodule ReInspector.App.Supervisors.MainSupervisor do
 
   def init([]) do
     children = [
-      supervisor(ReInspector.App.Supervisors.ProcessorsSupervisor, []),
-      worker(ReInspector.App.Workers.ConfigWorker, []),
-      worker(ReInspector.App.Repo, [])
+      worker(ReInspector.App.Workers.MessageListenerWorker,  [{redis_client, redis_list}]),
+      worker(ReInspector.App.Workers.MessageCorrelatorWorker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/Supervisor.Behaviour.html
