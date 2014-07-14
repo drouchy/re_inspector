@@ -5,8 +5,13 @@ defmodule ReInspector.App.Processors.RedisListener do
   alias ReInspector.App.JsonParser
 
   def listen(redis_client, list) do
-    Lager.debug "listening '#{list}' in redis"
     Redis.pop(redis_client, list)
+    |> decode
+  end
+
+  defp decode(:none), do: :none
+  defp decode(message) do
+    message
     |> JsonParser.decode
   end
 end

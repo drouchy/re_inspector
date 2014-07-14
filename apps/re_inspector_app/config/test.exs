@@ -7,5 +7,5 @@ config :redis,
   list: "re_inspector_test"
 
 config :exlager,
-  level: :emergency,
+  level: :error,
   truncation_size: 8096

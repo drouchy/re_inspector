@@ -63,6 +63,19 @@ defmodule ReInspector.App.Connections.RedisTest do
     assert Redis.pop(redis_connection, redis_list) == :none
   end
 
+  test "returns :none if the list does not exist" do
+    query ["DEL", redis_list]
+
+    assert Redis.pop(redis_connection, redis_list) == :none
+  end
+
+  test "returns :none if the list is empty" do
+    query ["RPUSH", redis_list, default_message]
+    query ["LPOP", redis_list]
+
+    assert Redis.pop(redis_connection, redis_list) == :none
+  end
+
   # push
   test "it adds the element at the tail of the list" do
     Redis.push(redis_connection, "message 1", failure_list)

@@ -20,5 +20,9 @@ defmodule ReInspector.App.Processors.RedisListenerTest do
     assert message == %{a: 1}
   end
 
+  test "return :none if nothing is in redis" do
+    :none = RedisListener.listen redis_connection, redis_list
+  end
+
   defp message, do: "{\"a\":1}"
 end

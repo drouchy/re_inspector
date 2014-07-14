@@ -1,5 +1,5 @@
 {
-  "requestedAt": "2014-01-03T14:30:00Z",
+  "requested_at": "2014-01-03T14:30:00Z",
   "time_to_execute": 1230,
   "service": {
     "name": "booking_service",

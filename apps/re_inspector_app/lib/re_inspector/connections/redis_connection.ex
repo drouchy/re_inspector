@@ -8,21 +8,18 @@ defmodule ReInspector.App.Connections.Redis do
   end
 
   def length(redis_client, list) do
-    Lager.debug "length of the list #{list}"
     redis_client
     |> query(["LLEN", list])
     |> to_size
   end
 
   def pop(redis_client, list) do
-    Lager.debug "lpop of the list #{list}"
     redis_client
-    |> query(["BLPOP", list, "0"])
-    |> value
+    |> query(["LPOP", list])
+    |> to_message
   end
 
   def push(redis_client, message, list) do
-    Lager.debug "push #{message}"
     redis_client
     |> query(["RPUSH", list, message])
     :ok
@@ -35,6 +32,11 @@ defmodule ReInspector.App.Connections.Redis do
     end
   end
 
-  defp value([_name, value]), do: value
-  defp value(_), do: :none
+  defp to_message(:undefined), do: :none
+  defp to_message(value) do
+    case Regex.run ~r/^ERR.*/, value do
+      nil -> value
+      _   -> :none
+    end
+  end
 end
