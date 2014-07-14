@@ -19,6 +19,6 @@ defmodule ReInspector.App.ApiRequest do
     field :service_version, :string
     field :service_env,     :string
 
-    # belongs_to :correlation, ReInspector.App.Correlation
+    belongs_to :correlation, ReInspector.App.Correlation
   end
 end
