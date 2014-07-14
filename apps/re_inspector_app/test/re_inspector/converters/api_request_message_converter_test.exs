@@ -20,7 +20,7 @@ defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
   end
 
   test "it converts the service name" do
-    assert convert[:service_name] == "booking_service"
+    assert convert[:service_name] == "service 1"
   end
 
   test "it converts the service version" do
@@ -36,7 +36,7 @@ defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
   end
 
   test "it converts the request path" do
-    assert convert[:path] == "/bookings"
+    assert convert[:path] == "/article/123/comments"
   end
 
   test "it converts the request headers" do
@@ -44,7 +44,7 @@ defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
   end
 
   test "it converts the request body" do
-    assert convert[:request_body] == "{ \"booking\" : { \"quote_id\": \"1a2b3c-asap\", \"booking_type\": \"general\" } }"
+    assert convert[:request_body] == "{ \"comment\" : { \"comment_id\": \"1a2b3c\", \"text\": \"general comment\" } }"
   end
 
   test "it converts the response status" do
@@ -56,7 +56,7 @@ defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
   end
 
   test "it converts the response body" do
-    assert convert[:response_body] == "{ \"booking\": { \"reference\": \"SHU31-24C43\" } }"
+    assert convert[:response_body] == "{ \"comment\": { \"reference\": \"24C43\" } }"
   end
 
   test "it removes the request entry" do
@@ -78,5 +78,5 @@ defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
   end
 
   defp default_fixture, do: File.read fixture_file
-  defp fixture_file,    do: Path.expand("../../../fixtures/booking_requests/default_request.json", __ENV__.file())
+  defp fixture_file,    do: Path.expand("../../../fixtures/service_1_default_request.json", __ENV__.file())
 end

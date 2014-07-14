@@ -26,9 +26,9 @@ defmodule FromRedisToPostgresTest do
       assert count_api_requests == 2
     end
 
-    assert first_api_request.service_name == "booking_service"
+    assert first_api_request.service_name == "service 1"
   end
 
   defp default_fixture, do: File.read fixture_file
-  defp fixture_file,    do: Path.expand("../../fixtures/booking_requests/default_request.json", __ENV__.file())
+  defp fixture_file,    do: Path.expand("../../fixtures/service_1_default_request.json", __ENV__.file())
 end
