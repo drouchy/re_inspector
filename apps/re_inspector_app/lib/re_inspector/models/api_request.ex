@@ -19,6 +19,8 @@ defmodule ReInspector.App.ApiRequest do
     field :service_version, :string
     field :service_env,     :string
 
+    field :request_name,    :string
+
     belongs_to :correlation, ReInspector.App.Correlation
   end
 end
