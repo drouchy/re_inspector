@@ -1,7 +1,8 @@
-defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
+defmodule ReInspector.App.Converters.ApiRequestMessageConverterTest do
   use ExUnit.Case
+  import ReInspector.Support.Fixtures
 
-  alias ReInspector.App.Processors.ApiRequestMessageConverter
+  alias ReInspector.App.Converters.ApiRequestMessageConverter
 
   test "it converts the requested_at" do
     date = convert[:requested_at]
@@ -71,12 +72,5 @@ defmodule ReInspector.App.Processors.ApiRequestMessageConverterTest do
     refute Map.has_key?(convert, :service)
   end
 
-  defp convert do
-    {:ok, content} = default_fixture
-    ReInspector.App.JsonParser.decode(content)
-    |> ApiRequestMessageConverter.to_postgres
-  end
-
-  defp default_fixture, do: File.read fixture_file
-  defp fixture_file,    do: Path.expand("../../../fixtures/service_1_default_request.json", __ENV__.file())
+  defp convert, do: default_message
 end

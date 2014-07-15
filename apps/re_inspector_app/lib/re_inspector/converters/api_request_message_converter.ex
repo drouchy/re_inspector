@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Processors.ApiRequestMessageConverter do
+defmodule ReInspector.App.Converters.ApiRequestMessageConverter do
   import Lager
   alias ReInspector.App.JsonParser
 

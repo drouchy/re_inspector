@@ -25,7 +25,7 @@ defmodule ReInspector.App.Workers.MessageListenerWorker do
   defp persist(:ok),   do: IO.puts "==> ok"; :none
   defp persist(message) do
     message
-    |> ReInspector.App.Processors.ApiRequestMessageConverter.to_postgres
+    |> ReInspector.App.Converters.ApiRequestMessageConverter.to_postgres
     |> ReInspector.App.Services.ApiRequestService.persist
   end
 end
