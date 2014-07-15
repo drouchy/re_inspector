@@ -12,6 +12,7 @@ defmodule ReInspector.App.Processors.RedisListenerTest do
     end
   end
 
+  # listen/2
   test "it reads & parse the message from redis" do
     redis_connection |> Exredis.query ['RPUSH', redis_list, message]
 
