@@ -44,7 +44,7 @@ defmodule ReInspector.App.Mixfile do
       {:exredis, github: "artemeff/exredis"},
       {:exlager, github: "khia/exlager"},
       {:jazz, "~> 0.1.2"},
-      { :chronos, "~> 0.3.2" }
+      {:chronos, github: "nurugger07/chronos" }
     ]
   end
 end

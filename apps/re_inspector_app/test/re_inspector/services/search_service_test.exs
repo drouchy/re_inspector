@@ -13,7 +13,7 @@ defmodule ReInspector.App.Services.SearchServiceTest do
   setup do
     clean_db
     insert
-    #on_exit fn -> clean_db end
+    on_exit fn -> clean_db end
     :ok
   end
 
