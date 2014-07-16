@@ -24,7 +24,7 @@ defmodule ReInspector.Backend.Mixfile do
   end
 
   def src_paths(:test) do
-    src_paths(:dev) ++ ["test/support"]
+    src_paths(:dev) ++ ["test/support", "../re_inspector_app/support"]
   end
 
   def src_paths(_) do
