@@ -14,4 +14,8 @@ config :redis,
   port: 16379,
   list: "re_inceptor"
 
+config :web,
+  port: 4000,
+  compress: true
+
 import_config "#{Mix.env}.exs"

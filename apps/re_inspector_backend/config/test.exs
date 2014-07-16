@@ -15,3 +15,7 @@ config :re_inspector,
     ReInspector.Test.Service1Correlator,
     ReInspector.Test.Service2Correlator
   ]
+
+config :web,
+  port: 4010,
+  compress: true
