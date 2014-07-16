@@ -37,6 +37,20 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
     assert first_api_request.method == "POST"
   end
 
+  #find/1
+  test "returns nil if not found" do
+    assert ApiRequestService.find(10) == nil
+  end
+
+  test "returns the entry when found" do
+    Ecto.Model.put_primary_key(%ApiRequest{}, 10) |> Repo.insert
+
+    found = ApiRequestService.find(10)
+
+    assert found != nil
+    assert found.id == 10
+  end
+
   #update/3
   test "links the api request & the correlation" do
     {correlation, api_request, correlator_name} = build_update_fixture

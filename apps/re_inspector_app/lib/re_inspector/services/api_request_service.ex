@@ -1,5 +1,6 @@
 defmodule ReInspector.App.Services.ApiRequestService do
   import Lager
+  import Ecto.Query, only: [from: 2]
 
   alias ReInspector.ApiRequest
   alias ReInspector.Repo
@@ -7,6 +8,13 @@ defmodule ReInspector.App.Services.ApiRequestService do
   def persist(attributes) do
     Lager.debug "persist api_request with: #{inspect(attributes)}"
     struct(ApiRequest, attributes) |> Repo.insert
+  end
+
+  def find(id) do
+    Lager.debug "find api_request with id #{id}"
+    from(q in ApiRequest, where: q.id == ^id, select: q)
+    |> Repo.all
+    |> List.first
   end
 
   def update(api_request, correlation, correlator_name) do
