@@ -1,10 +1,15 @@
 defmodule ReInspector.App.Services.ApiRequestServiceTest do
   use ExUnit.Case
+  use Chronos, date: {2014, 7, 16}
+
   import Lager
   import ReInspector.Support.Ecto
 
   alias ReInspector.App.Services.ApiRequestService
   alias ReInspector.Repo
+
+  alias ReInspector.ApiRequest
+  alias ReInspector.Correlation
 
   setup do
     clean_db
@@ -32,6 +37,38 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
     assert first_api_request.method == "POST"
   end
 
+  #update/3
+  test "links the api request & the correlation" do
+    {correlation, api_request, correlator_name} = build_update_fixture
+
+    updated = ApiRequestService.update api_request, correlation, correlator_name
+
+    assert updated.correlation.id == correlation.id
+  end
+
+  test "sets the correlator name" do
+    {correlation, api_request, correlator_name} = build_update_fixture
+
+    updated = ApiRequestService.update api_request, correlation, correlator_name
+
+    assert updated.correlator_name == "one correlator"
+  end
+
+  test "sets the correlated date" do
+    {correlation, api_request, correlator_name} = build_update_fixture
+
+    updated = ApiRequestService.update api_request, correlation, correlator_name
+
+    assert updated.correlated_at != nil
+    {2014, 7, 16} = {updated.correlated_at.year, updated.correlated_at.month, updated.correlated_at.day}
+  end
 
   defp attributes, do: %{method: "POST", path: "/url/1"}
+  defp build_update_fixture do
+    {
+      %Correlation{correlations: ["1", "2"]} |> Repo.insert,
+      %ApiRequest{} |> Repo.insert,
+      "one correlator"
+    }
+  end
 end
