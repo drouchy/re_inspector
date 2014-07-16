@@ -15,7 +15,7 @@ defmodule ReInspector.Support.Fixtures do
 
   def all_fixtures do
     [fixture_file, second_fixture_file]
-    |> Enum.map(fn(file) -> {:ok, file} = File.read fixture_file ; file end)
+    |> Enum.map(fn(file) -> {:ok, f} = File.read file ; f end)
     |> Enum.map(fn(content) -> ReInspector.App.JsonParser.decode content end)
     |> Enum.map(fn(json) -> ReInspector.App.Converters.ApiRequestMessageConverter.to_postgres json end)
   end

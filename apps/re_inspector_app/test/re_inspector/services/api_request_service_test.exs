@@ -2,7 +2,6 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
   use ExUnit.Case
   use Chronos, date: {2014, 7, 16}
 
-  import Lager
   import ReInspector.Support.Ecto
 
   alias ReInspector.App.Services.ApiRequestService

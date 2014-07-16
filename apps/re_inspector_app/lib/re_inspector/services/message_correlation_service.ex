@@ -9,20 +9,20 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
 
   import Ecto.Query, only: [from: 2]
 
-  def process_api_request(correlators, id) do
+  def process_api_request(id, correlators) do
     Lager.info "processing api request #{id}"
     api_request = ApiRequestService.find(id)
 
-    {api_request, correlations, correlator_name} = launch_correlation(correlators, api_request)
+    {api_request, correlations, correlator_name} = launch_correlation(api_request, correlators)
     correlation = persist_correlation(correlations)
 
     ApiRequestService.update(api_request, correlation, correlator_name)
   end
 
-  def launch_correlation(correlators, api_request) do
+  def launch_correlation(api_request, correlators) do
     Lager.info "launching correlation for api_request #{inspect api_request}"
 
-    correlator = find_correlator(correlators, api_request)
+    correlator = find_correlator(api_request, correlators)
     {
       %ApiRequest{api_request| request_name: correlator.request_name(api_request)},
       correlator.extract_correlation(api_request),
@@ -34,7 +34,7 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
     update_correlation(correlations, find_previous_correlation(correlations))
   end
 
-  defp find_correlator(correlators, api_request) do
+  defp find_correlator(api_request, correlators) do
     Enum.find correlators, fn (correlator) -> correlator.support? api_request end
   end
 

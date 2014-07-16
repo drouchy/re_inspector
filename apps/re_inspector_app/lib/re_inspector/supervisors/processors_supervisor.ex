@@ -8,7 +8,7 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   def init([]) do
     children = [
       worker(ReInspector.App.Workers.MessageListenerWorker,  [{redis_client, redis_list}]),
-      worker(ReInspector.App.Workers.MessageCorrelatorWorker, [])
+      worker(ReInspector.App.Workers.MessageCorrelatorWorker, [correlators])
     ]
 
     # See http://elixir-lang.org/docs/stable/Supervisor.Behaviour.html
@@ -20,4 +20,5 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   defp redis_list,   do: Application.get_env(:redis, :list)
 
   defp redis_options, do: Application.get_all_env(:redis)
+  defp correlators, do: Application.get_env(:re_inspector, :correlators)
 end

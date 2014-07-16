@@ -21,7 +21,7 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
     |> Ecto.Model.put_primary_key(15)
     |> Repo.insert
 
-    processed = MessageCorrelationService.process_api_request(correlators, 15)
+    processed = MessageCorrelationService.process_api_request(15, correlators)
 
     assert processed.correlation.id != nil
     assert processed.correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
@@ -30,31 +30,31 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
 
   #launch_correlation/2
   test "enriches the message with the request name" do
-    {enriched, _, _} = MessageCorrelationService.launch_correlation(correlators, struct(ApiRequest, default_message))
+    {enriched, _, _} = MessageCorrelationService.launch_correlation(struct(ApiRequest, default_message), correlators)
 
     assert enriched.request_name == "service 1 request"
   end
 
   test "keeps the previous properties of the api request" do
-    {enriched, _, _} = MessageCorrelationService.launch_correlation(correlators, struct(ApiRequest, default_message))
+    {enriched, _, _} = MessageCorrelationService.launch_correlation(struct(ApiRequest, default_message), correlators)
 
     assert enriched.path == "/article/123/comments"
   end
 
   test "returns the correlations of the message" do
-    {_, correlations, _} = MessageCorrelationService.launch_correlation(correlators, struct(ApiRequest, default_message))
+    {_, correlations, _} = MessageCorrelationService.launch_correlation(struct(ApiRequest, default_message), correlators)
 
     assert correlations == ["123", "24C43", nil]
   end
 
   test "returns the correlator name" do
-    {_, _, correlator_name} = MessageCorrelationService.launch_correlation(correlators, struct(ApiRequest, default_message))
+    {_, _, correlator_name} = MessageCorrelationService.launch_correlation(struct(ApiRequest, default_message), correlators)
 
     assert correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
   end
 
   test "works whaever the order of the correlators" do
-    {enriched, correlations, _} = MessageCorrelationService.launch_correlation(Enum.reverse(correlators), struct(ApiRequest, default_message))
+    {enriched, correlations, _} = MessageCorrelationService.launch_correlation(struct(ApiRequest, default_message), Enum.reverse(correlators))
 
     assert correlations == ["123", "24C43", nil]
     assert enriched.request_name == "service 1 request"

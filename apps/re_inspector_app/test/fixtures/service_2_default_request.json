@@ -2,7 +2,7 @@
   "requested_at": "2014-01-03T14:30:00Z",
   "time_to_execute": 1230,
   "service": {
-    "name": "service 1",
+    "name": "service 2",
     "version": "4.10.3",
     "environment": "sandbox"
   },

@@ -18,7 +18,7 @@ defmodule ReInspector.Support.Ecto do
   end
 
   def first_api_request do
-    List.first all_api_requests
+    List.first Repo.all api_request_query
   end
 
   def all_correlations do
@@ -26,7 +26,7 @@ defmodule ReInspector.Support.Ecto do
   end
 
   def all_api_requests do
-    Repo.all api_request_query
+    Repo.all from q in ReInspector.ApiRequest, preload: :correlation
   end
 
   def first_correlation do

@@ -22,4 +22,9 @@ defmodule ReInspector.App do
 
     :application.ensure_all_started(:exlager)
   end
+
+  # client methods
+  def process_api_request(api_request_id) do
+    GenServer.cast :re_inspector_message_correlator, {:process, api_request_id}
+  end
 end

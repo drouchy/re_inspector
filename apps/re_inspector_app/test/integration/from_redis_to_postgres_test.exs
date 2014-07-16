@@ -17,7 +17,7 @@ defmodule FromRedisToPostgresTest do
     :ok
   end
 
-  test "when a request is in redis, it's transformed and persisted into mongodb" do
+  test "when a request is in redis, it's transformed and persisted into postgres" do
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
 
@@ -26,5 +26,19 @@ defmodule FromRedisToPostgresTest do
     end
 
     assert first_api_request.service_name == "service 1"
+  end
+
+  test "end-to-end correlation test - from redis to postgres and correlated" do
+    redis_connection |> query ["RPUSH", redis_list, default_fixture]
+    redis_connection |> query ["RPUSH", redis_list, default_fixture]
+
+    with_retries 20, 100 do
+      assert count_api_requests == 2
+      assert count_uncorrelated_requests == 0
+    end
+
+    [first_api_request|tail] = all_api_requests
+    assert first_api_request.service_name == "service 1"
+    assert first_api_request.correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
   end
 end
