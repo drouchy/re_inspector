@@ -11,12 +11,22 @@ defmodule ReInspector.Support.Ecto do
     Enum.count(all_correlations)
   end
 
+  def count_uncorrelated_requests do
+    from(q in ReInspector.ApiRequest, where: q.correlated_at == nil)
+    |> Repo.all
+    |> Enum.count
+  end
+
   def first_api_request do
-    List.first(Repo.all(api_request_query))
+    List.first all_api_requests
   end
 
   def all_correlations do
     Repo.all(correlation_query)
+  end
+
+  def all_api_requests do
+    Repo.all api_request_query
   end
 
   def first_correlation do

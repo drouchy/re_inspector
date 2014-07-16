@@ -14,7 +14,8 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
     correlator = find_correlator(correlators, message)
     {
       %ApiRequest{request_name: correlator.request_name(message)},
-      correlator.extract_correlation(message)
+      correlator.extract_correlation(message),
+      to_string(correlator)
     }
   end
 
