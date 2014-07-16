@@ -27,4 +27,9 @@ defmodule ReInspector.App do
   def process_api_request(api_request_id) do
     GenServer.cast :re_inspector_message_correlator, {:process, api_request_id}
   end
+
+  # clients
+  def search(term, options \\ %{}) do
+    GenServer.call(:re_inspector_search, {:search, term, options})
+  end
 end
