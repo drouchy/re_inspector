@@ -5,5 +5,6 @@ defmodule ReInspector.Test.Service2Correlator do
   def support?(message), do: message.service_name == "service 2"
   def additional_information(_message), do: %{}
   def extract_correlation(_message), do: ["123", nil, nil]
+  def obfuscate(message), do: message
 
 end
