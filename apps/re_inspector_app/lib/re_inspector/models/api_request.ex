@@ -20,6 +20,7 @@ defmodule ReInspector.ApiRequest do
     field :service_env,     :string
 
     field :request_name,    :string
+    field :correlator_name, :string
 
     belongs_to :correlation, ReInspector.Correlation
   end

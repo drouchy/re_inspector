@@ -20,7 +20,10 @@ defmodule ReInspector.Repo.Migrations.CreateApiRequets do
 
       service_name    text,
       service_version text,
-      service_env     text
+      service_env     text,
+
+      request_name    text,
+      correlator_name text
     )
 
     """
