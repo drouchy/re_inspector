@@ -1,8 +1,8 @@
 defmodule ReInspector.App.Services.ApiRequestService do
   import Lager
 
-  alias ReInspector.App.ApiRequest
-  alias ReInspector.App.Repo
+  alias ReInspector.ApiRequest
+  alias ReInspector.Repo
 
   def persist(attributes) do
     Lager.debug "persist api_request with: #{inspect(attributes)}"

@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Repo.Migrations.CreateApiRequets do
+defmodule ReInspector.Repo.Migrations.CreateApiRequets do
   use Ecto.Migration
 
   def up do

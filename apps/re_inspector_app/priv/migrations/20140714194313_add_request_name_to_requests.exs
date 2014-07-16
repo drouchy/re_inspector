@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Repo.Migrations.AddRequestNameToRequests do
+defmodule ReInspector.Repo.Migrations.AddRequestNameToRequests do
   use Ecto.Migration
 
   def up do

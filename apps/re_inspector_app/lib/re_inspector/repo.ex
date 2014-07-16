@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Repo do
+defmodule ReInspector.Repo do
   use Ecto.Repo, adapter: Ecto.Adapters.Postgres
 
   def conf do

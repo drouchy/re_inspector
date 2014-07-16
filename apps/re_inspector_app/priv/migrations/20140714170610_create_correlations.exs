@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Repo.Migrations.CreateCorrelations do
+defmodule ReInspector.Repo.Migrations.CreateCorrelations do
   use Ecto.Migration
 
   def up do

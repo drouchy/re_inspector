@@ -4,7 +4,7 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
   import ReInspector.Support.Ecto
 
   alias ReInspector.App.Services.ApiRequestService
-  alias ReInspector.App.Repo
+  alias ReInspector.Repo
 
   setup do
     clean_db

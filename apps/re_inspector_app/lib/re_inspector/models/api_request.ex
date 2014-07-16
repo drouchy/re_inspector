@@ -1,4 +1,4 @@
-defmodule ReInspector.App.ApiRequest do
+defmodule ReInspector.ApiRequest do
   use Ecto.Model
 
   schema "api_requests" do
@@ -21,6 +21,6 @@ defmodule ReInspector.App.ApiRequest do
 
     field :request_name,    :string
 
-    belongs_to :correlation, ReInspector.App.Correlation
+    belongs_to :correlation, ReInspector.Correlation
   end
 end

@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Repo.Migrations.LinkApiRequestsAndCorrelations do
+defmodule ReInspector.Repo.Migrations.LinkApiRequestsAndCorrelations do
   use Ecto.Migration
 
   def up do

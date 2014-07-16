@@ -1,5 +1,5 @@
 defmodule ReInspector.Support.Ecto do
-  alias ReInspector.App.Repo
+  alias ReInspector.Repo
 
   import Ecto.Query, only: [from: 2]
 
@@ -24,15 +24,15 @@ defmodule ReInspector.Support.Ecto do
   end
 
   def clean_db do
-     Repo.delete_all(ReInspector.App.ApiRequest)
-     Repo.delete_all(ReInspector.App.Correlation)
+     Repo.delete_all(ReInspector.ApiRequest)
+     Repo.delete_all(ReInspector.Correlation)
   end
 
   defp api_request_query do
-    from q in ReInspector.App.ApiRequest, []
+    from q in ReInspector.ApiRequest, []
   end
 
   defp correlation_query do
-    from q in ReInspector.App.Correlation, []
+    from q in ReInspector.Correlation, []
   end
 end

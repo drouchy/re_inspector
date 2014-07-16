@@ -9,7 +9,7 @@ defmodule ReInspector.App.Supervisors.MainSupervisor do
     children = [
       supervisor(ReInspector.App.Supervisors.ProcessorsSupervisor, []),
       worker(ReInspector.App.Workers.ConfigWorker, []),
-      worker(ReInspector.App.Repo, [])
+      worker(ReInspector.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/Supervisor.Behaviour.html

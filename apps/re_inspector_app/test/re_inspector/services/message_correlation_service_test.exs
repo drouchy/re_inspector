@@ -46,8 +46,8 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
   end
 
   test "updates a previous correlation when it shares some values" do
-    correlation = %ReInspector.App.Correlation{correlations: [nil, "24C43", "1234"]}
-    |> ReInspector.App.Repo.insert
+    correlation = %ReInspector.Correlation{correlations: [nil, "24C43", "1234"]}
+    |> ReInspector.Repo.insert
 
     inserted = MessageCorrelationService.persist_correlation ["123", "24C43", nil]
 

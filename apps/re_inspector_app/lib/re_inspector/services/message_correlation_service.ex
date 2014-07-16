@@ -1,9 +1,9 @@
 defmodule ReInspector.App.Services.MessageCorrelationService do
   import Lager
 
-  alias ReInspector.App.Repo
-  alias ReInspector.App.ApiRequest
-  alias ReInspector.App.Correlation
+  alias ReInspector.Repo
+  alias ReInspector.ApiRequest
+  alias ReInspector.Correlation
   alias ReInspector.App.Utils.ListUtils
 
   import Ecto.Query, only: [from: 2]
