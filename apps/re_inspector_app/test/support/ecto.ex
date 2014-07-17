@@ -33,9 +33,14 @@ defmodule ReInspector.Support.Ecto do
     List.first(all_correlations)
   end
 
+  def first_processing_error do
+    List.first Repo.all(error_query)
+  end
+
   def clean_db do
      Repo.delete_all(ReInspector.ApiRequest)
      Repo.delete_all(ReInspector.Correlation)
+     Repo.delete_all(ReInspector.ProcessingError)
   end
 
   defp api_request_query do
@@ -44,5 +49,9 @@ defmodule ReInspector.Support.Ecto do
 
   defp correlation_query do
     from q in ReInspector.Correlation, []
+  end
+
+  defp error_query do
+    from e in ReInspector.ProcessingError, []#preload: :api_request
   end
 end

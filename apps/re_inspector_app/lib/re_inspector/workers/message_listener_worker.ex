@@ -15,20 +15,29 @@ defmodule ReInspector.App.Workers.MessageListenerWorker do
   end
 
   defp listen_redis(redis_client, redis_list) do
-    api_request = ReInspector.App.Processors.RedisListener.listen(redis_client, redis_list)
-    |> persist
-    |> launch_processing
+    ReInspector.App.Processors.RedisListener.listen(redis_client, redis_list)
+    |> process
 
     :timer.sleep 300
     listen_redis(redis_client, redis_list)
   end
 
-  defp persist(:none), do: :none
-  defp persist(:ok),   do: IO.puts "==> ok"; :none
-  defp persist(message) do
-    message
-    |> ReInspector.App.Converters.ApiRequestMessageConverter.to_postgres
-    |> ReInspector.App.Services.ApiRequestService.persist
+  defp process(:none), do: :none
+  defp process(message) do
+    try do
+      message
+      |> ReInspector.App.Converters.ApiRequestMessageConverter.to_postgres
+      |> ReInspector.App.Services.ApiRequestService.persist
+      |> launch_processing
+    rescue
+      error ->
+        IO.puts "=========================================="
+        IO.puts "message: #{inspect message}"
+        IO.puts "description: #{inspect error}"
+        IO.puts "trace: #{inspect :erlang.get_stacktrace()}"
+        IO.puts "=========================================="
+        raise error
+    end
   end
 
   defp launch_processing(:none), do: :ok

@@ -7,6 +7,7 @@ defmodule ReInspector.Repo.Migrations.AddProcessingErrors do
       id bigserial primary key,
       created_at  timestamp,
       message text not null,
+      error text,
       trace text[],
 
       api_request_id bigint null references api_requests(id)

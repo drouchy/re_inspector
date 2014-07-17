@@ -13,12 +13,12 @@ defmodule ReInspector.App.Workers.ErrorProcessorWorkerTest do
   test_with_mock "process the error", ErrorProcessorService, mock do
     handle_cast
 
-    assert called ErrorProcessorService.process_error(:message, :error, :trace)
+    assert called ErrorProcessorService.process_error(:error, :trace)
   end
 
   defp handle_cast do
-    ErrorProcessorWorker.handle_cast({:error_raised, :message, :error, :trace}, :state)
+    ErrorProcessorWorker.handle_cast({:error_raised, :error, :trace}, :state)
   end
 
-  defp mock, do: [process_error: fn(_,_,_) -> :ok end]
+  defp mock, do: [process_error: fn(_,_) -> :ok end]
 end

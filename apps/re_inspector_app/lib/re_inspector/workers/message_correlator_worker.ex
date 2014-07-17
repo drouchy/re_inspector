@@ -10,8 +10,18 @@ defmodule ReInspector.App.Workers.MessageCorrelatorWorker do
   end
 
   def handle_cast({:process, api_request_id}, correlators) do
-    Lager.info "launching correlation of request #{api_request_id}"
-    ReInspector.App.Services.MessageCorrelationService.process_api_request(api_request_id, correlators)
+    try do
+      Lager.info "launching correlation of request #{api_request_id}"
+      ReInspector.App.Services.MessageCorrelationService.process_api_request(api_request_id, correlators)
+    rescue
+      error ->
+        IO.puts "--------"
+        IO.puts "api_request: #{inspect api_request_id}"
+        IO.puts "description: #{inspect error}"
+        IO.puts "--------"
+        # :gen_server.cast :re_inspector_failure_worker, { :process, message, { error.description, error} }
+        { :stop, error.description }
+    end
     {:noreply, correlators}
   end
 

@@ -4,10 +4,9 @@ defmodule ReInspector.App.Workers.ErrorProcessorWorker do
 
   alias ReInspector.App.Services.ErrorProcessorService
 
-  def handle_cast({:error_raised, message, error, stack_trace}, state) do
-    Lager.error("An error has been raised: #{message}")
-    IO.inspect "#{message} - #{error} - #{stack_trace}"
-    ErrorProcessorService.process_error(message, error, stack_trace)
+  def handle_cast({:error_raised, error, stack_trace}, state) do
+    Lager.error("An error has been raised: #{error.description}")
+    ErrorProcessorService.process_error(error, stack_trace)
     {:noreply, state}
   end
 end

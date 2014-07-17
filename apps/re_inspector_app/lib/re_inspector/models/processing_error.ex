@@ -4,6 +4,7 @@ defmodule ReInspector.ProcessingError do
   schema "processing_errors" do
     field :message, :string
     field :created_at, :datetime
+    field :error, :string
     field :trace, {:array, :string}
 
     belongs_to :api_request, ReInspector.ApiRequest
