@@ -1,6 +1,8 @@
 defmodule ReInspector.App.Services.ApiRequestServiceTest do
   use ExUnit.Case
-  use Chronos, date: {2014, 7, 16}
+  import Mock
+
+  @now {{ 2013, 12, 21 }, {7, 23, 54}}
 
   import ReInspector.Support.Ecto
 
@@ -67,13 +69,14 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
     assert updated.correlator_name == "one correlator"
   end
 
-  test "sets the correlated date" do
+  test_with_mock "sets the correlated_at date", Chronos, [now: fn ()-> @now end] do
     {correlation, api_request, correlator_name} = build_update_fixture
 
     updated = ApiRequestService.update api_request, correlation, correlator_name
 
-    assert updated.correlated_at != nil
-    {2014, 7, 16} = {updated.correlated_at.year, updated.correlated_at.month, updated.correlated_at.day}
+    date = updated.correlated_at
+    assert date != nil
+    assert {{date.year, date.month, date.day}, {date.hour, date.min, date.sec}} == @now
   end
 
   defp attributes, do: %{method: "POST", path: "/url/1"}
