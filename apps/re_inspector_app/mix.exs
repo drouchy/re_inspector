@@ -23,12 +23,20 @@ defmodule ReInspector.App.Mixfile do
     ]
   end
 
+  def src_paths(:travis) do
+    src_paths(:test)
+  end
+
   def src_paths(:test) do
     src_paths(:dev) ++ ["test/support"]
   end
 
   def src_paths(_) do
     ["lib"]
+  end
+
+  defp deps(:travis) do
+    deps(:test)
   end
 
   defp deps(:test) do

@@ -1,7 +1,19 @@
 language: erlang
 otp_release:
   - 17.0
+services:
+  - redis-server
+addons:
+  postgresql: "9.3"
 before_install:
   - ./scripts/setup_travis
-before_script: "export PATH=`pwd`/tmp/elixir/bin:$PATH"
-script: "MIX_ENV=test mix do deps.get, test"
+before_script:
+  - "export PATH=`pwd`/tmp/elixir/bin:$PATH"
+  - "export MIX_ENV=travis"
+  - psql -c 'create database re_inspector_ci_test;' -U postgres
+script:
+  - mix deps.get
+  - cd apps/re_inspector_app
+  - mix do deps.get, deps.compile, compile, ecto.migrate ReInspector.Repo
+  - cd ../..
+  - mix test

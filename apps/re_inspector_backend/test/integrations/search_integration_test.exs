@@ -20,7 +20,7 @@ defmodule ReInspector.Backend.Integration.SearchTest do
   end
 
   def fetch(path) do
-    response = HTTPoison.get "http://localhost:4000#{path}"
+    response = HTTPoison.get "http://localhost:#{Application.get_env(:web,:port)}#{path}"
     response.body
   end
 end
