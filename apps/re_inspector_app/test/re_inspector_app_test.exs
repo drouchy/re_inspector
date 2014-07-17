@@ -22,4 +22,17 @@ defmodule ReInspector.AppTest do
 
     assert called GenServer.call(:re_inspector_search, {:search, "query", %{}})
   end
+
+  #process_error/2
+  test_with_mock "call a message for processing error", GenServer, [cast: fn(:re_inspector_error_processor, {:error_raised, :error, :trace, :id}) -> :ok end] do
+    ReInspector.App.process_error(:error, :trace, :id)
+
+    assert called GenServer.cast(:re_inspector_error_processor, {:error_raised, :error, :trace, :id})
+  end
+
+  test_with_mock "call a message for processing error without any request id", GenServer, [cast: fn(:re_inspector_error_processor, {:error_raised, :error, :trace, nil}) -> :ok end] do
+    ReInspector.App.process_error(:error, :trace)
+
+    assert called GenServer.cast(:re_inspector_error_processor, {:error_raised, :error, :trace, nil})
+  end
 end

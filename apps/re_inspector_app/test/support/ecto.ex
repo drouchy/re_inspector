@@ -37,10 +37,14 @@ defmodule ReInspector.Support.Ecto do
     List.first Repo.all(error_query)
   end
 
+  def first_processing_error_with_api_request do
+    List.first Repo.all(full_error_query)
+  end
+
   def clean_db do
+     Repo.delete_all(ReInspector.ProcessingError)
      Repo.delete_all(ReInspector.ApiRequest)
      Repo.delete_all(ReInspector.Correlation)
-     Repo.delete_all(ReInspector.ProcessingError)
   end
 
   defp api_request_query do
@@ -52,6 +56,10 @@ defmodule ReInspector.Support.Ecto do
   end
 
   defp error_query do
-    from e in ReInspector.ProcessingError, []#preload: :api_request
+    from e in ReInspector.ProcessingError, []
+  end
+
+  defp full_error_query do
+    from e in ReInspector.ProcessingError, preload: :api_request
   end
 end

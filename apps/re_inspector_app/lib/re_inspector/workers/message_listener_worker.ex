@@ -31,11 +31,7 @@ defmodule ReInspector.App.Workers.MessageListenerWorker do
       |> launch_processing
     rescue
       error ->
-        IO.puts "=========================================="
-        IO.puts "message: #{inspect message}"
-        IO.puts "description: #{inspect error}"
-        IO.puts "trace: #{inspect :erlang.get_stacktrace()}"
-        IO.puts "=========================================="
+        ReInspector.App.process_error(error, :erlang.get_stacktrace())
         raise error
     end
   end

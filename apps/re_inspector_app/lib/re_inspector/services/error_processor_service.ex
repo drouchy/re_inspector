@@ -3,7 +3,11 @@ defmodule ReInspector.App.Services.ErrorProcessorService do
   alias ReInspector.ProcessingError
 
   def process_error(error, trace) do
-    from(error, trace)
+    process_error(error, trace, nil)
+  end
+
+  def process_error(error, trace, api_request_id) do
+    from(error, trace, api_request_id)
     |> Repo.insert
   end
 
@@ -13,12 +17,22 @@ defmodule ReInspector.App.Services.ErrorProcessorService do
 
   def now, do: Ecto.DateTime.from_erl Chronos.now
 
-  def from(error, trace) do
+  def from(error, trace, api_request_id) do
     %ProcessingError{
-      message: error.description,
+      message: error_description(error),
       error: inspect(error),
       trace: inspect_stack_trace(trace),
-      created_at: now
+      created_at: now,
+      api_request_id: api_request_id
     }
+  end
+
+  # not sure how to that correctly wihtout try/catch
+  def error_description(error) do
+    try do
+      error.description
+    rescue
+      KeyError -> "undefined"
+    end
   end
 end

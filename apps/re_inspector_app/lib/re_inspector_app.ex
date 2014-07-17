@@ -28,7 +28,10 @@ defmodule ReInspector.App do
     GenServer.cast :re_inspector_message_correlator, {:process, api_request_id}
   end
 
-  # clients
+  def process_error(error, stack_trace, api_request_id \\ nil) do
+    GenServer.cast(:re_inspector_error_processor, {:error_raised, error, stack_trace, api_request_id})
+  end
+
   def search(term, options \\ %{}) do
     GenServer.call(:re_inspector_search, {:search, term, options})
   end

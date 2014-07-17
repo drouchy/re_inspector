@@ -51,6 +51,21 @@ defmodule ReInspector.App.Workers.ErrorProcessorServiceTest do
     assert Ecto.DateTime.to_erl(date) == @now
   end
 
+  test "supports an error without any description" do
+    error = %UndefinedFunctionError{arity: 1, function: :request_name, module: nil}
+
+    assert process_error != nil
+  end
+
+  #process_error/3
+  test "links the error with the api_request" do
+    api_request = %ReInspector.ApiRequest{} |> Repo.insert
+    error = %UndefinedFunctionError{arity: 1, function: :request_name, module: nil}
+
+    ErrorProcessorService.process_error(erlang_error, stacktrace, api_request.id)
+    assert first_processing_error_with_api_request.api_request.get().id == api_request.id
+  end
+
   defp process_error do
     ErrorProcessorService.process_error(erlang_error, stacktrace)
   end
