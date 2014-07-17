@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :database,
-  database: "re_inspector"
+  database: "re_inspector_development"
 
 config :exlager,
   level: :debug,

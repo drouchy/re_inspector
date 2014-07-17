@@ -12,7 +12,7 @@ config :database,
 config :redis,
   host: "localhost",
   port: 16379,
-  list: "re_inceptor"
+  list: "re_inspector"
 
 config :web,
   port: 4000,
