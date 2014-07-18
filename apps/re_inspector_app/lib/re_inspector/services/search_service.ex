@@ -1,20 +1,31 @@
 defmodule ReInspector.App.Services.SearchService do
   import Lager
 
-  import Ecto.Query, only: [from: 2]
+  import Ecto.Query
 
   alias ReInspector.Correlation
   alias ReInspector.Repo
 
   def search(query, options) do
     Lager.info "search '#{query}' with options: #{inspect options}"
-    ecto_query(query)
+    ecto_query(query, options)
     |> Repo.all
-    |> Enum.map(fn(correlation) -> correlation.requests.all end)
-    |> List.flatten
   end
 
-  defp ecto_query(term) do
-    from c in Correlation, where: ^term in c.correlations, preload: :requests
+  defp ecto_query(term, options) do
+    from(c in Correlation,
+      where: ^term in c.correlations,
+      left_join: q in c.requests,
+      select: q,
+      order_by: q.requested_at
+    )
+    |> limit_results(options)
   end
+
+  defp limit_results(query, %{"limit" => limit, "page" => page}) do
+    query
+    |> limit(limit)
+    |> offset(limit*page)
+  end
+  defp limit_results(query, _), do: query
 end

@@ -12,17 +12,34 @@ defmodule ReInspector.App.Services.SearchServiceTest do
 
   setup do
     clean_db
-    insert
     on_exit fn -> clean_db end
     :ok
   end
 
   test "returns the api requests linked to a correlation that contains the query" do
+    insert
+
     result = SearchService.search("3", %{})
 
     assert Enum.count(result) == 2
     assert List.first(result).service_name == "service 1"
     assert List.last(result).service_name == "service 3"
+  end
+
+  test "limits the search based on the options" do
+    big_insert
+
+    result = SearchService.search("3", %{"limit" => 5, "page" => 0})
+    assert Enum.count(result) == 5
+  end
+
+  test "returns only the first elements" do
+    big_insert
+
+    result = SearchService.search("3", %{"limit" => 5, "page" => 2})
+
+    service_names = Enum.map(result, fn(e) -> e.service_name end)
+    assert service_names == ["service 10", "service 11", "service 12", "service 13", "service 14"]
   end
 
   defp insert do
@@ -34,4 +51,16 @@ defmodule ReInspector.App.Services.SearchServiceTest do
     %ApiRequest{service_name: "service 3", correlation_id: correlation_1.id} |> Repo.insert
   end
 
+  defp big_insert do
+    correlation = %Correlation{correlations: ["3"]} |> Repo.insert
+    Enum.map(0..19, fn (i) ->
+      %ApiRequest{
+        service_name: "service #{i}",
+        correlation_id: correlation.id,
+        requested_at: Ecto.DateTime.from_erl {{2014, 7, 12}, {14, i, 12}}
+      }
+    end)
+    |> Enum.reverse
+    |> Enum.each(fn(e) -> Repo.insert(e) end)
+  end
 end
