@@ -5,15 +5,23 @@ defmodule ReInspector.App.Converters.ApiRequestMessageConverterTest do
   alias ReInspector.App.Converters.ApiRequestMessageConverter
 
   test "it converts the requested_at" do
-    date = convert[:requested_at]
+    assert_date convert[:requested_at]
+  end
 
-    assert date.year == 2014
-    assert date.month == 1
-    assert date.day == 3
+  test "it supports request_at with the +00:00" do
+    message = %{default_message| requested_at: "2014-01-03T14:30:00+00:00"}
 
-    assert date.hour == 14
-    assert date.min == 30
-    assert date.sec == 00
+    converted = ApiRequestMessageConverter.to_postgres(message)
+
+    assert_date converted[:requested_at]
+  end
+
+  test "it supports request_at with the +0000" do
+    message = %{default_message| requested_at: "2014-01-03T14:30:00+0000"}
+
+    converted = ApiRequestMessageConverter.to_postgres(message)
+
+    assert_date converted[:requested_at]
   end
 
   test "it converts the time_to_execute" do
@@ -73,4 +81,14 @@ defmodule ReInspector.App.Converters.ApiRequestMessageConverterTest do
   end
 
   defp convert, do: default_message
+
+  def assert_date(date) do
+    assert date.year == 2014
+    assert date.month == 1
+    assert date.day == 3
+
+    assert date.hour == 14
+    assert date.min == 30
+    assert date.sec == 00
+  end
 end

@@ -24,7 +24,7 @@ defmodule ReInspector.App.Converters.ApiRequestMessageConverter do
   end
 
   defp parse_date_time date_string do
-    Regex.named_captures(~r/^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})Z/, date_string)
+    Regex.named_captures(~r/^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})(?<timezone>.*)/, date_string)
     |> date_time_captures_to_date_time
   end
 
