@@ -2,6 +2,8 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
   use ExUnit.Case
   import Mock
 
+  import Ecto.Query, only: [from: 2]
+
   @now {{ 2013, 12, 21 }, {7, 23, 54}}
 
   import ReInspector.Support.Ecto
@@ -58,7 +60,8 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
 
     updated = ApiRequestService.update api_request, correlation, correlator_name
 
-    assert updated.correlation.id == correlation.id
+    updated = load_api_request updated.id
+    assert updated.correlation.get.id == correlation.id
   end
 
   test "sets the correlator name" do
@@ -87,4 +90,5 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
       "one correlator"
     }
   end
+
 end

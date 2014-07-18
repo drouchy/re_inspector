@@ -23,9 +23,7 @@ defmodule ReInspector.App.Services.ApiRequestService do
 
     correlated_at = %Ecto.DateTime{year: year, month: month, day: day, hour: hour, min: minute, sec: second}
 
-    # check with ecto why we have to persist the correlation id in a dedicated request in test mode
-    api_request = persist(api_request, correlation, Mix.env)
-    api_request = %{api_request | correlation: correlation, correlator_name: correlator_name, correlated_at: correlated_at}
+    api_request = %{api_request | correlation_id: correlation.id, correlator_name: correlator_name, correlated_at: correlated_at}
     Repo.update(api_request)
 
     api_request

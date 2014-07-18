@@ -23,9 +23,10 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
 
     processed = MessageCorrelationService.process_api_request(15, correlators)
 
-    assert processed.correlation.id != nil
+    processed = load_api_request processed.id
+    assert processed.correlation.get.id != nil
     assert processed.correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
-    assert Enum.member?(processed.correlation.correlations, "24C43")
+    assert Enum.member?(processed.correlation.get.correlations, "24C43")
   end
 
   #launch_correlation/2

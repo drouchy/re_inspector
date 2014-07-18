@@ -41,6 +41,12 @@ defmodule ReInspector.Support.Ecto do
     List.first Repo.all(full_error_query)
   end
 
+  def load_api_request(id) do
+    from(q in ReInspector.ApiRequest, where: q.id == ^id, preload: :correlation)
+    |> Repo.all
+    |> List.first
+  end
+
   def clean_db do
      Repo.delete_all(ReInspector.ProcessingError)
      Repo.delete_all(ReInspector.ApiRequest)
