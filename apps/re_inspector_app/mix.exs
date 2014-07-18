@@ -47,8 +47,8 @@ defmodule ReInspector.App.Mixfile do
 
   defp deps(_) do
     [
-      {:postgrex, "~> 0.5.2"},
-      {:ecto, "~> 0.2.0"},
+      {:postgrex, "~> 0.5.3"},
+      {:ecto, github: "elixir-lang/ecto"},
       {:exredis, github: "artemeff/exredis"},
       {:exlager, github: "khia/exlager"},
       {:jazz, "~> 0.1.2"},
