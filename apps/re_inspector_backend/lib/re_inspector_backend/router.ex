@@ -32,7 +32,9 @@ defmodule ReInspector.Backend.Router do
 
   get "/api/search" do
     conn = fetch_params(conn)
-    results = ReInspector.App.search(conn.params["q"], %{})
+    options = Map.drop(conn.params, ["q"])
+
+    results = ReInspector.App.search(conn.params["q"], options)
     rendered = Enum.map(results, fn(api_request) -> ApiRequestRenderer.render(api_request) end)
     json = JsonParser.encode %{results: rendered}
 

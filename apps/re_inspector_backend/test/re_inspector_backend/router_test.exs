@@ -53,6 +53,12 @@ defmodule ReInspector.Backend.RouterTest do
     assert first_result[:response][:status] == 200
   end
 
+  test_with_mock "GET /api/search searches with the page & limit options", ReInspector.App, [search: fn("to_search", _) -> results end] do
+    Router.call(conn(:get, "/api/search?q=to_search&page=2&limit=10"), [])
+
+    assert called ReInspector.App.search "to_search", %{"limit" => "10", "page" => "2"}
+  end
+
   test "returns a 404 when the route is not found" do
     response = Router.call(conn(:get, "/whatever/does/not/matter"), [])
 
