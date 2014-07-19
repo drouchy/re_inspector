@@ -10,7 +10,19 @@ defmodule ReInspector.Backend.Router do
   plug :fetch
   # plug Plug.Parsers, parsers: [Plug.Parsers.URLENCODED, Plug.Parsers.MULTIPART]
 
+  get "/search" do
+    conn = fetch_params(conn)
+
+    conn
+    |> redirect_to("/api/search?#{URI.encode_query(conn.params)}")
+  end
+
   get "/version" do
+    conn
+    |> redirect_to("/api/version")
+  end
+
+  get "/api/version" do
     json = JsonParser.encode version
 
     conn
@@ -18,7 +30,7 @@ defmodule ReInspector.Backend.Router do
     |> send_resp(200, json)
   end
 
-  get "/search" do
+  get "/api/search" do
     conn = fetch_params(conn)
     results = ReInspector.App.search(conn.params["q"], %{})
     rendered = Enum.map(results, fn(api_request) -> ApiRequestRenderer.render(api_request) end)
@@ -40,8 +52,14 @@ defmodule ReInspector.Backend.Router do
 
   defp fetch(conn, _opts), do: fetch_params(conn)
 
-  match _ do
-    raise NotFound
+  match conn do
+    conn
+    |> send_resp(404, "not found")
   end
 
+  defp redirect_to(conn, path) do
+    conn
+    |> put_resp_header("Location", path)
+    |> send_resp(302, "")
+  end
 end

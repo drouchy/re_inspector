@@ -11,16 +11,16 @@ defmodule ReInspector.Backend.RouterTest do
     :options = Router.init :options
   end
 
-  # get /version
-  test "GET /version sends the request" do
+  # get /api/version
+  test "GET /api/version sends the request" do
     assert version.state == :sent
   end
 
-  test "GET /version sets the status to 200" do
+  test "GET /api/version sets the status to 200" do
     assert version.status == 200
   end
 
-  test "GET /version sets the content type" do
+  test "GET /api/version sets the content type" do
     { _header, content_type } = Enum.find(version.resp_headers, fn({name, value}) -> name == "content-type" end)
     assert content_type == "application/json; charset=utf-8"
   end
@@ -29,21 +29,21 @@ defmodule ReInspector.Backend.RouterTest do
     assert version.resp_body == "{\"version\":{\"app\":\"0.0.1\",\"backend\":\"0.0.1\"}}"
   end
 
-  # get /search
-  test "GET /search sends the request" do
+  # get /api/search
+  test "GET /api/search sends the request" do
     assert search.state == :sent
   end
 
-  test "GET /search sets the status to 200" do
+  test "GET /api/search sets the status to 200" do
     assert search.status == 200
   end
 
-  test "GET /search sets the content type" do
+  test "GET /api/search sets the content type" do
     { _header, content_type } = Enum.find(search.resp_headers, fn({name, value}) -> name == "content-type" end)
     assert content_type == "application/json; charset=utf-8"
   end
 
-  test_with_mock "GET /search renders the results", ReInspector.App, [search: fn("to_search", _) -> results end] do
+  test_with_mock "GET /api/search renders the results", ReInspector.App, [search: fn("to_search", _) -> results end] do
     json = ReInspector.App.JsonParser.decode search.resp_body
 
     assert Enum.count(json[:results]) == 2
@@ -53,8 +53,14 @@ defmodule ReInspector.Backend.RouterTest do
     assert first_result[:response][:status] == 200
   end
 
-  defp version, do: Router.call(conn(:get, "/version"), [])
-  defp search,  do: Router.call(conn(:get, "/search?q=to_search"), [])
+  test "returns a 404 when the route is not found" do
+    response = Router.call(conn(:get, "/whatever/does/not/matter"), [])
+
+    assert response.status == 404
+  end
+
+  defp version, do: Router.call(conn(:get, "/api/version"), [])
+  defp search,  do: Router.call(conn(:get, "/api/search?q=to_search"), [])
 
   defp results do
     [
