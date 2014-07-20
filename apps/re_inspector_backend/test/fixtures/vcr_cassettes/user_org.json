@@ -9,10 +9,10 @@
       "options": {
         "connect_timeout": 5000
       },
-      "url": "https://api.github.com/users/drouchy/orgs"
+      "url": "https://api.github.com/users/username/orgs"
     },
     "response": {
-      "body": "[{\"login\":\"org1\",\"id\":000001,\"url\":\"https://api.github.com/orgs/org1\",\"repos_url\":\"https://api.github.com/orgs/org1/repos\",\"events_url\":\"https://api.github.com/orgs/org1/events\",\"members_url\":\"https://api.github.com/orgs/org1/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/org1/public_members{/member}\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/000001?\"},{\"login\":\"myorg\",\"id\":0000002,\"url\":\"https://api.github.com/orgs/myorg\",\"repos_url\":\"https://api.github.com/orgs/myorg/repos\",\"events_url\":\"https://api.github.com/orgs/myorg/events\",\"members_url\":\"https://api.github.com/orgs/myorg/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/myorg/public_members{/member}\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/0000002?\"}]",
+      "body": "[{\"login\":\"org1\",\"id\":1234567890,\"url\":\"https://api.github.com/orgs/org1\",\"repos_url\":\"https://api.github.com/orgs/org1/repos\",\"events_url\":\"https://api.github.com/orgs/org1/events\",\"members_url\":\"https://api.github.com/orgs/org1/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/org1/public_members{/member}\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/000001?\"},{\"login\":\"myorg\",\"id\":987654321,\"url\":\"https://api.github.com/orgs/myorg\",\"repos_url\":\"https://api.github.com/orgs/myorg/repos\",\"events_url\":\"https://api.github.com/orgs/myorg/events\",\"members_url\":\"https://api.github.com/orgs/myorg/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/myorg/public_members{/member}\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/0000002?\"}]",
       "headers": {
         "Server": "GitHub.com",
         "Date": "Sat, 19 Jul 2014 19:32:52 GMT",

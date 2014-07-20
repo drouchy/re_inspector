@@ -19,3 +19,11 @@ config :re_inspector,
 config :web,
   port: 4010,
   compress: true
+
+config :auth,
+  providers: ["github"]
+
+config :github,
+  client_id: "myclient_id",
+  client_secret: "myclientsecret",
+  callback_url: "http://re_inspector.example.com"
