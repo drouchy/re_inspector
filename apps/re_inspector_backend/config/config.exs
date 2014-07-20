@@ -20,7 +20,7 @@ config :web,
   host: "http://localhost:8080"
 
 config :authentication,
-  enabled: false,
+  enabled: true,
   providers: ["github"]
 
 config :github,
