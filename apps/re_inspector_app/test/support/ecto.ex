@@ -51,6 +51,7 @@ defmodule ReInspector.Support.Ecto do
      Repo.delete_all(ReInspector.ProcessingError)
      Repo.delete_all(ReInspector.ApiRequest)
      Repo.delete_all(ReInspector.Correlation)
+     Repo.delete_all(ReInspector.User)
   end
 
   defp api_request_query do
