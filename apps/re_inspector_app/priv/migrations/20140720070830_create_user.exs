@@ -14,7 +14,9 @@ defmodule ReInspector.Repo.Migrations.CreateUser do
 
       created_at      timestamp,
       updated_at      timestamp,
-      last_checked_at timestamp
+
+      last_checked_at timestamp,
+      enabled         boolean default true
     )
 
     """

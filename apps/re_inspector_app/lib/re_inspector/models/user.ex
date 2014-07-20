@@ -10,6 +10,8 @@ defmodule ReInspector.User do
 
     field :created_at,      :datetime
     field :updated_at,      :datetime
+
+    field :enabled,         :boolean
     field :last_checked_at, :datetime
   end
 
