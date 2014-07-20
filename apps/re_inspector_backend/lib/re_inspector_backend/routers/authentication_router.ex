@@ -17,7 +17,7 @@ defmodule ReInspector.Backend.Routers.AuthenticationRouter do
     user = AuthenticationService.authenticate(provider, conn.params)
 
     conn
-    |> send_resp(200, user.access_token)
+    |> call_back_for(user)
   end
 
   match conn do
@@ -26,5 +26,14 @@ defmodule ReInspector.Backend.Routers.AuthenticationRouter do
   end
 
   defp fetch(conn, _opts), do: fetch_params(conn)
+
+  defp call_back_for(conn, nil), do: send_resp(conn, 403, "")
+  defp call_back_for(conn, user) do
+    location = URI.encode_query %{authentication_token: user.access_token, login: user.login}
+
+    conn
+    |> put_resp_header("Location", "/?#{location}")
+    |> send_resp(302, "")
+  end
 
 end
