@@ -29,7 +29,7 @@ defmodule ReInspector.Backend.Authentication.GithubTest do
   #get_user_info/3
   test "makes a GET to github to get the user info" do
     use_cassette "user_info" do
-      user_info = Github.get_user_info(config, recorded_access_token, "user")
+      user_info = Github.get_user_info(config, recorded_access_token)
 
       assert user_info[:login] == "username"
       assert user_info[:organizations_url] == "https://api.github.com/users/username/orgs"
