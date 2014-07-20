@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "connect_timeout": 5000
+      },
+      "url": "https://github.com/login/oauth/authorize?client_id=myclientid&state=46005663142823252&scope=user"
+    },
+    "response": {
+      "body": "<html><body>You are being <a href=\"https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3Dmyclientid%26scope%3Duser%26state%3D46005663142823252\">redirected</a>.</body></html>",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Sat, 19 Jul 2014 19:21:50 GMT",
+        "Content-Type": "text/html; charset=utf-8",
+        "Status": "302 Found",
+        "Cache-Control": "no-cache",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Frame-Options": "deny",
+        "Content-Security-Policy": "default-src *; script-src assets-cdn.github.com www.google-analytics.com collector-cdn.github.com; object-src assets-cdn.github.com; style-src 'self' 'unsafe-inline' 'unsafe-eval' assets-cdn.github.com; img-src 'self' data: assets-cdn.github.com identicons.github.com www.google-analytics.com collector.githubapp.com *.githubusercontent.com *.gravatar.com *.wp.com; media-src 'none'; frame-src 'self' render.githubusercontent.com www.youtube.com assets.braintreegateway.com; font-src assets-cdn.github.com; connect-src 'self' ghconduit.com:25035 live.github.com uploads.github.com s3.amazonaws.com",
+        "Vary": "X-PJAX",
+        "Location": "https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3Dmyclientid%26scope%3Duser%26state%3D46005663142823252",
+        "Content-Length": "207",
+        "X-GitHub-Request-Id": "5C127FD1:22D7:121B5D7:53CAC54E",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Accept-Encoding",
+        "X-Served-By": "d0e230454cb69aa01d4f86fc3a57b17f"
+      },
+      "status_code": 302,
+      "type": "ok"
+    }
+  }
+]

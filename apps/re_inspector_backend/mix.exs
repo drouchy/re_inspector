@@ -18,7 +18,7 @@ defmodule ReInspector.Backend.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [
-      applications: [:re_inspector_app, :cowboy, :plug],
+      applications: [:re_inspector_app, :cowboy, :plug, :httpoison],
       mod: { ReInspector.Backend, [] }
     ]
   end
@@ -42,8 +42,7 @@ defmodule ReInspector.Backend.Mixfile do
   defp deps(:test) do
     [
       { :mock, github: "jjh42/mock" },
-      { :httpoison, "~> 0.3.0"},
-      { :hackney, github: "benoitc/hackney" }
+      { :exvcr, "~> 0.2.0" }
     ] ++ deps(:default)
   end
 
@@ -52,7 +51,9 @@ defmodule ReInspector.Backend.Mixfile do
       { :re_inspector_app, in_umbrella: true },
       { :plug, "~> 0.5.1" },
       { :cowboy, github: "extend/cowboy" },
-      { :jazz, "~> 0.1.2"}
+      { :jazz, "~> 0.1.2" },
+      { :httpoison, "~> 0.3.0"},
+      { :hackney, github: "benoitc/hackney" },
     ]
   end
 end

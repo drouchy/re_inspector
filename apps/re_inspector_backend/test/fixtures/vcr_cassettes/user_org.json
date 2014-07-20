@@ -1,0 +1,47 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Authorization": "token 0000111122223333444455556666777788889999"
+      },
+      "method": "get",
+      "options": {
+        "connect_timeout": 5000
+      },
+      "url": "https://api.github.com/users/drouchy/orgs"
+    },
+    "response": {
+      "body": "[{\"login\":\"org1\",\"id\":000001,\"url\":\"https://api.github.com/orgs/org1\",\"repos_url\":\"https://api.github.com/orgs/org1/repos\",\"events_url\":\"https://api.github.com/orgs/org1/events\",\"members_url\":\"https://api.github.com/orgs/org1/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/org1/public_members{/member}\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/000001?\"},{\"login\":\"myorg\",\"id\":0000002,\"url\":\"https://api.github.com/orgs/myorg\",\"repos_url\":\"https://api.github.com/orgs/myorg/repos\",\"events_url\":\"https://api.github.com/orgs/myorg/events\",\"members_url\":\"https://api.github.com/orgs/myorg/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/myorg/public_members{/member}\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/0000002?\"}]",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Sat, 19 Jul 2014 19:32:52 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Status": "200 OK",
+        "X-RateLimit-Limit": "5000",
+        "X-RateLimit-Remaining": "4997",
+        "X-RateLimit-Reset": "1405801885",
+        "Cache-Control": "private, max-age=60, s-maxage=60",
+        "ETag": "\"987e9c02efa7cd21d16c36a34a1130bb\"",
+        "X-OAuth-Scopes": "user",
+        "X-Accepted-OAuth-Scopes": "admin:org, read:org, repo, user, write:org",
+        "Vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Frame-Options": "deny",
+        "Content-Security-Policy": "default-src 'none'",
+        "Content-Length": "861",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "X-GitHub-Request-Id": "5C127FD1:3AFF:17F0575:53CAC7E4",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Accept-Encoding",
+        "X-Served-By": "6d7de9e645814cac34ea2a8d72ba3141"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
