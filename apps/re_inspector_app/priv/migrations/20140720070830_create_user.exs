@@ -6,9 +6,9 @@ defmodule ReInspector.Repo.Migrations.CreateUser do
     CREATE TABLE users(
       id bigserial primary key,
 
-      login varchar(128),
+      login varchar(128) not null unique,
       email varchar(128),
-      token text,
+      access_token text not null unique,
       state varchar(128),
       authenticated_by varchar(64),
 

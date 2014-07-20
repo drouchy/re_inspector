@@ -15,30 +15,30 @@ defmodule ReInspector.App.Services.UserServiceTest do
 
   #create/1
   test "creates the value in the db" do
-    user = %{login: "user test", token: "one token"}
+    user = %{login: "user test", access_token: "one token"}
 
     UserService.create(user)
 
-    user = Repo.all(from u in ReInspector.User, where: u.token == "one token") |> List.first
+    user = Repo.all(from u in ReInspector.User, where: u.access_token == "one token") |> List.first
     assert user != nil
     assert user.login == "user test"
   end
 
   #update/1
   test "inserts the value in the db" do
-    user = %ReInspector.User{login: "user test", token: "one token"} |> Repo.insert
-    attributes = %{token: "new token"}
+    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+    attributes = %{access_token: "new token"}
 
     UserService.update(user, attributes)
 
-    user = Repo.all(from u in ReInspector.User, where: u.token == "new token") |> List.first
+    user = Repo.all(from u in ReInspector.User, where: u.access_token == "new token") |> List.first
     assert user != nil
     assert user.login == "user test"
   end
 
   #find_ty_token/1
   test "checks the entry in the db" do
-    user = %ReInspector.User{login: "user test", token: "one token"} |> Repo.insert
+    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
     user = UserService.find_by_token("one token")
 
@@ -47,7 +47,7 @@ defmodule ReInspector.App.Services.UserServiceTest do
   end
 
   test "returns nil if not found in the db" do
-    user = %ReInspector.User{login: "user test", token: "one token"} |> Repo.insert
+    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
     user = UserService.find_by_token("other token")
 

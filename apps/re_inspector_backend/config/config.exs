@@ -16,6 +16,15 @@ config :redis,
 
 config :web,
   port: 4000,
-  compress: true
+  compress: true,
+  host: "http://localhost:8080"
+
+config :authentication,
+  enabled: false,
+  providers: ["github"]
+
+config :github,
+  client_id: "myclient_id",
+  client_secret: "myclientsecret"
 
 import_config "#{Mix.env}.exs"

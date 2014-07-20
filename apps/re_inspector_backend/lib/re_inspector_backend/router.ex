@@ -5,10 +5,12 @@ defmodule ReInspector.Backend.Router do
   alias ReInspector.App.JsonParser
   alias ReInspector.Backend.Renderers.ApiRequestRenderer
 
+  import ReInspector.Backend.Plugs.AuthenticationPlug
+
+  plug ReInspector.Backend.Plugs.AuthenticationPlug, enabled: Application.get_env(:authentication, :enabled)
   plug :match
   plug :dispatch
   plug :fetch
-  # plug Plug.Parsers, parsers: [Plug.Parsers.URLENCODED, Plug.Parsers.MULTIPART]
 
   get "/search" do
     conn = fetch_params(conn)

@@ -1,9 +1,14 @@
 defmodule ReInspector.Backend.Authentication.GithubTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
   import Mock
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   alias ReInspector.Backend.Authentication.Github
+
+  setup_all do
+    on_exit fn -> :meck.unload(:hackney) end
+    :ok
+  end
 
   #authorization_url/1
   test_with_mock "build the authorization_url with the config & a random number", ReInspector.Random, [generate: fn() -> "46005663142823252" end] do
@@ -40,7 +45,7 @@ defmodule ReInspector.Backend.Authentication.GithubTest do
     end
   end
 
-  defp config, do: %{client_id: "myclient_id", client_secret: "myclientsecret", callback_url: "http://re_inspector.example.com"}
+  defp config, do: %{client_id: "myclient_id", client_secret: "myclientsecret", callback_url: "http://re_inspector.example.com/auth/github/call_back"}
   defp code, do: "a81486ef2d03cf40a1f8"
   defp recorded_access_token, do: "0000111122223333444455556666777788889999"
 end

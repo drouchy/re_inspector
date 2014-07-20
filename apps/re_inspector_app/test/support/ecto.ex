@@ -47,6 +47,10 @@ defmodule ReInspector.Support.Ecto do
     |> List.first
   end
 
+  def insert_user(attributes) do
+    struct(ReInspector.User, attributes) |> Repo.insert
+  end
+
   def clean_db do
      Repo.delete_all(ReInspector.ProcessingError)
      Repo.delete_all(ReInspector.ApiRequest)

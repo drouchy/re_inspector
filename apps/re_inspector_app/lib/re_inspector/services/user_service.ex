@@ -17,7 +17,7 @@ defmodule ReInspector.App.Services.UserService do
 
   def find_by_token(token) do
     Lager.debug("find user by token #{obfuscate token}")
-    from(u in ReInspector.User, where: u.token == ^token)
+    from(u in ReInspector.User, where: u.access_token == ^token)
     |> Repo.all
     |> List.first
   end

@@ -4,7 +4,7 @@ defmodule ReInspector.User do
   schema "users" do
     field :login,            :string
     field :email,            :string
-    field :token,            :string
+    field :access_token,     :string
     field :state,            :string
     field :authenticated_by, :string
 
