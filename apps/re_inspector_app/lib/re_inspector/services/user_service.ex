@@ -6,23 +6,38 @@ defmodule ReInspector.App.Services.UserService do
 
   def create(attributes) do
     Lager.debug("inserting user: #{inspect attributes}")
+
+    attributes = Map.merge(attributes, %{created_at: now, updated_at: now})
     struct(ReInspector.User, attributes)
     |> Repo.insert
   end
 
   def update(user, attributes) do
     Lager.debug("updating user: #{inspect user.id} with #{inspect attributes}")
-    Map.merge(user, attributes) |> Repo.update
+
+    user = Map.merge(user, attributes) |> Map.put(:updated_at, now)
+    :ok = user |> Repo.update
+    user
   end
 
   def find_by_token(token) do
     Lager.debug("find user by token #{obfuscate token}")
-    from(u in ReInspector.User, where: u.access_token == ^token)
-    |> Repo.all
-    |> List.first
+    first_result from(u in ReInspector.User, where: u.access_token == ^token)
+  end
+
+  def find_by_login(login) do
+    Lager.debug("find user by login #{login}")
+    first_result from(u in ReInspector.User, where: u.login == ^login)
   end
 
   defp obfuscate(value) do
     value
   end
+
+  defp first_result(query) do
+    query
+    |> Repo.all
+    |> List.first
+  end
+  def now, do: Ecto.DateTime.from_erl Chronos.now
 end

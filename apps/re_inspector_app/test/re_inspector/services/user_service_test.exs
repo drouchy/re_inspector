@@ -24,6 +24,20 @@ defmodule ReInspector.App.Services.UserServiceTest do
     assert user.login == "user test"
   end
 
+  test "creating sets the created_at" do
+    user = %{login: "user test", access_token: "one token"}
+
+    user = UserService.create(user)
+    assert user.created_at != nil
+  end
+
+  test "creating sets the updated_at" do
+    user = %{login: "user test", access_token: "one token"}
+
+    user = UserService.create(user)
+    assert user.created_at != nil
+  end
+
   #update/1
   test "inserts the value in the db" do
     user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
@@ -36,7 +50,28 @@ defmodule ReInspector.App.Services.UserServiceTest do
     assert user.login == "user test"
   end
 
-  #find_ty_token/1
+  test "returns the updated value" do
+    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+    attributes = %{access_token: "new token"}
+
+    user = UserService.update(user, attributes)
+
+    assert user.login == "user test"
+  end
+
+  test "insertion update the updated_at" do
+    user = %ReInspector.User{login: "user test", access_token: "one token", updated_at: now, created_at: now} |> Repo.insert
+    attributes = %{access_token: "new token"}
+
+    # TODO: find a better way
+    :timer.sleep 1100
+    updated = UserService.update(user, attributes)
+
+    assert updated.created_at == user.created_at
+    refute updated.updated_at == user.updated_at
+  end
+
+  #find_by_token/1
   test "checks the entry in the db" do
     user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
@@ -53,4 +88,24 @@ defmodule ReInspector.App.Services.UserServiceTest do
 
     assert user == nil
   end
+
+  #find_by_login/1
+  test "checks the entry in the db for the login" do
+    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+
+    user = UserService.find_by_login("user test")
+
+    assert user != nil
+    assert user.access_token == "one token"
+  end
+
+  test "returns nil if no login found in the db" do
+    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+
+    user = UserService.find_by_login("other user")
+
+    assert user == nil
+  end
+
+  def now, do: Ecto.DateTime.from_erl Chronos.now
 end

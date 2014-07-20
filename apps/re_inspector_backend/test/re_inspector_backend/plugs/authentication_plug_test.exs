@@ -52,12 +52,19 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlugTest do
     assert conn.status == nil
   end
 
+  test "support the header Authorization capitalized" do
+    insert_user(login: "user", access_token: "1234567890")
+
+    conn = call_with_headers %{"Authorization" => "token 1234567890"}
+    assert conn.status == nil
+  end
+
   defp call(conn) do
     conn |> AuthenticationPlug.call([enabled: true])
   end
 
   defp call_with_no_token,        do: call_with_headers %{}
-  defp call_with_token(token),    do: call_with_headers %{"Authorization" => token}
+  defp call_with_token(token),    do: call_with_headers %{"authorization" => token}
   defp call_with_headers(headers) do
     call %{conn(:get, "/") | req_headers: headers}
   end

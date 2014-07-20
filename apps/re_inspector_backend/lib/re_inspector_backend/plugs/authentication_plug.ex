@@ -25,7 +25,7 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlug do
   end
 
   defp authenticated?(conn) do
-    user = Plug.Conn.get_req_header(conn, "authorization")
+    user = Plug.Conn.get_req_header(conn, "authorization") ++ Plug.Conn.get_req_header(conn, "Authorization")
     |> List.first
     |> extract_token
     |> UserService.find_by_token

@@ -15,9 +15,9 @@ defmodule ReInspector.App.Services.ErrorProcessorService do
     Enum.map stack_trace, fn(trace) -> inspect(trace) end
   end
 
-  def now, do: Ecto.DateTime.from_erl Chronos.now
+  defp now, do: Ecto.DateTime.from_erl Chronos.now
 
-  def from(error, trace, api_request_id) do
+  defp from(error, trace, api_request_id) do
     %ProcessingError{
       message: error_description(error),
       error: inspect(error),
@@ -28,7 +28,7 @@ defmodule ReInspector.App.Services.ErrorProcessorService do
   end
 
   # not sure how to that correctly wihtout try/catch
-  def error_description(error) do
+  defp error_description(error) do
     try do
       error.description
     rescue

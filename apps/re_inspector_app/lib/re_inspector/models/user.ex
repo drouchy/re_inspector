@@ -5,7 +5,6 @@ defmodule ReInspector.User do
     field :login,            :string
     field :email,            :string
     field :access_token,     :string
-    field :state,            :string
     field :authenticated_by, :string
 
     field :created_at,      :datetime
