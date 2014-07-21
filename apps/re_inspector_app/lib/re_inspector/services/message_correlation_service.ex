@@ -23,8 +23,10 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
     Lager.info "launching correlation for api_request #{inspect api_request}"
 
     correlator = find_correlator(api_request, correlators)
+    enriched = enrich_request(api_request, correlator)
+
     {
-      %ApiRequest{api_request| request_name: correlator.request_name(api_request)},
+      enriched,
       correlator.extract_correlation(api_request),
       to_string(correlator)
     }
@@ -32,6 +34,10 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
 
   def persist_correlation(correlations) do
     update_correlation(correlations, find_previous_correlation(correlations))
+  end
+
+  defp enrich_request(api_request, correlator) do
+    %ApiRequest{api_request| request_name: correlator.request_name(api_request)}
   end
 
   defp find_correlator(api_request, correlators) do
