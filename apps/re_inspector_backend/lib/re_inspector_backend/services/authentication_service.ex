@@ -9,7 +9,7 @@ defmodule ReInspector.Backend.Services.AuthenticationService do
     access_token = Github.request_access_token(config, params["code"])
     info = Map.put Github.get_user_info(config, access_token), :provider, provider
 
-    case check_correct_orginsation(config[:organisation], info[:organisations_url], access_token) do
+    case check_correct_orginsation(config[:organisation], info[:organizations_url], access_token) do
       true -> process_authentication(info, access_token)
       false -> false
     end

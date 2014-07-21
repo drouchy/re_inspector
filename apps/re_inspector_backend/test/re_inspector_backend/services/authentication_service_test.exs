@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Services.AuthenticationServiceTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
   import Mock
 
   import ReInspector.Support.Ecto
@@ -75,8 +75,8 @@ defmodule ReInspector.Backend.Services.AuthenticationServiceTest do
   defp github_mock do
     [
       request_access_token: fn (config, code) -> access_token end,
-      get_user_info: fn (config, access_token) -> %{login: login, email: "user_name@example.com", organisations_url: org_url} end,
-      get_user_orgs: fn (config, access_token, org_url) -> [%{login: "org1"}, %{login: "org2"}] end
+      get_user_info: fn (config, "ACCESS_TOKEN") -> %{login: login, email: "user_name@example.com", organizations_url: "org url"} end,
+      get_user_orgs: fn (config, "ACCESS_TOKEN", "org url") -> [%{login: "org1"}, %{login: "org2"}] end
     ]
   end
 
