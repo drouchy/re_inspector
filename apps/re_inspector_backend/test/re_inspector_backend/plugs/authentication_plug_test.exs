@@ -38,13 +38,6 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlugTest do
     assert conn.status == 401
   end
 
-  test_with_mock "a 401 gives the authentication url in the body", Github, [authorization_url: fn(_) -> "github url" end] do
-    conn = call %{conn(:get, "/") | req_headers: %{}}
-
-    json = ReInspector.App.JsonParser.decode conn.resp_body
-    assert json[:authentication_url] == "github url"
-  end
-
   test "does not touch the conn if there is an user with the access token header" do
     insert_user(login: "user", access_token: "1234567890")
 

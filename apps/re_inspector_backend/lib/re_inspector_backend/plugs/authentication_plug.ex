@@ -15,14 +15,10 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlug do
     authenticated_call(authenticated, conn, [])
   end
 
-  defp authenticated_call(false, conn, []), do: send_resp(conn, 401, unauthenticated_body)
+  defp authenticated_call(false, conn, []), do: send_resp(conn, 401, "")
   defp authenticated_call(true, conn, []),  do: conn
 
   defp config, do: Application.get_all_env(:github)
-  defp unauthenticated_body do
-    %{authentication_url: Github.authorization_url(config)}
-    |> ReInspector.App.JsonParser.encode
-  end
 
   defp authenticated?(conn) do
     user = Plug.Conn.get_req_header(conn, "authorization") ++ Plug.Conn.get_req_header(conn, "Authorization")

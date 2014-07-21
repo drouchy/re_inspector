@@ -7,9 +7,16 @@ defmodule ReInspector.Backend.Routers.AuthenticationRouter do
   plug :fetch
 
   alias ReInspector.Backend.Services.AuthenticationService
+  alias ReInspector.Backend.Authentication.Github
 
   def init(options) do
     options
+  end
+
+  get ":provider/authenticate" do
+    conn
+    |> put_resp_header("Location", Github.authorization_url(Application.get_all_env(:github)))
+    |> send_resp(302, "")
   end
 
   get ":provider/call_back" do
