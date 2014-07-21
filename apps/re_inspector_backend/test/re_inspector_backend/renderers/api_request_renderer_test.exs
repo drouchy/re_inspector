@@ -3,64 +3,80 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
 
   alias ReInspector.Backend.Renderers.ApiRequestRenderer
 
-  test "render the requested_at" do
+  test "renders the requested_at" do
     assert rendered["requested_at"] == "2014-07-01T14:32:06Z"
   end
 
-  test "render the correlated_at" do
+  test "renders the correlated_at" do
     assert rendered["correlated_at"] == "2014-07-01T14:40:06Z"
   end
 
-  test "render the duration" do
+  test "renders the duration" do
     assert rendered["duration"] == 12
   end
 
-  test "render the path" do
+  test "renders the path" do
     assert rendered["request"]["path"] == "/path"
   end
 
-  test "render the method" do
+  test "renders the method" do
     assert rendered["request"]["method"] == "get"
   end
 
-  test "render the request_headers" do
+  test "renders the request_headers" do
     assert rendered["request"]["headers"] == "request headers"
   end
 
-  test "render the request_body" do
+  test "renders the request_body" do
     assert rendered["request"]["body"] == "request body"
   end
 
-  test "render the response_headers" do
+  test "renders the response_headers" do
     assert rendered["response"]["headers"] == "response headers"
   end
 
-  test "render the response_body" do
+  test "renders the response_body" do
     assert rendered["response"]["body"] == "response body"
   end
 
-  test "render the status" do
+  test "renders the status" do
     assert rendered["response"]["status"] == 200
   end
 
-  test "render the service_name" do
+  test "renders the service_name" do
     assert rendered["service"]["name"] == "service name"
   end
 
-  test "render the service_version" do
+  test "renders the service_version" do
     assert rendered["service"]["version"] == "service version"
   end
 
-  test "render the service_env" do
+  test "renders the service_env" do
     assert rendered["service"]["env"] == "service env"
   end
 
-  test "render the request_name" do
+  test "renders the request_name" do
     assert rendered["request_name"] == "request name"
   end
 
-  test "render the correlator_name" do
-    assert rendered["correlator_name"] == "correlator name"
+  test "renders the correlator_name" do
+    assert rendered["correlator_name"] == "Elixir.ReInspector.Test.Service2Correlator"
+  end
+
+  test "before rendering obfuscates the message with the correlator" do
+    message = %{fixture | correlator_name: "Elixir.ReInspector.Test.Service1Correlator"}
+
+    obfuscated = ApiRequestRenderer.render message
+
+    assert obfuscated["request"]["headers"] == "REDACTED"
+  end
+
+  test "does not crash if the correlator can not be found" do
+    message = %{fixture | correlator_name: "Elixir.ReInspector.Test.ServiceUnkownCorrelator"}
+
+    obfuscated = ApiRequestRenderer.render message
+
+    assert obfuscated["request"]["headers"] == "request headers"
   end
 
   defp rendered, do: ApiRequestRenderer.render fixture
@@ -81,7 +97,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
       service_version: "service version",
       service_env: "service env",
       request_name: "request name",
-      correlator_name: "correlator name"
+      correlator_name: "Elixir.ReInspector.Test.Service2Correlator"
     }
   end
 end

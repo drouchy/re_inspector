@@ -2,6 +2,19 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   import Lager
 
   def render(api_request) do
+    api_request
+    |> obfuscate(api_request.correlator_name)
+    |> to_map
+  end
+
+  defp obfuscate(api_request, nil), do: api_request
+  defp obfuscate(api_request, correlator_name) do
+    apply(String.to_atom(correlator_name), :obfuscate, [api_request])
+  rescue
+    e in UndefinedFunctionError -> api_request
+  end
+
+  defp to_map(api_request) do
     Lager.debug "rendering: #{inspect api_request}"
     %{
       "requested_at"      => to_iso8601(api_request.requested_at),
