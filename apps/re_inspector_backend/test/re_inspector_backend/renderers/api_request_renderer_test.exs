@@ -3,6 +3,10 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
 
   alias ReInspector.Backend.Renderers.ApiRequestRenderer
 
+  test "renders the request id" do
+    assert rendered["id"] == 1234
+  end
+
   test "renders the requested_at" do
     assert rendered["requested_at"] == "2014-07-01T14:32:06Z"
   end
@@ -83,6 +87,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
 
   defp fixture do
     %ReInspector.ApiRequest{
+      id: 1234,
       requested_at:  %Ecto.DateTime{year: 2014, month: 7, day: 1, hour: 14, min: 32 ,sec: 6},
       correlated_at: %Ecto.DateTime{year: 2014, month: 7, day: 1, hour: 14, min: 40 ,sec: 6},
       duration: 12,

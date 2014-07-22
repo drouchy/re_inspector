@@ -17,6 +17,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   defp to_map(api_request) do
     Lager.debug "rendering: #{inspect api_request}"
     %{
+      "id"                => api_request.id,
       "requested_at"      => to_iso8601(api_request.requested_at),
       "correlated_at"     => to_iso8601(api_request.correlated_at),
       "duration"          => api_request.duration,
