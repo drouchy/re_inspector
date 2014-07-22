@@ -8,18 +8,25 @@ defmodule ReInspector.App.Services.SearchService do
 
   def search(query, options) do
     Lager.info "search '#{query}' with options: #{inspect options}"
-    ecto_query(query, options)
+    ecto_query(query)
+    |> select([_c, q], q)
+    |> order_by([_c, q], q.requested_at)
+    |> limit_results(options)
     |> Repo.all
   end
 
-  defp ecto_query(term, options) do
+  def count(query, options) do
+    Lager.debug "counting total result for '#{query}'"
+    ecto_query(query)
+    |> select([_c, q], count(q.id))
+    |> Repo.one
+  end
+
+  defp ecto_query(term) do
     from(c in Correlation,
       where: ^term in c.correlations,
-      left_join: q in c.requests,
-      select: q,
-      order_by: q.requested_at
+      left_join: q in c.requests
     )
-    |> limit_results(options)
   end
 
   defp limit_results(query, %{"limit" => limit, "page" => page}) do

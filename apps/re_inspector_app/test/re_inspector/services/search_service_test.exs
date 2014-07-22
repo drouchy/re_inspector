@@ -16,6 +16,7 @@ defmodule ReInspector.App.Services.SearchServiceTest do
     :ok
   end
 
+  #search/2
   test "returns the api requests linked to a correlation that contains the query" do
     insert
 
@@ -40,6 +41,15 @@ defmodule ReInspector.App.Services.SearchServiceTest do
 
     service_names = Enum.map(result, fn(e) -> e.service_name end)
     assert service_names == ["service 10", "service 11", "service 12", "service 13", "service 14"]
+  end
+
+  #count/2
+  test "count the total number of entries despite the limit & page options" do
+    big_insert
+
+    result = SearchService.count("3", %{"limit" => 5, "page" => 2})
+
+    assert result == 20
   end
 
   defp insert do
