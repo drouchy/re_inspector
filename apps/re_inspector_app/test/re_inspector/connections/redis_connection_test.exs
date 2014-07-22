@@ -92,7 +92,5 @@ defmodule ReInspector.App.Connections.RedisTest do
 
   defp default_message, do: "one message in redis"
 
-  defp opts do
-    %{host: Application.get_env(:redis, :host), port: Application.get_env(:redis, :port)}
-  end
+  defp opts, do: ReInspector.Support.Redis.redis_options
 end

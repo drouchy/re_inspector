@@ -3,9 +3,15 @@ use Mix.Config
 config :database,
   database: "re_inspector_test"
 
-config :redis,
-  port: 16379,
-  list: "re_inspector_test"
+config :listeners,
+  redis: [
+    %{
+      name: "test",
+      host: "localhost",
+      port: 16379,
+      list: "re_inspector_test"
+    }
+  ]
 
 config :exlager,
   level: :emergency,

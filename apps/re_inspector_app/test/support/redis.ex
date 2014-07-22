@@ -8,14 +8,17 @@ defmodule ReInspector.Support.Redis do
   end
 
   def redis_connection do
-    Exredis.start(to_char_list(Application.get_env(:redis, :host)), Application.get_env(:redis, :port))
+    Exredis.start(to_char_list(redis_options[:host]), redis_options[:port])
   end
 
   def query(args) do
     redis_connection |> query(args)
   end
 
-  def redis_list,   do: Application.get_env(:redis, :list)
+  def redis_list,   do: redis_options[:list]
   def failure_list, do: "REDIS_FAILURE_LIST"
 
+  def redis_options do
+    Application.get_env(:listeners, :redis) |> List.first
+  end
 end

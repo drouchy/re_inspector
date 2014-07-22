@@ -4,8 +4,15 @@ config :database,
   login: "postgres",
   database: "re_inspector_ci_test"
 
-config :redis,
-  list: "re_inspector_ci_test"
+config :listeners,
+  redis: [
+    %{
+      name: "local",
+      host: "localhost_ci_test",
+      port: 16379,
+      list: "re_inspector"
+    }
+  ]
 
 config :exlager,
   level: :emergency,

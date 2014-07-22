@@ -9,10 +9,15 @@ config :database,
   password: nil,
   database: "re_inspector"
 
-config :redis,
-  host: "localhost",
-  port: 16379,
-  list: "re_inspector"
+config :listeners,
+  redis: [
+    %{
+      name: "local",
+      host: "localhost",
+      port: 16379,
+      list: "re_inspector"
+    }
+  ]
 
 config :web,
   port: 4000,

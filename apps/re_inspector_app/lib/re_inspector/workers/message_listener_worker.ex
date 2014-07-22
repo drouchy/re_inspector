@@ -5,13 +5,16 @@ defmodule ReInspector.App.Workers.MessageListenerWorker do
   @doc """
   Starts the config worker.
   """
-  def start_link(args) do
-    GenServer.start_link(__MODULE__, args, [name: :re_inspector_message_listener])
+  def start_link(name, args) do
+    worker_name = "re_inspector_message_listener_#{name}"
+    GenServer.start_link(__MODULE__, args, [name: String.to_atom(worker_name)])
   end
 
-  def init({redis_client, redis_list}) do
-    Lager.info "starting the message listener #{redis_list}"
-    {:ok, spawn_link fn -> listen_redis(redis_client, redis_list) end }
+  def init(redis_options) do
+    Lager.info "starting the message listener #{redis_options[:list]}"
+    redis_client = ReInspector.App.Connections.Redis.client(redis_options)
+    pid = spawn_link fn -> listen_redis(redis_client, redis_options[:list]) end
+    {:ok, pid }
   end
 
   defp listen_redis(redis_client, redis_list) do
