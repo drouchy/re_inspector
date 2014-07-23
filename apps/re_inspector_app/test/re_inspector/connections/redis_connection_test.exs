@@ -26,8 +26,8 @@ defmodule ReInspector.App.Connections.RedisTest do
   end
 
   test "returns the length of the list" do
-    query ["RPUSH", redis_list, default_message]
-    query ["RPUSH", redis_list, "other #{default_message}"]
+    query ["LPUSH", redis_list, default_message]
+    query ["LPUSH", redis_list, "other #{default_message}"]
 
     assert Redis.length(redis_connection, redis_list) == 2
   end
@@ -41,15 +41,15 @@ defmodule ReInspector.App.Connections.RedisTest do
 
   # pop
   test "it returns the first element in the list" do
-    query ["RPUSH", redis_list, default_message]
-    query ["RPUSH", redis_list, "other #{default_message}"]
+    query ["LPUSH", redis_list, default_message]
+    query ["LPUSH", redis_list, "other #{default_message}"]
 
     assert Redis.pop(redis_connection, redis_list) == default_message
   end
 
   test "it only removes the first element" do
-    query ["RPUSH", redis_list, default_message]
-    query ["RPUSH", redis_list, "other #{default_message}"]
+    query ["LPUSH", redis_list, default_message]
+    query ["LPUSH", redis_list, "other #{default_message}"]
 
     Redis.pop(redis_connection, redis_list)
 
@@ -70,8 +70,8 @@ defmodule ReInspector.App.Connections.RedisTest do
   end
 
   test "returns :none if the list is empty" do
-    query ["RPUSH", redis_list, default_message]
-    query ["LPOP", redis_list]
+    query ["LPUSH", redis_list, default_message]
+    query ["RPOP", redis_list]
 
     assert Redis.pop(redis_connection, redis_list) == :none
   end
@@ -81,7 +81,7 @@ defmodule ReInspector.App.Connections.RedisTest do
     Redis.push(redis_connection, "message 1", failure_list)
     Redis.push(redis_connection, "message 2", failure_list)
 
-    set = query ["LPOP", failure_list]
+    set = query ["RPOP", failure_list]
 
     assert set == "message 1"
   end

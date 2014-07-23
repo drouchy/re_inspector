@@ -15,13 +15,13 @@ defmodule ReInspector.App.Connections.Redis do
 
   def pop(redis_client, list) do
     redis_client
-    |> query(["LPOP", list])
+    |> query(["RPOP", list])
     |> to_message
   end
 
   def push(redis_client, message, list) do
     redis_client
-    |> query(["RPUSH", list, message])
+    |> query(["LPUSH", list, message])
     :ok
   end
 
