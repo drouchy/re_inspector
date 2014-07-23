@@ -28,7 +28,15 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
   end
 
   test "renders the request_headers" do
-    assert rendered["request"]["headers"] == "request headers"
+    assert rendered["request"]["headers"] == %{name: "request headers"}
+  end
+
+  test "renders the request_headers as an empty hash when the json is invalid" do
+    message = %{fixture | request_headers: "invalid json"}
+
+    rendered = ApiRequestRenderer.render message
+
+    assert rendered["request"]["headers"] == %{}
   end
 
   test "renders the request_body" do
@@ -36,7 +44,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
   end
 
   test "renders the response_headers" do
-    assert rendered["response"]["headers"] == "response headers"
+    assert rendered["response"]["headers"] == %{name: "response headers"}
   end
 
   test "renders the response_body" do
@@ -72,7 +80,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
 
     obfuscated = ApiRequestRenderer.render message
 
-    assert obfuscated["request"]["headers"] == "REDACTED"
+    assert obfuscated["request"]["headers"] == %{Authorization: "REDACTED"}
   end
 
   test "does not crash if the correlator can not be found" do
@@ -80,7 +88,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
 
     obfuscated = ApiRequestRenderer.render message
 
-    assert obfuscated["request"]["headers"] == "request headers"
+    assert obfuscated["request"]["body"] == "request body"
   end
 
   defp rendered, do: ApiRequestRenderer.render fixture
@@ -93,9 +101,9 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
       duration: 12,
       path: "/path",
       method: "get",
-      request_headers: "request headers",
+      request_headers: "{\"name\":\"request headers\"}",
       request_body: "request body",
-      response_headers: "response headers",
+      response_headers: "{\"name\":\"response headers\"}",
       response_body: "response body",
       status: 200,
       service_name: "service name",

@@ -7,6 +7,6 @@ defmodule ReInspector.Test.Service1Correlator do
   def support?(message), do: message.service_name == "service 1"
   def additional_information(_message), do: %{}
   def extract_correlation(_message), do: ["123", "24C43", nil]
-  def obfuscate(message), do: %{message|request_headers: "REDACTED"}
+  def obfuscate(message), do: %{message|request_headers: "{\"Authorization\":\"REDACTED\"}"}
 
 end

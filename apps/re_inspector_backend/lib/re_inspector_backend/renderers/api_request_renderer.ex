@@ -24,11 +24,11 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
       "request" => %{
         "path"        => api_request.path,
         "method"      => api_request.method,
-        "headers"     => api_request.request_headers,
+        "headers"     => decode_headers(api_request.request_headers),
         "body"        => api_request.request_body,
       },
       "response" => %{
-        "headers"  => api_request.response_headers,
+        "headers"  => decode_headers(api_request.response_headers),
         "body"     => api_request.response_body,
         "status"   => api_request.status
       },
@@ -59,4 +59,11 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
     "0#{num}"
   end
   defp format_number(num), do: "#{num}"
+
+  defp decode_headers(headers_as_string) do
+    case ReInspector.App.JsonParser.decode headers_as_string do
+      :invalid -> %{}
+      hash     -> hash
+    end
+  end
 end
