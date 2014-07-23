@@ -60,6 +60,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   end
   defp format_number(num), do: "#{num}"
 
+  defp decode_headers(nil), do: %{}
   defp decode_headers(headers_as_string) do
     case ReInspector.App.JsonParser.decode headers_as_string do
       :invalid -> %{}

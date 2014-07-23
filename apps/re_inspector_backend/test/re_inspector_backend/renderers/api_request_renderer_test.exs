@@ -91,6 +91,22 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
     assert obfuscated["request"]["body"] == "request body"
   end
 
+  test "does not crash if the request headers field is nil" do
+    message = %{fixture | request_headers: nil}
+
+    rendered = ApiRequestRenderer.render message
+
+    assert rendered["request"]["headers"] == %{}
+  end
+
+  test "does not crash if the response headers field is nil" do
+    message = %{fixture | response_headers: nil}
+
+    rendered = ApiRequestRenderer.render message
+
+    assert rendered["response"]["headers"] == %{}
+  end
+
   defp rendered, do: ApiRequestRenderer.render fixture
 
   defp fixture do
