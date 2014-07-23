@@ -16,13 +16,6 @@ defmodule ReInspector.AppTest do
     assert called GenServer.cast(:re_inspector_message_correlator, {:process, 10})
   end
 
-  #search/2
-  test_with_mock "call a message for search", GenServer, [call: fn(:re_inspector_search, {:search, "query", %{}}) -> :ok end] do
-    ReInspector.App.search("query")
-
-    assert called GenServer.call(:re_inspector_search, {:search, "query", %{}})
-  end
-
   #process_error/2
   test_with_mock "call a message for processing error", GenServer, [cast: fn(:re_inspector_error_processor, {:error_raised, :error, :trace, :id}) -> :ok end] do
     ReInspector.App.process_error(:error, :trace, :id)

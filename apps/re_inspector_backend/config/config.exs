@@ -32,4 +32,10 @@ config :github,
   client_id: "59eca5038dee208a43dc",
   client_secret: "eaef16f776c2a4383bd3f574ab2ce6e23bdf9426"
 
+config :worker_pools,
+  search: %{
+    size: 3,
+    max_overflow: 5
+  }
+
 import_config "#{Mix.env}.exs"

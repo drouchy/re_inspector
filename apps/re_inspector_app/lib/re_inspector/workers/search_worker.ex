@@ -7,8 +7,8 @@ defmodule ReInspector.App.Workers.SearchWorker do
   @doc """
   Starts the config worker.
   """
-  def start_link() do
-    GenServer.start_link(__MODULE__, [], [name: :re_inspector_search])
+  def start_link(_args) do
+    GenServer.start_link(__MODULE__, [], [])
   end
 
   def handle_call({:search, query, options}, from, state) do

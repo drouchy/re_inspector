@@ -16,4 +16,9 @@ config :listeners,
     }
   ]
 
+config :worker_pools,
+  search: %{
+    size: 3,
+    max_overflow: 5
+  }
 import_config "#{Mix.env}.exs"

@@ -33,6 +33,8 @@ defmodule ReInspector.App do
   end
 
   def search(term, options \\ %{}) do
-    GenServer.call(:re_inspector_search, {:search, term, options})
+    :poolboy.transaction(:search_worker_pool, fn(worker) ->
+      GenServer.call(worker, {:search, term, options})
+    end)
   end
 end

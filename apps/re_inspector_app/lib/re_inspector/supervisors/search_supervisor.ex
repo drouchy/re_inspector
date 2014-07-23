@@ -7,9 +7,16 @@ defmodule ReInspector.App.Supervisors.SearchSupervisor do
 
   def init([]) do
     children = [
-      worker(ReInspector.App.Workers.SearchWorker, [])
+      :poolboy.child_spec(:search_worker_pool,  search_pool_options, [])
     ]
 
     supervise(children, strategy: :one_for_one)
   end
+
+  defp search_pool_options do
+    Application.get_env(:worker_pools, :search)
+    |> Map.merge(%{name: {:local, :search_worker_pool}, worker_module: ReInspector.App.Workers.SearchWorker})
+    |> Map.to_list
+  end
+
 end
