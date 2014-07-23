@@ -29,11 +29,4 @@ defmodule ReInspector.App.Services.ApiRequestService do
     api_request
   end
 
-  defp persist(api_request, correlation, :test) do
-    api_request = %{api_request | correlation_id: correlation.id}
-    Repo.update(api_request)
-    api_request
-  end
-  defp persist(_, _, _), do: :ok
-
 end

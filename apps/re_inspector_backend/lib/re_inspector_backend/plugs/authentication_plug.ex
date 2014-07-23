@@ -2,7 +2,6 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlug do
   @behaviour Plug
   import Plug.Conn
 
-  alias ReInspector.Backend.Authentication.Github
   alias ReInspector.App.Services.UserService
 
   def init(options) do
@@ -17,8 +16,6 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlug do
 
   defp authenticated_call(false, conn, []), do: send_resp(conn, 401, "")
   defp authenticated_call(true, conn, []),  do: conn
-
-  defp config, do: Application.get_all_env(:github)
 
   defp authenticated?(conn) do
     user = Plug.Conn.get_req_header(conn, "authorization") ++ Plug.Conn.get_req_header(conn, "Authorization")
