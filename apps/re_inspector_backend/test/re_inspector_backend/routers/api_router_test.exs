@@ -54,10 +54,24 @@ defmodule ReInspector.Backend.ApiRouterTest do
     assert first_result[:response][:status] == 200
   end
 
+  test_with_mock "GET search searches renders the pagination", SearchService, [search: fn("to_search", _) -> results end] do
+    json = ReInspector.App.JsonParser.decode search.resp_body
+
+    assert json[:pagination] != nil
+    assert json[:pagination][:total] == 250
+
+  end
+
   test_with_mock "GET search searches with the page & limit options", SearchService, [search: fn("to_search", _) -> results end] do
     ApiRouter.call(conn(:get, "search?q=to_search&page=2&limit=10"), [])
 
-    assert called SearchService.search "to_search", %{"limit" => "10", "page" => "2"}
+    assert called SearchService.search "to_search", %{"limit" => 10, "page" => 2, "path" => "/api/search"}
+  end
+
+  test_with_mock "GET search searches assigns default options", SearchService, [search: fn("to_search", _) -> results end] do
+    ApiRouter.call(conn(:get, "search?q=to_search"), [])
+
+    assert called SearchService.search "to_search", %{"limit" => 30, "page" => 0, "path" => "/api/search"}
   end
 
   test "returns a 404 when the route is not found" do
@@ -70,15 +84,20 @@ defmodule ReInspector.Backend.ApiRouterTest do
   defp search,  do: ApiRouter.call(conn(:get, "search?q=to_search"), [])
 
   defp results do
-    [
-      %ReInspector.ApiRequest{
-        path: "/path_1",
-        status: 200
-      },
-      %ReInspector.ApiRequest{
-        path: "/path_2",
-        status: 404
+    {
+      [
+        %ReInspector.ApiRequest{
+          path: "/path_1",
+          status: 200
+        },
+        %ReInspector.ApiRequest{
+          path: "/path_2",
+          status: 404
+        }
+      ],
+      %{
+        "total" => 250
       }
-    ]
+    }
   end
 end
