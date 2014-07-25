@@ -14,6 +14,14 @@ config :listeners,
       port: 16379,
       list: "re_inspector"
     }
+  ],
+  rabbitmq: [
+    %{
+      host: System.get_env("RABBITMQ_HOST"),
+      user: System.get_env("RABBITMQ_USER"),
+      vhost: System.get_env("RABBITMQ_VHOST"),
+      password: System.get_env("RABBITMQ_PASSWORD")
+    }
   ]
 
 config :worker_pools,
