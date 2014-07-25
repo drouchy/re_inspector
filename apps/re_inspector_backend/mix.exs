@@ -49,7 +49,7 @@ defmodule ReInspector.Backend.Mixfile do
   defp deps(_) do
     [
       { :re_inspector_app, in_umbrella: true },
-      { :plug, "~> 0.5.1" },
+      { :plug, "~> 0.5.2" },
       { :cowboy, github: "extend/cowboy" },
       { :jazz, "~> 0.1.2" },
       { :httpoison, "~> 0.3.0"},

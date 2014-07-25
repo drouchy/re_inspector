@@ -20,7 +20,7 @@
   "lager": {:git, "https://github.com/basho/lager.git", "4d8291edb72a25ac0efde907e2ecaa115108ff90", []},
   "meck": {:git, "git://github.com/eproxus/meck.git", "dde759050eff19a1a80fd854d7375174b191665d", [tag: "0.8.2"]},
   "mock": {:git, "git://github.com/jjh42/mock.git", "275109db347caf3449b6d123bd4da720fb08b28e", []},
-  "plug": {:package, "0.5.1"},
+  "plug": {:package, "0.5.2"},
   "poolboy": {:package, "1.2.1"},
   "postgrex": {:package, "0.5.3"},
   "ranch": {:git, "git://github.com/extend/ranch.git", "3189ef2d47843945efc96c224963380462c33d40", [ref: "0.10.0"]}}
