@@ -4,6 +4,7 @@ defmodule ReInspector.Backend.Routers.ApiRouter do
 
   alias ReInspector.App.JsonParser
   alias ReInspector.Backend.Renderers.ApiRequestRenderer
+  alias ReInspector.Backend.Services.SearchService
 
   alias ReInspector.Backend.Plugs
 
@@ -28,7 +29,7 @@ defmodule ReInspector.Backend.Routers.ApiRouter do
     conn = fetch_params(conn)
     options = Map.drop(conn.params, ["q"])
 
-    results = ReInspector.App.search(conn.params["q"], options)
+    results = SearchService.search(conn.params["q"], options)
     rendered = Enum.map(results, fn(api_request) -> ApiRequestRenderer.render(api_request) end)
     json = JsonParser.encode %{results: rendered}
 

@@ -5,6 +5,7 @@ defmodule ReInspector.Backend.ApiRouterTest do
   import Mock
 
   alias ReInspector.Backend.Routers.ApiRouter
+  alias ReInspector.Backend.Services.SearchService
 
   # init/1
   test "returns the options" do
@@ -43,7 +44,7 @@ defmodule ReInspector.Backend.ApiRouterTest do
     assert content_type == "application/json; charset=utf-8"
   end
 
-  test_with_mock "GET search renders the results", ReInspector.App, [search: fn("to_search", _) -> results end] do
+  test_with_mock "GET search renders the results", SearchService, [search: fn("to_search", _) -> results end] do
     json = ReInspector.App.JsonParser.decode search.resp_body
 
     assert Enum.count(json[:results]) == 2
@@ -53,10 +54,10 @@ defmodule ReInspector.Backend.ApiRouterTest do
     assert first_result[:response][:status] == 200
   end
 
-  test_with_mock "GET search searches with the page & limit options", ReInspector.App, [search: fn("to_search", _) -> results end] do
+  test_with_mock "GET search searches with the page & limit options", SearchService, [search: fn("to_search", _) -> results end] do
     ApiRouter.call(conn(:get, "search?q=to_search&page=2&limit=10"), [])
 
-    assert called ReInspector.App.search "to_search", %{"limit" => "10", "page" => "2"}
+    assert called SearchService.search "to_search", %{"limit" => "10", "page" => "2"}
   end
 
   test "returns a 404 when the route is not found" do
