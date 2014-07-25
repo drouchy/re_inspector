@@ -8,7 +8,11 @@ defmodule ReInspector.Backend.Integration.VersionTest do
   end
 
   def fetch(path) do
-    response = HTTPoison.get "http://localhost:#{Application.get_env(:phoenix, ReInspector.Backend.Router)[:port]}#{path}"
+    response = HTTPoison.get "http://localhost:#{port}#{path}"
     response.body
+  end
+
+  defp port do
+    Application.get_env(:phoenix, ReInspector.Backend.Router)[:port]
   end
 end

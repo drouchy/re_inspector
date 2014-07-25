@@ -23,25 +23,31 @@ defmodule ReInspector.Backend.Services.SearchServiceTest do
     assert pagination["total"] == 250
   end
 
-  test_with_mock "the pagination contains a path for the next page", ReInspector.App, mock_search do
+  test_with_mock "the pagination contains the path for the current page", ReInspector.App, mock_search do
     {_, pagination} = SearchService.search("to_search", options)
 
-    assert pagination["next_page"] == "/api/search?limit=20&page=3"
+    assert pagination["current_page"] == "/api/search?limit=20&page=2&q=to_search"
   end
 
-  test_with_mock "the pagination contains a path for the previous page", ReInspector.App, mock_search do
+  test_with_mock "the pagination contains the path for the next page", ReInspector.App, mock_search do
     {_, pagination} = SearchService.search("to_search", options)
 
-    assert pagination["previous_page"] == "/api/search?limit=20&page=1"
+    assert pagination["next_page"] == "/api/search?limit=20&page=3&q=to_search"
   end
 
-  test_with_mock "the pagination does not contain a path for the previous page when already on the first one", ReInspector.App, mock_search do
+  test_with_mock "the pagination contains the path for the previous page", ReInspector.App, mock_search do
+    {_, pagination} = SearchService.search("to_search", options)
+
+    assert pagination["previous_page"] == "/api/search?limit=20&page=1&q=to_search"
+  end
+
+  test_with_mock "the pagination does not contain the path for the previous page when already on the first one", ReInspector.App, mock_search do
     {_, pagination} = SearchService.search("to_search", %{"limit" => 20, "page" => 0, "path" => "/api/search"})
 
     assert pagination["previous_page"] == nil
   end
 
-  test_with_mock "the pagination does not contain a path for the next page when already on th last one", ReInspector.App, mock_search do
+  test_with_mock "the pagination does not contain the path for the next page when already on th last one", ReInspector.App, mock_search do
     {_, pagination} = SearchService.search("to_search", %{"limit" => 20, "page" => 12, "path" => "/api/search"})
 
     assert pagination["next_page"] == nil
