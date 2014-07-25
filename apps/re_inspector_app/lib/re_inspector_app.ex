@@ -37,4 +37,10 @@ defmodule ReInspector.App do
       GenServer.call(worker, {:search, term, options})
     end)
   end
+
+  def count(term, options \\ %{}) do
+    :poolboy.transaction(:search_worker_pool, fn(worker) ->
+      GenServer.call(worker, {:count, term, options})
+    end)
+  end
 end

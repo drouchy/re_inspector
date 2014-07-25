@@ -15,4 +15,9 @@ defmodule ReInspector.App.Workers.SearchWorker do
     results = SearchService.search(query, options)
     {:reply, results, state}
   end
+
+  def handle_call({:count, query, options}, from, state) do
+    count = SearchService.count(query, options)
+    {:reply, count, state}
+  end
 end
