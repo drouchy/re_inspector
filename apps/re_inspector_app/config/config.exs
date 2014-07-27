@@ -17,9 +17,10 @@ config :listeners,
   ],
   rabbitmq: [
     %{
+      name: "cloudamqp",
       host: System.get_env("RABBITMQ_HOST"),
-      user: System.get_env("RABBITMQ_USER"),
-      vhost: System.get_env("RABBITMQ_VHOST"),
+      virtual_host: System.get_env("RABBITMQ_VHOST"),
+      username: System.get_env("RABBITMQ_USER"),
       password: System.get_env("RABBITMQ_PASSWORD")
     }
   ]
