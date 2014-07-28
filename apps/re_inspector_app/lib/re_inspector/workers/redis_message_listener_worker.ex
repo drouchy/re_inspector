@@ -1,12 +1,11 @@
-defmodule ReInspector.App.Workers.MessageListenerWorker do
+defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
   use GenServer
   import Lager
 
   @doc """
-  Starts the config worker.
   """
   def start_link(name, args) do
-    worker_name = "re_inspector_message_listener_#{name}"
+    worker_name = "re_inspector_redis_message_listener_#{name}"
     GenServer.start_link(__MODULE__, args, [name: String.to_atom(worker_name)])
   end
 

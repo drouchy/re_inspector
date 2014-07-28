@@ -7,10 +7,19 @@ config :database,
 config :listeners,
   redis: [
     %{
+      name: "test",
+      host: "localhost",
+      port: 6379,
+      list: "re_inspector_ci_test"
+    }
+  ],
+  rabbitmq: [
+    %{
       name: "local",
-      host: "localhost_ci_test",
-      port: 16379,
-      list: "re_inspector"
+      host: "localhost",
+      virtual_host: "/",
+      username: "guest",
+      password: "guest"
     }
   ]
 

@@ -1,4 +1,6 @@
-%{"chronos": {:git, "git://github.com/nurugger07/chronos.git", "28ebaf433ae7bf605fecf665ad6b92d80eda2e2a", []},
+%{"amqp": {:git, "git://github.com/pma/amqp.git", "1d88b172da3897f15776e570b52e70c048e3ebcb", []},
+  "amqp_client": {:git, "git://github.com/pma/amqp_client.git", "85da3db807a527d3acc9a4aeafb710a125a1609d", [tag: "rabbitmq-3.3.4"]},
+  "chronos": {:git, "git://github.com/nurugger07/chronos.git", "28ebaf433ae7bf605fecf665ad6b92d80eda2e2a", []},
   "cowboy": {:git, "git://github.com/extend/cowboy.git", "99061274b6dc602614a07a8751ea3925950f6b80", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "e2ffefe828b918486e2cd76e44c54ae9b62c616e", [ref: "0.6.2"]},
   "decimal": {:package, "0.2.3"},
@@ -23,4 +25,5 @@
   "plug": {:package, "0.5.2"},
   "poolboy": {:package, "1.2.1"},
   "postgrex": {:package, "0.5.3"},
+  "rabbit_common": {:git, "git://github.com/pma/rabbit_common.git", "e43a663211c60d71830306ca00c8d0013e3751cf", [tag: "rabbitmq-3.3.4"]},
   "ranch": {:git, "git://github.com/extend/ranch.git", "3189ef2d47843945efc96c224963380462c33d40", [ref: "0.10.0"]}}

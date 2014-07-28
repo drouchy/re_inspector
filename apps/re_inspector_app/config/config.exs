@@ -14,6 +14,15 @@ config :listeners,
       port: 16379,
       list: "re_inspector"
     }
+  ],
+  rabbitmq: [
+    %{
+      name: "cloudamqp",
+      host: System.get_env("RABBITMQ_HOST"),
+      virtual_host: System.get_env("RABBITMQ_VHOST"),
+      username: System.get_env("RABBITMQ_USER"),
+      password: System.get_env("RABBITMQ_PASSWORD")
+    }
   ]
 
 config :worker_pools,

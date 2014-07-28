@@ -11,8 +11,16 @@ config :listeners,
       port: 16379,
       list: "re_inspector_test"
     }
+  ],
+  rabbitmq: [
+    %{
+      name: "local",
+      host: "localhost",
+      virtual_host: "re_inspector_test",
+      username: "guest",
+      password: "guest"
+    }
   ]
-
 
 config :exlager,
   level: :emergency,

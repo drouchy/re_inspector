@@ -34,7 +34,7 @@ defmodule ReInspector.App.Connections.Redis do
 
   defp to_message(:undefined), do: :none
   defp to_message(value) do
-    case Regex.run ~r/^ERR.*/, value do
+    case Regex.run ~r/^ERR|WRONG.*/, value do
       nil -> value
       _   -> :none
     end

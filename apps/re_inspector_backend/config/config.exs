@@ -17,6 +17,14 @@ config :listeners,
       port: 16379,
       list: "re_inspector"
     }
+  ],
+  rabbitmq: [
+    %{
+      host: System.get_env("RABBITMQ_HOST"),
+      user: System.get_env("RABBITMQ_USER"),
+      vhost: System.get_env("RABBITMQ_VHOST"),
+      password: System.get_env("RABBITMQ_PASSWORD")
+    }
   ]
 
 config :web,
@@ -29,8 +37,8 @@ config :authentication,
   providers: ["github"]
 
 config :github,
-  client_id: "59eca5038dee208a43dc",
-  client_secret: "eaef16f776c2a4383bd3f574ab2ce6e23bdf9426"
+  client_id: System.get_env("GITHUB_CLIENT_ID"),
+  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
 
 config :worker_pools,
   search: %{
