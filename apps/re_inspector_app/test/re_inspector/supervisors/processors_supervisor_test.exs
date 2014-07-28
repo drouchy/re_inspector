@@ -18,6 +18,22 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisorTest do
     end
   end
 
+  test "it starts the rabbitmq message listener worker" do
+    assert Process.whereis(:re_inspector_rabbitmq_message_listener_local) != nil
+  end
+
+  test "it restarts the rabbitmq message listener worker when it crashes" do
+    pid = Process.whereis(:re_inspector_rabbitmq_message_listener_local)
+
+    Process.exit pid, :to_test
+
+    with_retries 5, 10 do
+      new_pid = Process.whereis(:re_inspector_rabbitmq_message_listener_local)
+      assert new_pid != nil
+      assert new_pid != pid
+    end
+  end
+
   test "it starts the message processor worker" do
     assert Process.whereis(:re_inspector_message_correlator) != nil
   end

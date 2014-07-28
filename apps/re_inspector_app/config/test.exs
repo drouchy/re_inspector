@@ -14,7 +14,7 @@ config :listeners,
   ],
   rabbitmq: [
     %{
-      name: "localhost",
+      name: "local",
       host: "localhost",
       virtual_host: "re_inspector_test",
       username: "guest",

@@ -10,7 +10,7 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
       worker(ReInspector.App.Workers.MessageCorrelatorWorker, [correlators]),
       worker(ReInspector.App.Workers.ErrorProcessorWorker,    [])
     ] ++ Enum.map(Application.get_env(:listeners, :redis), fn(redis_config) -> redis_worker(redis_config) end)
-
+      ++ Enum.map(Application.get_env(:listeners, :rabbitmq), fn(rabbitmq_config) -> rabbitmq_worker(rabbitmq_config) end)
     supervise(children, strategy: :one_for_one)
   end
 
@@ -19,5 +19,9 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
 
   defp redis_worker(redis_config) do
     worker(ReInspector.App.Workers.RedisMessageListenerWorker, [redis_config[:name], Map.delete(redis_config, :name)])
+  end
+
+  defp rabbitmq_worker(rabbitmq_config) do
+    worker(ReInspector.App.Workers.RabbitMQMessageListenerWorker, [rabbitmq_config[:name], Map.delete(rabbitmq_config, :name)])
   end
 end

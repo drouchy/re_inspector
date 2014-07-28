@@ -18,21 +18,15 @@ defmodule ReInspector.App.Connections.RabbitMQ do
     AMQP.Exchange.declare channel, exchange_name, type, options
   end
 
-  def declare_queue(channel, queue_name) do
+  def declare_queue(channel, queue_name \\ "", options \\ []) do
     Lager.debug "declare a new queue #{queue_name}"
-    {:ok, queue} = AMQP.Queue.declare channel, queue_name
+    {:ok, queue} = AMQP.Queue.declare channel, queue_name, options
     queue
   end
 
-  def declare_queue(channel) do
-    Lager.debug "declare a new anonymous queue"
-    {:ok, queue} = AMQP.Queue.declare channel
-    queue
-  end
-
-  def bind_queue_and_exchange(channel, queue_name, exchange_name) do
+  def bind_queue_and_exchange(channel, queue_name, exchange_name, options \\ []) do
     Lager.debug "binding exhange #{exchange_name} with queue #{queue_name}"
-    AMQP.Queue.bind channel, queue_name, exchange_name
+    AMQP.Queue.bind channel, queue_name, exchange_name, options
   end
 
   def publish(channel, exchange_name, routing_key, payload, options \\ []) do
