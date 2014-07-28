@@ -5,7 +5,7 @@ defmodule ReInspector.App.Connections.RabbitMQTest do
 
   # create_connection/1
   test "returns the pid of the created connection" do
-    %{pid: pid} = RabbitMQ.create_connection(config)
+    %{pid: pid} = RabbitMQ.create_connection(ReInspector.Support.RabbitMQ.config)
 
     assert pid != nil
   end
@@ -29,7 +29,7 @@ defmodule ReInspector.App.Connections.RabbitMQTest do
 
   #declare_queue/1
   test "without a queue name returns a generated name of the declared queue" do
-    %{queue: queue_name} = RabbitMQ.declare_queue rabbit_channel
+    %{queue: queue_name} = RabbitMQ.declare_queue rabbit_channel, "", auto_delete: true
     assert queue_name != nil
   end
 
@@ -60,12 +60,6 @@ defmodule ReInspector.App.Connections.RabbitMQTest do
     assert subscription_id != nil
   end
 
-  def config do
-    Application.get_env(:listeners, :rabbitmq)
-    |> List.first
-    |> Map.to_list
-  end
-
-  defp rabbit_connection, do: RabbitMQ.create_connection(config)
+  defp rabbit_connection, do: RabbitMQ.create_connection(ReInspector.Support.RabbitMQ.config)
   defp rabbit_channel,    do: RabbitMQ.create_channel(rabbit_connection)
 end

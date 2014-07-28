@@ -1,4 +1,4 @@
-defmodule ReInspector.App.Workers.MessageListenerWorker do
+defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
   use GenServer
   import Lager
 

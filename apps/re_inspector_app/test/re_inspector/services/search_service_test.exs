@@ -23,8 +23,9 @@ defmodule ReInspector.App.Services.SearchServiceTest do
     result = SearchService.search("3", %{})
 
     assert Enum.count(result) == 2
-    assert List.first(result).service_name == "service 1"
-    assert List.last(result).service_name == "service 3"
+    service_names = Enum.map(result, fn(r) -> r.service_name end)
+    assert Enum.member?(service_names, "service 1")
+    assert Enum.member?(service_names, "service 3")
   end
 
   test "limits the search based on the options" do
