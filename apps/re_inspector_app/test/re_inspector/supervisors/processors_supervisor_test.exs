@@ -2,17 +2,17 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisorTest do
   use ExUnit.Case
   use Webtest.Case
 
-  test "it starts the message listener worker" do
-    assert Process.whereis(:re_inspector_message_listener_test) != nil
+  test "it starts the redis message listener worker" do
+    assert Process.whereis(:re_inspector_redis_message_listener_test) != nil
   end
 
-  test "it restarts the message listener worker when it crashes" do
-    pid = Process.whereis(:re_inspector_message_listener_test)
+  test "it restarts the redis message listener worker when it crashes" do
+    pid = Process.whereis(:re_inspector_redis_message_listener_test)
 
     Process.exit pid, :to_test
 
     with_retries 5, 10 do
-      new_pid = Process.whereis(:re_inspector_message_listener_test)
+      new_pid = Process.whereis(:re_inspector_redis_message_listener_test)
       assert new_pid != nil
       assert new_pid != pid
     end

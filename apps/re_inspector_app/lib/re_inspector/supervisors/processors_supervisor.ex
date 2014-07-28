@@ -7,10 +7,9 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
 
   def init([]) do
     children = [
-      worker(ReInspector.App.Workers.RedisMessageListenerWorker,   [redis_config[:name], Map.delete(redis_config, :name)]),
       worker(ReInspector.App.Workers.MessageCorrelatorWorker, [correlators]),
       worker(ReInspector.App.Workers.ErrorProcessorWorker,    [])
-    ]
+    ] ++ Enum.map(Application.get_env(:listeners, :redis), fn(redis_config) -> redis_worker(redis_config) end)
 
     supervise(children, strategy: :one_for_one)
   end
@@ -18,4 +17,7 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   defp correlators, do: Application.get_env(:re_inspector, :correlators)
   defp redis_config, do: Application.get_env(:listeners, :redis) |> List.first
 
+  defp redis_worker(redis_config) do
+    worker(ReInspector.App.Workers.RedisMessageListenerWorker, [redis_config[:name], Map.delete(redis_config, :name)])
+  end
 end
