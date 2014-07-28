@@ -7,7 +7,7 @@ config :database,
 config :listeners,
   redis: [
     %{
-      name: "local travis",
+      name: "test",
       host: "localhost",
       port: 6379,
       list: "re_inspector_ci_test"
