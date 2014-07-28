@@ -3,6 +3,8 @@ otp_release:
   - 17.0
 services:
   - redis-server
+  - rabbitmq
+
 addons:
   postgresql: "9.3"
 before_install:
