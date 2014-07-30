@@ -16,6 +16,8 @@ before_script:
 script:
   - mix deps.get
   - cd apps/re_inspector_app
-  - mix do deps.get, deps.compile, compile, ecto.migrate ReInspector.Repo
+  - mix do deps.get deps.compile, compile, ecto.migrate ReInspector.Repo
+  - cd ../re_inspector_backend
+  - mix do deps.get, deps.compile cowboy
   - cd ../..
   - mix test
