@@ -17,7 +17,7 @@ defmodule ReInspector.Backend.Mixfile do
   def application do
     [
       mod: { ReInspector.Backend, [] },
-      applications: [:phoenix]
+      applications: [:phoenix, :re_inspector_app]
     ]
   end
 

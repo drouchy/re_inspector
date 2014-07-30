@@ -13,7 +13,8 @@ config :phoenix, :logger,
   level: :emergency
 
 config :database,
-  database: "re_inspector_test"
+  login: "postgres",
+  database: "re_inspector_ci_test"
 
 config :listeners,
   redis: [],

@@ -11,4 +11,23 @@ config :phoenix, ReInspector.Backend.Router,
 config :phoenix, :logger,
   level: :error
 
+config :worker_pools,
+  search: %{
+    size: 3,
+    max_overflow: 5
+  }
+
+config :database,
+  host: "localhost",
+  login: "re_inspector",
+  password: nil,
+  database: "re_inspector"
+
+config :listeners,
+  redis: [],
+  rabbitmq: []
+
+config :re_inspector,
+  correlators: []
+
 import_config "#{Mix.env}.exs"
