@@ -11,12 +11,12 @@ defmodule ReInspector.Repo do
   end
 
   def log({:query, sql}, fun) do
-      {time, result} = :timer.tc(fun)
-      Lager.debug "#{sql} - #{time}ms"
-      result
-    end
+    {time, result} = :timer.tc(fun)
+    Lager.debug "#{sql} - #{time}ms"
+    result
+  end
 
-    def log(_arg, fun), do: fun.()
+  def log(_arg, fun), do: fun.()
 
   defp login,    do: Application.get_env(:database, :login)
   defp password, do: Application.get_env(:database, :password)

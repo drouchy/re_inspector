@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Services.ApiRequestService do
   import Lager
-  import Ecto.Query, only: [from: 2]
+  import Ecto.Query
 
   alias ReInspector.ApiRequest
   alias ReInspector.Repo
@@ -12,9 +12,13 @@ defmodule ReInspector.App.Services.ApiRequestService do
 
   def find(id) do
     Lager.debug "find api_request with id #{id}"
-    from(q in ApiRequest, where: q.id == ^id, select: q)
-    |> Repo.all
-    |> List.first
+    from(q in ApiRequest,
+      where: q.id == ^id,
+      left_join: c in q.correlation,
+      select: {q,c}
+    )
+    |> Repo.one
+    |> rebuild
   end
 
   def update(api_request, correlation, correlator_name) do
@@ -29,4 +33,8 @@ defmodule ReInspector.App.Services.ApiRequestService do
     api_request
   end
 
+  defp rebuild(nil), do: nil
+  defp rebuild({api_request, correlation}) do
+    %{api_request | correlation: correlation}
+  end
 end

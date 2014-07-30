@@ -54,6 +54,16 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
     assert found.id == 10
   end
 
+  test "preload the correlation with the api request" do
+    correlation = %Correlation{correlations: ["1", "2"]} |> Repo.insert
+    Ecto.Model.put_primary_key(%ApiRequest{correlation_id: correlation.id}, 10) |> Repo.insert
+
+    found = ApiRequestService.find(10)
+
+    assert found != nil
+    assert found.correlation.id != nil
+  end
+
   #update/3
   test "links the api request & the correlation" do
     {correlation, api_request, correlator_name} = build_update_fixture
