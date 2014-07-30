@@ -58,11 +58,13 @@ defmodule ReInspector.Backend.Controllers.SearchControllerTest do
       [
         %ReInspector.ApiRequest{
           path: "/path_1",
-          status: 200
+          status: 200,
+          correlation: %ReInspector.Correlation{correlations: ["1","2"]}
         },
         %ReInspector.ApiRequest{
           path: "/path_2",
-          status: 404
+          status: 404,
+          correlation: %ReInspector.Correlation{correlations: ["1","2"]}
         }
       ],
       %{

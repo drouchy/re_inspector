@@ -9,10 +9,11 @@ defmodule ReInspector.App.Services.SearchService do
   def search(query, options) do
     Lager.info "search '#{query}' with options: #{inspect options}"
     ecto_query(query)
-    |> select([_c, q], q)
+    |> select([c, q], {c,q})
     |> order_by([_c, q], q.requested_at)
     |> limit_results(options)
     |> Repo.all
+    |> Enum.map fn({correlation, api_request}) -> %{api_request | correlation: correlation} end
   end
 
   def count(query, _options) do

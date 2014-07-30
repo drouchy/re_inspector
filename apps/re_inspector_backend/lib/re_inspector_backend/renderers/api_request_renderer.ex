@@ -21,6 +21,8 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
       "requested_at"      => to_iso8601(api_request.requested_at),
       "correlated_at"     => to_iso8601(api_request.correlated_at),
       "duration"          => api_request.duration,
+      "correlations"      => compact(ReInspector.ApiRequest.correlations(api_request)),
+
       "request" => %{
         "path"        => api_request.path,
         "method"      => api_request.method,
@@ -67,4 +69,6 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
       hash     -> hash
     end
   end
+
+  defp compact(enum), do: Enum.filter(enum, fn(e) -> e end)
 end
