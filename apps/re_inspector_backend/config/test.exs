@@ -25,3 +25,7 @@ config :exlager,
 
 config :re_inspector,
   correlators: []
+
+config :authentication,
+  enabled: false,
+  providers: []

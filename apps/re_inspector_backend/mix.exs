@@ -17,7 +17,7 @@ defmodule ReInspector.Backend.Mixfile do
   def application do
     [
       mod: { ReInspector.Backend, [] },
-      applications: [:phoenix, :re_inspector_app]
+      applications: [:phoenix, :re_inspector_app, :httpoison]
     ]
   end
 
@@ -37,7 +37,9 @@ defmodule ReInspector.Backend.Mixfile do
     [
       {:re_inspector_app, in_umbrella: true},
       {:phoenix, github: "phoenixframework/phoenix"},
-      {:cowboy, "~> 0.10.0", github: "extend/cowboy", optional: true}
+      {:cowboy, "~> 0.10.0", github: "extend/cowboy", optional: true},
+      {:httpoison, "~> 0.3.0"},
+      {:hackney, github: "benoitc/hackney"}
     ]
   end
 end

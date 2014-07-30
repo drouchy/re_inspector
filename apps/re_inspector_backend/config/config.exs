@@ -30,4 +30,12 @@ config :listeners,
 config :re_inspector,
   correlators: []
 
+config :authentication,
+  enabled: true,
+  providers: ["github"]
+
+config :github,
+  client_id: System.get_env("GITHUB_CLIENT_ID"),
+  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
+
 import_config "#{Mix.env}.exs"
