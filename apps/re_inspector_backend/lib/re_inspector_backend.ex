@@ -1,9 +1,10 @@
 defmodule ReInspector.Backend do
   use Application
 
-  # See http://elixir-lang.org/docs/stable/Application.Behaviour.html
-  # for more information on OTP Applications
+  def start(), do: start(nil, nil)
   def start(_type, _args) do
-    ReInspector.Backend.Supervisor.start_link
+    { :ok, pid} = ReInspector.Backend.Supervisor.start_link
+    ReInspector.Backend.Router.start
+    {:ok, pid}
   end
 end
