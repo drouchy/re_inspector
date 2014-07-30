@@ -27,11 +27,6 @@ config :listeners,
     }
   ]
 
-config :web,
-  port: 4000,
-  compress: true,
-  host: "http://localhost:4000"
-
 config :authentication,
   enabled: false,
   providers: ["github"]

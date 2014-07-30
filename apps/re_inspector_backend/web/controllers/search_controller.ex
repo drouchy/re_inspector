@@ -1,31 +1,13 @@
-defmodule ReInspector.Backend.Routers.ApiRouter do
-  import Plug.Conn
-  use Plug.Router
+defmodule ReInspector.Backend.Controllers.SearchController do
+  use ReInspector.Backend.Controllers.AuthenticatedController
 
   alias ReInspector.App.JsonParser
-  alias ReInspector.Backend.Renderers.ApiRequestRenderer
   alias ReInspector.Backend.Services.SearchService
+  alias ReInspector.Backend.Renderers.ApiRequestRenderer
 
-  alias ReInspector.Backend.Plugs
-
-  plug Plugs.AuthenticationPlug, enabled: Application.get_env(:authentication, :enabled)
-  plug :match
-  plug :dispatch
   plug :fetch
 
-  def init(options) do
-    options
-  end
-
-  get "version" do
-    json = JsonParser.encode version
-
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, json)
-  end
-
-  get "search" do
+  def index(conn, _params) do
     conn = fetch_params(conn)
 
     default_options = %{"limit" => 30, "page" => 0, "path" => "/api/search"}
@@ -42,21 +24,7 @@ defmodule ReInspector.Backend.Routers.ApiRouter do
     |> send_resp(200, json)
   end
 
-  defp version do
-    %{
-      "version" => %{
-        "app" => "0.0.1",
-        "backend" => "0.0.1"
-      }
-    }
-  end
-
   defp fetch(conn, _opts), do: fetch_params(conn)
-
-  match conn do
-    conn
-    |> send_resp(404, "not found")
-  end
 
   defp parse_conn_params(params) do
     %{

@@ -1,9 +1,9 @@
 defmodule ReInspector.Backend do
   use Application
-  import Lager
 
+  # See http://elixir-lang.org/docs/stable/Application.Behaviour.html
+  # for more information on OTP Applications
   def start(_type, _args) do
-    Lager.info "Starting web server on port #{Application.get_env(:web, :port)}"
-    Plug.Adapters.Cowboy.http(ReInspector.Backend.Router, [], Application.get_all_env(:web))
+    ReInspector.Backend.Supervisor.start_link
   end
 end

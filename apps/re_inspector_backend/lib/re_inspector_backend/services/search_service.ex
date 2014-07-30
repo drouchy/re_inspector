@@ -15,21 +15,22 @@ defmodule ReInspector.Backend.Services.SearchService do
 
     %{
       "total"         => total,
-      "next_page"     => link_to_next_page(path, limit, page, total),
-      "previous_page" => link_to_previous_page(path, limit, page)
+      "current_page"  => "#{path}?#{encode(term, limit, page)}",
+      "next_page"     => link_to_next_page(term, path, limit, page, total),
+      "previous_page" => link_to_previous_page(term, path, limit, page)
     }
   end
 
-  defp encode(limit, page) do
-    URI.encode_query(%{"limit" => limit, "page" => page})
+  defp encode(term, limit, page) do
+    URI.encode_query(%{"limit" => limit, "page" => page, "q" => term})
   end
 
-  defp link_to_previous_page(path, limit, 0), do: nil
-  defp link_to_previous_page(path, limit, page), do: "#{path}?#{encode(limit, page-1)}"
+  defp link_to_previous_page(term, path, limit, 0), do: nil
+  defp link_to_previous_page(term, path, limit, page), do: "#{path}?#{encode(term, limit, page-1)}"
 
-  defp link_to_next_page(path, limit, page, total) do
-    case (page+2) * limit > total do
-      false -> "#{path}?#{encode(limit, page+1)}"
+  defp link_to_next_page(term, path, limit, page, total) do
+    case (page+1) * limit > total do
+      false -> "#{path}?#{encode(term, limit, page+1)}"
       true  -> nil
     end
   end

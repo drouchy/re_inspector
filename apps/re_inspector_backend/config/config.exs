@@ -1,7 +1,21 @@
-# This file is responsible for configuring your application
-# and its dependencies. The Mix.Config module provides functions
-# to aid in doing so.
 use Mix.Config
+
+config :phoenix, ReInspector.Backend.Router,
+  port: 4000,
+  ssl: false,
+  code_reload: false,
+  cookies: true,
+  session_key: "_re_inspector_backend_key",
+  session_secret: "5$9D78BBM(F3XWS^+IY*RYD+MQ!9_8G2Q!091P@XU%@96LB)G25B#CT0P1LSD($E*^4GKGX4U(Q#FVO"
+
+config :phoenix, :logger,
+  level: :error
+
+config :worker_pools,
+  search: %{
+    size: 3,
+    max_overflow: 5
+  }
 
 config :database,
   host: "localhost",
@@ -10,27 +24,11 @@ config :database,
   database: "re_inspector"
 
 config :listeners,
-  redis: [
-    %{
-      name: "local",
-      host: "localhost",
-      port: 16379,
-      list: "re_inspector"
-    }
-  ],
-  rabbitmq: [
-    %{
-      host: System.get_env("RABBITMQ_HOST"),
-      user: System.get_env("RABBITMQ_USER"),
-      vhost: System.get_env("RABBITMQ_VHOST"),
-      password: System.get_env("RABBITMQ_PASSWORD")
-    }
-  ]
+  redis: [],
+  rabbitmq: []
 
-config :web,
-  port: 4000,
-  compress: true,
-  host: "http://localhost:8080"
+config :re_inspector,
+  correlators: []
 
 config :authentication,
   enabled: true,
@@ -39,11 +37,5 @@ config :authentication,
 config :github,
   client_id: System.get_env("GITHUB_CLIENT_ID"),
   client_secret: System.get_env("GITHUB_CLIENT_SECRET")
-
-config :worker_pools,
-  search: %{
-    size: 3,
-    max_overflow: 5
-  }
 
 import_config "#{Mix.env}.exs"

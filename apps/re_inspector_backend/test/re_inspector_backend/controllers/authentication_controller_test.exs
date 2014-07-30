@@ -1,6 +1,6 @@
-defmodule ReInspector.Backend.AuthenticationRouterTest do
-  use ExUnit.Case, async: true
-  use Plug.Test
+defmodule ReInspector.Backend.AuthenticationControllerTest do
+  use ExUnit.Case
+  use PlugHelper
 
   import Mock
 
@@ -9,17 +9,12 @@ defmodule ReInspector.Backend.AuthenticationRouterTest do
   alias ReInspector.Backend.Authentication.Github
   alias ReInspector.User
 
-  # init/1
-  test "returns the options" do
-    :options = AuthenticationRouter.init :options
-  end
-
   # get :provider/authentication
-  test_with_mock "GET github/authenticate sends the request", AuthenticationService, mock_authentication do
+  test_with_mock "GET /auth/github/authenticate sends the request", AuthenticationService, mock_authentication do
     assert execute_authenticate.state == :sent
   end
 
-  test_with_mock "GET github/authenticate returns a 302 status", AuthenticationService, mock_authentication do
+  test_with_mock "GET /auth/github/authenticate returns a 302 status", AuthenticationService, mock_authentication do
     assert execute_authenticate.status == 302
   end
 
@@ -34,23 +29,23 @@ defmodule ReInspector.Backend.AuthenticationRouterTest do
     assert execute_callback.state == :sent
   end
 
-  test_with_mock "GET github/call_back returns a 302 status", AuthenticationService, mock_authentication do
+  test_with_mock "GET /auth/github/call_back returns a 302 status", AuthenticationService, mock_authentication do
     assert execute_callback.status == 302
   end
 
-  test_with_mock "GET github/call_back returns location header", AuthenticationService, mock_authentication do
+  test_with_mock "GET /auth/github/call_back returns location header", AuthenticationService, mock_authentication do
     location = Plug.Conn.get_resp_header(execute_callback, "Location") |> List.first
 
     assert location == "/?authentication_token=abcdef&login=user+name"
   end
 
-  test_with_mock "GET github/call_back returns a 403 with an invalid authentication", AuthenticationService,
+  test_with_mock "GET /auth/github/call_back returns a 403 with an invalid authentication", AuthenticationService,
   [ authenticate: fn(_,_) -> nil end ] do
     assert execute_callback.status == 403
   end
 
-  defp execute_callback,     do: AuthenticationRouter.call(conn(:get, "github/call_back?code=1234&state=456"), [])
-  defp execute_authenticate, do: AuthenticationRouter.call(conn(:get, "github/authenticate"), [])
+  defp execute_callback,     do: simulate_request(:get, "/auth/github/call_back?code=1234&state=456")
+  defp execute_authenticate, do: simulate_request(:get, "/auth/github/authenticate")
 
   defp mock_authentication do
     [
