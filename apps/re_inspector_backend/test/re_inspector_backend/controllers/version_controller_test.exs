@@ -21,5 +21,5 @@ defmodule ReInspector.Backend.VersionControllerTest do
     assert version_request.resp_body == "{\"version\":{\"app\":\"0.0.1\",\"backend\":\"0.0.1\"}}"
   end
 
-  defp version_request, do: simulate_request(:get, "/version")
+  defp version_request, do: simulate_request(:get, "/api/version")
 end

@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Controllers.VersionController do
-  use Phoenix.Controller
+  use ReInspector.Backend.Controllers.AuthenticatedController
 
   alias ReInspector.App.JsonParser
 
