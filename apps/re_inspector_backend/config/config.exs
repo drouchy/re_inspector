@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :phoenix, ReInspector.Backend.Router,
-  port: System.get_env("PORT"),
+  port: 4000,
   ssl: false,
   code_reload: false,
   cookies: true,
