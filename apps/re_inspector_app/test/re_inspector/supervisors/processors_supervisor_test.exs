@@ -65,4 +65,20 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisorTest do
       assert new_pid != pid
     end
   end
+
+  test "it starts the message broadcaster worker" do
+    assert Process.whereis(:re_inspector_message_broadcaster) != nil
+  end
+
+  test "it restarts the message broadcaster worker when it crashes" do
+    pid = Process.whereis(:re_inspector_message_broadcaster)
+
+    Process.exit pid, :to_test
+
+    with_retries 5, 10 do
+      new_pid = Process.whereis(:re_inspector_message_broadcaster)
+      assert new_pid != nil
+      assert new_pid != pid
+    end
+  end
 end

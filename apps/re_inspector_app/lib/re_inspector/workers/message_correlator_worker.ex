@@ -13,6 +13,7 @@ defmodule ReInspector.App.Workers.MessageCorrelatorWorker do
     try do
       Lager.info "launching correlation of request #{api_request_id}"
       ReInspector.App.Services.MessageCorrelationService.process_api_request(api_request_id, correlators)
+      GenServer.cast :re_inspector_message_broadcaster, {:new_request, api_request_id}
     rescue
       error -> ReInspector.App.process_error(error, :erlang.get_stacktrace(), api_request_id)
       { :stop, error }
