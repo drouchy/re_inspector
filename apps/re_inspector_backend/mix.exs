@@ -5,40 +5,27 @@ defmodule ReInspector.Backend.Mixfile do
     [
       app: :re_inspector_backend,
       version: "0.0.1",
+      elixir: "~> 0.14.3",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 0.14.2",
-      deps: deps(Mix.env),
-      elixirc_paths: src_paths(Mix.env)
+      elixirc_paths: src_paths(Mix.env),
+      deps: deps(Mix.env)
     ]
   end
 
   # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
     [
-      applications: [:re_inspector_app, :cowboy, :plug, :httpoison],
-      mod: { ReInspector.Backend, [] }
+      mod: { ReInspector.Backend, [] },
+      applications: [:phoenix]
     ]
   end
 
-  def src_paths(:travis) do
-    src_paths(:test)
-  end
+  defp src_paths(:travis), do: src_paths(:test)
+  defp src_paths(:test),   do: ["test/support", "../re_inspector_app/test/support"] ++ src_paths(:default)
+  defp src_paths(_),       do: ["lib", "web"]
 
-  def src_paths(:test) do
-    src_paths(:dev) ++ ["test/support", "../re_inspector_app/support"]
-  end
-
-  def src_paths(_) do
-    ["lib"]
-  end
-
-  defp deps(:travis) do
-    deps(:test)
-  end
-
+  defp deps(:travis), do: deps(:test)
   defp deps(:test) do
     [
       { :mock, github: "jjh42/mock" },
@@ -48,12 +35,9 @@ defmodule ReInspector.Backend.Mixfile do
 
   defp deps(_) do
     [
-      { :re_inspector_app, in_umbrella: true },
-      { :plug, "~> 0.5.2" },
-      { :cowboy, github: "extend/cowboy" },
-      { :jazz, "~> 0.1.2" },
-      { :httpoison, "~> 0.3.0"},
-      { :hackney, github: "benoitc/hackney" },
+      {:re_inspector_app, in_umbrella: true},
+      {:phoenix, github: "phoenixframework/phoenix"},
+      {:cowboy, "~> 0.10.0", github: "extend/cowboy", optional: true}
     ]
   end
 end

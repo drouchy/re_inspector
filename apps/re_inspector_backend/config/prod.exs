@@ -1,11 +1,13 @@
 use Mix.Config
 
-config :database,
-  database: "re_inspector"
+config :phoenix, ReInspector.Backend.Router,
+  port: System.get_env("PORT"),
+  ssl: false,
+  code_reload: false,
+  cookies: true,
+  session_key: "_re_inspector_backend_key",
+  session_secret: "5$9D78BBM(F3XWS^+IY*RYD+MQ!9_8G2Q!091P@XU%@96LB)G25B#CT0P1LSD($E*^4GKGX4U(Q#FVO"
 
-config :exlager,
-  level: :info,
-  truncation_size: 8096
+config :phoenix, :logger,
+  level: :error
 
-config :re_inspector,
-  correlators: []
