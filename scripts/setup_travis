@@ -11,15 +11,7 @@ if ! [ `which mix` ] ; then
   unzip -u ${APP_DIR}/elixir.zip -d ${APP_DIR}/elixir
 fi
 
-curl -L https://github.com/ericmj/hex/archive/v0.3.2.zip > ${APP_DIR}/hex.zip
-unzip -u ${APP_DIR}/hex.zip -d ${APP_DIR}
-cd ${APP_DIR}/hex-0.3.2
-mix do archive.build, archive.install --force
-cd -
-
-if ! [ `which rebar` ] ; then
-  curl -L https://github.com/rebar/rebar/wiki/rebar > ${APP_DIR}/elixir/bin/rebar
-  chmod +x ${APP_DIR}/elixir/bin/rebar
-fi
+mix local.hex --force
+mix local.rebar --force
 
 iex --version
