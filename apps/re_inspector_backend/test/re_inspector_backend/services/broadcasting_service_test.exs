@@ -11,6 +11,6 @@ defmodule ReInspector.Backend.BroadcastingServiceTest do
   test_with_mock "publishes a broadcast event on the WS channel", Phoenix.Channel, [broadcast: fn(_,_,_,_) -> :ok end] do
     BroadcastingService.new_request("id")
 
-    assert called Phoenix.Channel.broadcast("re_inspector", "api_request", "new:request", %{api_request_id: "id"})
+    assert called Phoenix.Channel.broadcast("re_inspector", "api_request", "new:request", %{path: "/api/api_request/id"})
   end
 end

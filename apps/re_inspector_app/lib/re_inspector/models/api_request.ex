@@ -26,6 +26,9 @@ defmodule ReInspector.ApiRequest do
   end
 
   def correlations(request) do
-    request.correlation.correlations
+    case request.correlation do
+      nil         -> []
+      correlation -> correlation.correlations
+    end
   end
 end

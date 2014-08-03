@@ -8,6 +8,8 @@ defmodule ReInspector.Backend.Router do
   get "/auth/:provider/authenticate", ReInspector.Backend.Controllers.AuthenticationController, :authenticate
   get "/auth/:provider/call_back",    ReInspector.Backend.Controllers.AuthenticationController, :call_back
 
+  get "/api/api_request/:id", ReInspector.Backend.Controllers.ApiRequestController, :show
+
   use Phoenix.Router.Socket, mount: "/ws"
 
   channel "re_inspector", ReInspector.Backend.Channels.ReInspectorChannel
