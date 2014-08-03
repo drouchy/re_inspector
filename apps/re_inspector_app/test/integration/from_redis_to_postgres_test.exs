@@ -2,6 +2,7 @@ defmodule FromRedisToPostgresTest do
   use ExUnit.Case, async: false
   use Webtest.Case
   use Exredis
+  import Mock
 
   import ReInspector.Support.Redis
   import ReInspector.Support.Ecto
@@ -40,5 +41,17 @@ defmodule FromRedisToPostgresTest do
     [first_api_request|tail] = all_api_requests
     assert first_api_request.service_name == "service 1"
     assert first_api_request.correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
+  end
+
+  test "end-to-end correlation test - executes the broadcast command" do
+    Application.put_env(:re_inspector, :broadcast_command, fn(id) -> redis_connection |> query ["SET", "BROADCAST", "1"] end)
+    redis_connection |> query ["SET", "BROADCAST", "0"]
+    redis_connection |> query ["RPUSH", redis_list, default_fixture]
+
+    with_retries 20, 100 do
+      assert query(redis_connection, ["GET", "BROADCAST"]) != "0"
+    end
+
+    assert query(redis_connection, ["GET", "BROADCAST"]) == "1"
   end
 end

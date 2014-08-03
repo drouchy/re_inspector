@@ -12,4 +12,10 @@ defmodule ReInspector.Backend.Fixtures do
     %ApiRequest{service_name: "service 2", correlation_id: correlation_2.id} |> Repo.insert
     %ApiRequest{service_name: "service 3", correlation_id: correlation_1.id} |> Repo.insert
   end
+
+  def insert_one_fixture do
+    correlation = %Correlation{correlations: ["1", "10", "3"]} |> Repo.insert
+    api_request = %ApiRequest{service_name: "service 1", correlation_id: correlation.id} |> Repo.insert
+    api_request.id
+  end
 end

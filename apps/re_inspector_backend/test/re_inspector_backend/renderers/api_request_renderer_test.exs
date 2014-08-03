@@ -15,6 +15,10 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
     assert rendered["correlated_at"] == "2014-07-01T14:40:06Z"
   end
 
+  test "renders the correlations" do
+    assert rendered["correlations"] == ["cor1", "cor2"]
+  end
+
   test "renders the duration" do
     assert rendered["duration"] == 12
   end
@@ -114,6 +118,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
       id: 1234,
       requested_at:  %Ecto.DateTime{year: 2014, month: 7, day: 1, hour: 14, min: 32 ,sec: 6},
       correlated_at: %Ecto.DateTime{year: 2014, month: 7, day: 1, hour: 14, min: 40 ,sec: 6},
+      correlation: %ReInspector.Correlation{correlations: [nil, "cor1", "cor2", nil]},
       duration: 12,
       path: "/path",
       method: "get",

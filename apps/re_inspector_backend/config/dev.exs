@@ -20,4 +20,19 @@ config :exlager,
   truncation_size: 8096
 
 config :re_inspector,
-  correlators: []
+  correlators: [
+    ReInspector.Test.Service1Correlator,
+    ReInspector.Test.Service2Correlator
+    ],
+  broadcast_command: &ReInspector.Backend.BroadcastingService.new_request/1
+
+config :listeners,
+  redis: [
+    %{
+      name: "local",
+      host: "localhost",
+      port: 16379,
+      list: "re_inspector"
+    }
+  ],
+  rabbitmq: []

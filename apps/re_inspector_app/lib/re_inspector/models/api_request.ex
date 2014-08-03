@@ -24,4 +24,11 @@ defmodule ReInspector.ApiRequest do
 
     belongs_to :correlation, ReInspector.Correlation
   end
+
+  def correlations(request) do
+    case request.correlation do
+      nil         -> []
+      correlation -> correlation.correlations
+    end
+  end
 end

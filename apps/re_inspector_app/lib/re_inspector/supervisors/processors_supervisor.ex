@@ -8,7 +8,8 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   def init([]) do
     children = [
       worker(ReInspector.App.Workers.MessageCorrelatorWorker, [correlators]),
-      worker(ReInspector.App.Workers.ErrorProcessorWorker,    [])
+      worker(ReInspector.App.Workers.ErrorProcessorWorker,    []),
+      worker(ReInspector.App.Workers.MessageBroadcasterWorker, []),
     ] ++ Enum.map(Application.get_env(:listeners, :redis), fn(redis_config) -> redis_worker(redis_config) end)
       ++ Enum.map(Application.get_env(:listeners, :rabbitmq), fn(rabbitmq_config) -> rabbitmq_worker(rabbitmq_config) end)
     supervise(children, strategy: :one_for_one)
