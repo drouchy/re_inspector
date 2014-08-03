@@ -20,7 +20,7 @@ defmodule ErrorProcessingTest do
   test "When an invalid message is inserted in redis, a processing error is created" do
     redis_connection |> query ["RPUSH", redis_list, "{"]
 
-    with_retries 10, 100 do
+    with_retries 10, 200 do
       assert first_processing_error != nil
     end
 
