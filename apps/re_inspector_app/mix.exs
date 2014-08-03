@@ -8,7 +8,7 @@ defmodule ReInspector.App.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 0.14.2",
-      deps: deps(Mix.env),
+      deps: deps,
       elixirc_paths: src_paths(Mix.env)
     ]
   end
@@ -35,26 +35,21 @@ defmodule ReInspector.App.Mixfile do
     ["lib"]
   end
 
-  defp deps(:travis) do
-    deps(:test)
-  end
-
-  defp deps(:test) do
-    [
-      { :mock, github: "jjh42/mock" }
-    ] ++ deps(:default)
-  end
-
-  defp deps(_) do
+  defp deps do
     [
       {:postgrex, "~> 0.5.3"},
+      {:decimal, "~> 0.2.3"},
       {:ecto, github: "elixir-lang/ecto"},
       {:exredis, github: "artemeff/exredis"},
       {:exlager, github: "khia/exlager"},
       {:jazz, "~> 0.1.2"},
       {:chronos, github: "nurugger07/chronos"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
-      {:amqp, github: "pma/amqp"}
+      {:amqp, github: "pma/amqp"},
+
+      {:mock, github: "jjh42/mock", only: test_envs}
     ]
   end
+
+  defp test_envs, do: [:test, :travis]
 end

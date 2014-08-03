@@ -22,14 +22,14 @@ defmodule FromRabbitmqToPostgresTest do
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
 
-    with_retries 8, 100 do
+    with_retries 20, 100 do
       assert count_api_requests == 2
     end
 
     assert first_api_request.service_name == "service 1"
   end
 
-  test "end-to-end correlation test - from redis to postgres and correlated" do
+  test "end-to-end correlation test - from rabbitmq to postgres and correlated" do
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
 
