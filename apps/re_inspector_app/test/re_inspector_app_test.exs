@@ -28,4 +28,11 @@ defmodule ReInspector.AppTest do
 
     assert called GenServer.cast(:re_inspector_error_processor, {:error_raised, :error, :trace, nil})
   end
+
+  #clean_old_data/0
+  test_with_mock "cast a message for cleaning old data", GenServer, [cast: fn(:re_inspector_data_cleaner, :clean_old_data) -> :ok end] do
+    ReInspector.App.clean_old_data
+
+    assert called GenServer.cast(:re_inspector_data_cleaner, :clean_old_data)
+  end
 end

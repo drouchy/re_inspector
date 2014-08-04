@@ -41,4 +41,7 @@ config :worker_pools,
     max_overflow: 5
   }
 
+config :re_inspector,
+  retention_in_weeks: 6
+
 import_config "#{Mix.env}.exs"

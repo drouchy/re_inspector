@@ -81,4 +81,20 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisorTest do
       assert new_pid != pid
     end
   end
+
+  test "it starts the data cleaner worker" do
+    assert Process.whereis(:re_inspector_data_cleaner) != nil
+  end
+
+  test "it restarts the data cleaner worker when it crashes" do
+    pid = Process.whereis(:re_inspector_data_cleaner)
+
+    Process.exit pid, :to_test
+
+    with_retries 5, 10 do
+      new_pid = Process.whereis(:re_inspector_data_cleaner)
+      assert new_pid != nil
+      assert new_pid != pid
+    end
+  end
 end

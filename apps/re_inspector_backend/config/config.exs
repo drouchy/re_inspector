@@ -28,7 +28,8 @@ config :listeners,
   rabbitmq: []
 
 config :re_inspector,
-  correlators: []
+  correlators: [],
+  retention_in_weeks: 6
 
 config :authentication,
   enabled: true,

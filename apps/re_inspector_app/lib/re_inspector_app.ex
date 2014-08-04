@@ -43,4 +43,8 @@ defmodule ReInspector.App do
       GenServer.call(worker, {:count, term, options})
     end)
   end
+
+  def clean_old_data do
+    GenServer.cast(:re_inspector_data_cleaner, :clean_old_data)
+  end
 end

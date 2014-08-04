@@ -30,4 +30,5 @@ config :re_inspector,
   correlators: [
     ReInspector.Test.Service1Correlator,
     ReInspector.Test.Service2Correlator
-  ]
+  ],
+  retention_in_weeks: 6

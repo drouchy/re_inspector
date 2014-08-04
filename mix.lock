@@ -1,6 +1,6 @@
 %{"amqp": {:git, "git://github.com/pma/amqp.git", "1d88b172da3897f15776e570b52e70c048e3ebcb", []},
   "amqp_client": {:git, "git://github.com/pma/amqp_client.git", "85da3db807a527d3acc9a4aeafb710a125a1609d", [tag: "rabbitmq-3.3.4"]},
-  "chronos": {:git, "git://github.com/nurugger07/chronos.git", "28ebaf433ae7bf605fecf665ad6b92d80eda2e2a", []},
+  "chronos": {:package, "0.3.4"},
   "cowboy": {:git, "git://github.com/extend/cowboy.git", "9e437e811939a1602d5737f2f9a5461b53f64b2f", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "e2ffefe828b918486e2cd76e44c54ae9b62c616e", [ref: "0.6.2"]},
   "decimal": {:package, "0.2.3"},
