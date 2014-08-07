@@ -5,7 +5,7 @@ defmodule ReInspector.Backend.Mixfile do
     [
       app: :re_inspector_backend,
       version: "0.0.1",
-      elixir: "~> 0.14.3",
+      elixir: "~> 0.15.0",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixirc_paths: src_paths(Mix.env),
@@ -29,7 +29,7 @@ defmodule ReInspector.Backend.Mixfile do
     [
       {:re_inspector_app, in_umbrella: true},
       {:phoenix, github: "phoenixframework/phoenix"},
-      {:cowboy, "~> 0.10.0", github: "extend/cowboy", optional: true},
+      {:cowboy, "~> 1.0.0", optional: true},
       {:httpoison, "~> 0.3.0"},
       {:hackney, github: "benoitc/hackney"},
 

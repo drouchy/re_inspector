@@ -7,7 +7,7 @@ defmodule ReInspector.App.Mixfile do
       version: "0.0.1",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 0.14.2",
+      elixir: "~> 0.15.0",
       deps: deps,
       elixirc_paths: src_paths(Mix.env)
     ]
@@ -42,7 +42,7 @@ defmodule ReInspector.App.Mixfile do
       {:ecto, github: "elixir-lang/ecto"},
       {:exredis, github: "artemeff/exredis"},
       {:exlager, github: "khia/exlager"},
-      {:jazz, "~> 0.1.2"},
+      {:jazz, "~> 0.2.0"},
       {:chronos, "~> 0.3.2"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
       {:amqp, github: "pma/amqp"},
