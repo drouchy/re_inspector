@@ -34,7 +34,7 @@ defmodule ReInspector.Backend.Mixfile do
       {:hackney, github: "benoitc/hackney"},
 
       {:mock, github: "jjh42/mock", only: test_envs},
-      {:exvcr, "~> 0.2.0", only: test_envs},
+      {:exvcr, "~> 0.3.0", only: test_envs},
       {:jsex, "~> 2.0.0", only: test_envs},
       {:jsx, "~> 2.0", only: test_envs}
     ]
