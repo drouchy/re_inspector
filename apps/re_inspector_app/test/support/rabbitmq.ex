@@ -4,7 +4,6 @@ defmodule ReInspector.Support.RabbitMQ do
   def config do
     Application.get_env(:re_inspector_app, :listeners)[:rabbitmq]
     |> List.first
-    |> Map.to_list
   end
 
   def channel do

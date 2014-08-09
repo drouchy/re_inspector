@@ -18,12 +18,12 @@ config :exlager,
 
 config :re_inspector_app, :listeners,
   redis: [
-    %{
+    [
       name: "local",
       host: "localhost",
       port: 16379,
       list: "re_inspector"
-    }
+    ]
   ],
   rabbitmq: []
 

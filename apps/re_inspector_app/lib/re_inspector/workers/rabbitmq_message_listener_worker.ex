@@ -15,7 +15,7 @@ defmodule ReInspector.App.Workers.RabbitMQMessageListenerWorker do
 
   def init(options) do
     Lager.debug "init rabbit mq listener with #{inspect options}"
-    connection = RabbitMQ.create_connection Map.to_list options
+    connection = RabbitMQ.create_connection options
     channel    = RabbitMQ.create_channel connection
 
     RabbitMQ.declare_queue(channel, @queue)

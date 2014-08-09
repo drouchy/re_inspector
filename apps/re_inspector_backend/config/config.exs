@@ -12,10 +12,10 @@ config :phoenix, :logger,
   level: :error
 
 config :re_inspector_app, :worker_pools,
-  search: %{
+  search: [
     size: 3,
     max_overflow: 5
-  }
+  ]
 
 config :re_inspector_app, :database,
   host: "localhost",

@@ -20,11 +20,11 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   defp redis_config, do: Application.get_env(:re_inspector_app, :listeners)[:redis] |> List.first
 
   defp redis_worker(redis_config) do
-    worker(ReInspector.App.Workers.RedisMessageListenerWorker, [redis_config[:name], Map.delete(redis_config, :name)])
+    worker(ReInspector.App.Workers.RedisMessageListenerWorker, [redis_config[:name], Keyword.delete(redis_config, :name)])
   end
 
   defp rabbitmq_worker(rabbitmq_config) do
-    worker(ReInspector.App.Workers.RabbitMQMessageListenerWorker, [rabbitmq_config[:name], Map.delete(rabbitmq_config, :name)])
+    worker(ReInspector.App.Workers.RabbitMQMessageListenerWorker, [rabbitmq_config[:name], Keyword.delete(rabbitmq_config, :name)])
   end
 
   defp retention, do: Application.get_env(:re_inspector_app, :retention_in_weeks)

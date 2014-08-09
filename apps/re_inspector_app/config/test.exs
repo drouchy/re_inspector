@@ -8,21 +8,21 @@ config :re_inspector_app, :database,
 
 config :re_inspector_app, :listeners,
   redis: [
-    %{
+    [
       name: "test",
       host: "localhost",
       port: 16379,
       list: "re_inspector_test"
-    }
+    ]
   ],
   rabbitmq: [
-    %{
+    [
       name: "local",
       host: "localhost",
       virtual_host: "re_inspector_test",
       username: "guest",
       password: "guest"
-    }
+    ]
   ]
 
 config :re_inspector_app,
