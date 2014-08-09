@@ -11,8 +11,8 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
       worker(ReInspector.App.Workers.ErrorProcessorWorker,    []),
       worker(ReInspector.App.Workers.MessageBroadcasterWorker, []),
       worker(ReInspector.App.Workers.DataCleanerWorker, [retention])
-    ] ++ Enum.map(Application.get_env(:re_inspector_app, :listeners, [redis: []])[:redis], fn(redis_config) -> redis_worker(redis_config) end)
-      ++ Enum.map(Application.get_env(:re_inspector_app, :listeners, [rabbitmq: []])[:rabbitmq], fn(rabbitmq_config) -> rabbitmq_worker(rabbitmq_config) end)
+    ] ++ redis_workers
+      ++ rabbitmq_workers
     supervise(children, strategy: :one_for_one)
   end
 
@@ -28,4 +28,14 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   end
 
   defp retention, do: Application.get_env(:re_inspector_app, :retention_in_weeks)
+
+  defp redis_workers do
+    Enum.map(config[:redis], fn(redis_config) -> redis_worker(redis_config) end)
+  end
+
+  defp rabbitmq_workers do
+    Enum.map(config[:rabbitmq], fn(rabbitmq_config) -> rabbitmq_worker(rabbitmq_config) end)
+  end
+
+  defp config, do: Application.get_env(:re_inspector_app, :listeners, [redis: [], rabbitmq: []])
 end
