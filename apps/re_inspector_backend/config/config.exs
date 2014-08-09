@@ -15,6 +15,10 @@ config :re_inspector_app, :worker_pools,
   search: [
     size: 3,
     max_overflow: 5
+  ],
+  processor: [
+    size: 3,
+    max_overflow: 5
   ]
 
 config :re_inspector_app, :database,

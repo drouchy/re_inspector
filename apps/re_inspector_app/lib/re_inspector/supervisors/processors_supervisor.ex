@@ -7,10 +7,11 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
 
   def init([]) do
     children = [
-      worker(ReInspector.App.Workers.MessageCorrelatorWorker, [correlators]),
-      worker(ReInspector.App.Workers.ErrorProcessorWorker,    []),
+      worker(ReInspector.App.Workers.MessageCorrelatorWorker,  [correlators]),
+      worker(ReInspector.App.Workers.ErrorProcessorWorker,     []),
       worker(ReInspector.App.Workers.MessageBroadcasterWorker, []),
-      worker(ReInspector.App.Workers.DataCleanerWorker, [retention])
+      :poolboy.child_spec(:message_processor_worker_pool,      search_pool_options, []),
+      worker(ReInspector.App.Workers.DataCleanerWorker,        [retention])
     ] ++ redis_workers
       ++ rabbitmq_workers
     supervise(children, strategy: :one_for_one)
@@ -38,4 +39,9 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   end
 
   defp config, do: Application.get_env(:re_inspector_app, :listeners, [redis: [], rabbitmq: []])
+
+  defp search_pool_options do
+    Application.get_env(:re_inspector_app, :worker_pools)[:processor]
+    |> Dict.merge(%{name: {:local, :message_processor_worker_pool}, worker_module: ReInspector.App.Workers.MessageProcessorWorker})
+  end
 end

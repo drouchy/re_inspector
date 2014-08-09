@@ -34,11 +34,11 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisorTest do
     end
   end
 
-  test "it starts the message processor worker" do
+  test "it starts the message correlator worker" do
     assert Process.whereis(:re_inspector_message_correlator) != nil
   end
 
-  test "it restarts the message processor worker when it crashes" do
+  test "it restarts the message correlator worker when it crashes" do
     pid = Process.whereis(:re_inspector_message_correlator)
 
     Process.exit pid, :to_test

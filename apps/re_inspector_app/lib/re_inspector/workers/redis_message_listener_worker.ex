@@ -30,19 +30,5 @@ defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
   end
 
   defp process(:none), do: :none
-  defp process(message) do
-    try do
-      message
-      |> ReInspector.App.Converters.ApiRequestMessageConverter.to_postgres
-      |> ReInspector.App.Services.ApiRequestService.persist
-      |> launch_processing
-    rescue
-      error ->
-        ReInspector.App.process_error(error, :erlang.get_stacktrace())
-        raise error
-    end
-  end
-
-  defp launch_processing(:none), do: :ok
-  defp launch_processing(api_request), do: ReInspector.App.process_api_request(api_request.id)
+  defp process(message), do: ReInspector.App.process_message(message)
 end

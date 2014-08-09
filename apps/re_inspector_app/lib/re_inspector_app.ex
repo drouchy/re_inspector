@@ -32,6 +32,12 @@ defmodule ReInspector.App do
     GenServer.cast(:re_inspector_error_processor, {:error_raised, error, stack_trace, api_request_id})
   end
 
+  def process_message(message) do
+    :poolboy.transaction(:message_processor_worker_pool, fn(worker) ->
+      GenServer.cast(worker, {:process, message})
+    end)
+  end
+
   def search(term, options \\ %{}) do
     :poolboy.transaction(:search_worker_pool, fn(worker) ->
       GenServer.call(worker, {:search, term, options})
