@@ -12,21 +12,11 @@ config :phoenix, ReInspector.Backend.Router,
 config :phoenix, :logger,
   level: :debug
 
-config :database,
-  database: "re_inspector_development"
-
 config :exlager,
   level: :debug,
   truncation_size: 8096
 
-config :re_inspector,
-  correlators: [
-    ReInspector.Test.Service1Correlator,
-    ReInspector.Test.Service2Correlator
-    ],
-  broadcast_command: &ReInspector.Backend.BroadcastingService.new_request/1
-
-config :listeners,
+config :re_inspector_app, :listeners,
   redis: [
     %{
       name: "local",
@@ -36,3 +26,13 @@ config :listeners,
     }
   ],
   rabbitmq: []
+
+config :re_inspector_app, :database,
+  database: "re_inspector_development"
+
+config :re_inspector_app,
+  correlators: [
+    ReInspector.Test.Service1Correlator,
+    ReInspector.Test.Service2Correlator
+  ],
+  broadcast_command: &ReInspector.Backend.BroadcastingService.new_request/1

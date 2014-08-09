@@ -12,20 +12,23 @@ config :phoenix, ReInspector.Backend.Router,
 config :phoenix, :logger,
   level: :emergency
 
-config :database,
-  database: "re_inspector_test"
-
-config :listeners,
-  redis: [],
-  rabbitmq: []
-
 config :exlager,
   level: :emergency,
   truncation_size: 8096
 
-config :re_inspector,
+config :re_inspector_app, :database,
+  host: "localhost",
+  login: "re_inspector",
+  password: nil,
+  database: "re_inspector_test"
+
+config :re_inspector_app, :listeners,
+  redis: [],
+  rabbitmq: []
+
+config :re_inspector_app,
   correlators: []
 
-config :authentication,
+config :re_inspector_backend, :authentication,
   enabled: false,
   providers: []

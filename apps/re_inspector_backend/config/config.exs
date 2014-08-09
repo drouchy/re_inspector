@@ -11,31 +11,31 @@ config :phoenix, ReInspector.Backend.Router,
 config :phoenix, :logger,
   level: :error
 
-config :worker_pools,
+config :re_inspector_app, :worker_pools,
   search: %{
     size: 3,
     max_overflow: 5
   }
 
-config :database,
+config :re_inspector_app, :database,
   host: "localhost",
   login: "re_inspector",
   password: nil,
   database: "re_inspector"
 
-config :listeners,
+config :re_inspector_app, :listeners,
   redis: [],
   rabbitmq: []
 
-config :re_inspector,
+config :re_inspector_app, :re_inspector,
   correlators: [],
   retention_in_weeks: 6
 
-config :authentication,
+config :re_inspector_backend, :authentication,
   enabled: true,
   providers: ["github"]
 
-config :github,
+config :re_inspector_backend, :github,
   client_id: System.get_env("GITHUB_CLIENT_ID"),
   client_secret: System.get_env("GITHUB_CLIENT_SECRET")
 
