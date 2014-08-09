@@ -19,6 +19,6 @@ defmodule ReInspector.Support.Redis do
   def failure_list, do: "REDIS_FAILURE_LIST"
 
   def redis_options do
-    Application.get_env(:listeners, :redis) |> List.first
+    Application.get_env(:re_inspector_app, :listeners)[:redis] |> List.first
   end
 end

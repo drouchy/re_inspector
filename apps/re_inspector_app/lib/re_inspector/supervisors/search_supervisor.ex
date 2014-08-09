@@ -14,7 +14,7 @@ defmodule ReInspector.App.Supervisors.SearchSupervisor do
   end
 
   defp search_pool_options do
-    Application.get_env(:worker_pools, :search)
+    Application.get_env(:re_inspector_app, :worker_pools)[:search]
     |> Map.merge(%{name: {:local, :search_worker_pool}, worker_module: ReInspector.App.Workers.SearchWorker})
     |> Map.to_list
   end

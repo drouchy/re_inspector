@@ -44,7 +44,7 @@ defmodule FromRedisToPostgresTest do
   end
 
   test "end-to-end correlation test - executes the broadcast command" do
-    Application.put_env(:re_inspector, :broadcast_command, fn(id) -> redis_connection |> query ["SET", "BROADCAST", "1"] end)
+    Application.put_env(:re_inspector_app, :broadcast_command, fn(id) -> redis_connection |> query ["SET", "BROADCAST", "1"] end)
     redis_connection |> query ["SET", "BROADCAST", "0"]
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
 

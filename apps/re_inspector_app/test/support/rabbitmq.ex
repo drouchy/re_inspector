@@ -2,7 +2,7 @@ defmodule ReInspector.Support.RabbitMQ do
   import ReInspector.App.Connections.RabbitMQ
 
   def config do
-    Application.get_env(:listeners, :rabbitmq)
+    Application.get_env(:re_inspector_app, :listeners)[:rabbitmq]
     |> List.first
     |> Map.to_list
   end

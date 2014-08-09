@@ -1,9 +1,12 @@
 use Mix.Config
 
-config :database,
+config :re_inspector_app, :database,
+  host: "localhost",
+  login: "re_inspector",
+  password: nil,
   database: "re_inspector_test"
 
-config :listeners,
+config :re_inspector_app, :listeners,
   redis: [
     %{
       name: "test",
@@ -22,13 +25,13 @@ config :listeners,
     }
   ]
 
-config :exlager,
-  level: :emergency,
-  truncation_size: 8096
-
-config :re_inspector,
+config :re_inspector_app,
   correlators: [
     ReInspector.Test.Service1Correlator,
     ReInspector.Test.Service2Correlator
   ],
   retention_in_weeks: 6
+
+config :exlager,
+  level: :emergency,
+  truncation_size: 8096

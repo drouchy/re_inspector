@@ -18,8 +18,9 @@ defmodule ReInspector.Repo do
 
   def log(_arg, fun), do: fun.()
 
-  defp login,    do: Application.get_env(:database, :login)
-  defp password, do: Application.get_env(:database, :password)
-  defp host,     do: Application.get_env(:database, :host)
-  defp database, do: Application.get_env(:database, :database)
+  defp config,   do: Application.get_env(:re_inspector_app, :database)
+  defp login,    do: config[:login]
+  defp password, do: config[:password]
+  defp host,     do: config[:host]
+  defp database, do: config[:database]
 end

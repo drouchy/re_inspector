@@ -1,10 +1,14 @@
 use Mix.Config
 
-config :database,
+import_config "test.exs"
+
+config :re_inspector_app, :database:
+  host: "localhost",
   login: "postgres",
+  password: nil,
   database: "re_inspector_ci_test"
 
-config :listeners,
+config :re_inspector_app, :listeners
   redis: [
     %{
       name: "test",
@@ -22,18 +26,3 @@ config :listeners,
       password: "guest"
     }
   ]
-
-config :exlager,
-  level: :emergency,
-  truncation_size: 8096
-
-config :re_inspector,
-  correlators: [
-    ReInspector.Test.Service1Correlator,
-    ReInspector.Test.Service2Correlator
-  ],
-  retention_in_weeks: 6
-
-config :web,
-  port: 4010,
-  compress: true
