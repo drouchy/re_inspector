@@ -1,6 +1,6 @@
 defmodule ReInspector.Repo do
   use Ecto.Repo, adapter: Ecto.Adapters.Postgres
-  import Lager
+  import Logger
 
   def conf do
     parse_url "ecto://#{login}:#{password}@#{host}/#{database}"
@@ -12,7 +12,7 @@ defmodule ReInspector.Repo do
 
   def log({:query, sql}, fun) do
     {time, result} = :timer.tc(fun)
-    Lager.debug "#{sql} - #{time}ms"
+    Logger.debug "#{sql} - #{time}ms"
     result
   end
 

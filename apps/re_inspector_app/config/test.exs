@@ -31,7 +31,3 @@ config :re_inspector_app,
     ReInspector.Test.Service2Correlator
   ],
   retention_in_weeks: 6
-
-config :exlager,
-  level: :emergency,
-  truncation_size: 8096

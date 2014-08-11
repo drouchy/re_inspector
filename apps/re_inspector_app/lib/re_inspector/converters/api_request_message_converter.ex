@@ -1,9 +1,9 @@
 defmodule ReInspector.App.Converters.ApiRequestMessageConverter do
-  import Lager
+  import Logger
   alias ReInspector.App.JsonParser
 
   def to_postgres(message) do
-    Lager.debug "converting message #{inspect message}"
+    Logger.debug "converting message #{inspect message}"
     message
     |> Map.put(:requested_at,    parse_date_time(message[:requested_at]))
     |> Map.put(:duration,        message[:time_to_execute])

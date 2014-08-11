@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.RabbitMQMessageListenerWorker do
   use GenServer
-  import Lager
+  import Logger
 
   alias ReInspector.App.Connections.RabbitMQ
 
@@ -14,7 +14,7 @@ defmodule ReInspector.App.Workers.RabbitMQMessageListenerWorker do
   end
 
   def init(options) do
-    Lager.debug "init rabbit mq listener with #{inspect options}"
+    Logger.debug "init rabbit mq listener with #{inspect options}"
     connection = RabbitMQ.create_connection options
     channel    = RabbitMQ.create_channel connection
 

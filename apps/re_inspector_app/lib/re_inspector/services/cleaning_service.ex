@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.CleaningService do
-  import Lager
+  import Logger
 
   import Ecto.Query, only: [from: 2]
 
@@ -9,7 +9,7 @@ defmodule ReInspector.App.Services.CleaningService do
   alias ReInspector.Repo
 
   def clean_old_api_requests(cut_off) do
-    Lager.info "Cleaning old Api Requests requested before #{inspect cut_off}"
+    Logger.info "Cleaning old Api Requests requested before #{inspect cut_off}"
 
     limit = Ecto.DateTime.from_erl({cut_off, {0, 0, 0}})
 

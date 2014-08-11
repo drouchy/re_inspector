@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.SearchService do
-  import Lager
+  import Logger
 
   import Ecto.Query
 
@@ -7,7 +7,7 @@ defmodule ReInspector.App.Services.SearchService do
   alias ReInspector.Repo
 
   def search(query, options) do
-    Lager.info "search '#{query}' with options: #{inspect options}"
+    Logger.info "search '#{query}' with options: #{inspect options}"
     ecto_query(query)
     |> select([c, q], {c,q})
     |> order_by([_c, q], q.requested_at)
@@ -17,7 +17,7 @@ defmodule ReInspector.App.Services.SearchService do
   end
 
   def count(query, _options) do
-    Lager.debug "counting total result for '#{query}'"
+    Logger.debug "counting total result for '#{query}'"
     ecto_query(query)
     |> select([_c, q], count(q.id))
     |> Repo.one

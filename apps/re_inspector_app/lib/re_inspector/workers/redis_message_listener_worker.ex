@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
   use GenServer
-  import Lager
+  import Logger
 
   @doc """
   """
@@ -10,7 +10,7 @@ defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
   end
 
   def init(redis_options) do
-    Lager.info "starting the message listener #{redis_options[:list]}"
+    Logger.info "starting the message listener #{redis_options[:list]}"
     try do
       redis_client = ReInspector.App.Connections.Redis.client(redis_options)
       pid = spawn_link fn -> listen_redis(redis_client, redis_options[:list]) end

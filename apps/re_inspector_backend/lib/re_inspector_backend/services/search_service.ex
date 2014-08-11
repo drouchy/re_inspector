@@ -1,8 +1,8 @@
 defmodule ReInspector.Backend.Services.SearchService do
-  import Lager
+  import Logger
 
   def search(term, options) do
-    Lager.info "searching #{inspect term} using options #{inspect options}"
+    Logger.info "searching #{inspect term} using options #{inspect options}"
     { search_results(term, options) , pagination(term, options) }
   end
 

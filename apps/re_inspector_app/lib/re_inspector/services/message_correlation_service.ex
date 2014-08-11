@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.MessageCorrelationService do
-  import Lager
+  import Logger
 
   alias ReInspector.Repo
   alias ReInspector.ApiRequest
@@ -10,7 +10,7 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
   import Ecto.Query, only: [from: 2]
 
   def process_api_request(id, correlators) do
-    Lager.info "processing api request #{id}"
+    Logger.info "processing api request #{id}"
     api_request = ApiRequestService.find(id)
 
     {api_request, correlations, correlator_name} = launch_correlation(api_request, correlators)
@@ -20,7 +20,7 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
   end
 
   def launch_correlation(api_request, correlators) do
-    Lager.info "launching correlation for api_request #{inspect api_request}"
+    Logger.info "launching correlation for api_request #{inspect api_request}"
 
     correlator = find_correlator(api_request, correlators)
     enriched = enrich_request(api_request, correlator)

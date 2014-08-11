@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
-  import Lager
+  import Logger
 
   def render(api_request) do
     api_request
@@ -15,7 +15,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   end
 
   defp to_map(api_request) do
-    Lager.debug "rendering: #{inspect api_request}"
+    Logger.debug "rendering: #{inspect api_request}"
     %{
       "id"                => api_request.id,
       "requested_at"      => to_iso8601(api_request.requested_at),

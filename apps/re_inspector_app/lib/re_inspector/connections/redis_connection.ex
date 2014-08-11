@@ -1,9 +1,9 @@
 defmodule ReInspector.App.Connections.Redis do
   import Exredis
-  require Lager
+  require Logger
 
   def client(opts) do
-    Lager.debug "Connection to #{inspect(opts)}"
+    Logger.debug "Connection to #{inspect(opts)}"
     start(to_char_list(opts[:host]), opts[:port])
   end
 

@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.SearchWorker do
   use GenServer
-  import Lager
+  import Logger
 
   alias ReInspector.App.Services.SearchService
 

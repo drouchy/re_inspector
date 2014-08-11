@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.ErrorProcessorWorker do
   use GenServer
-  import Lager
+  import Logger
 
   alias ReInspector.App.Services.ErrorProcessorService
 
@@ -9,13 +9,13 @@ defmodule ReInspector.App.Workers.ErrorProcessorWorker do
   end
 
   def handle_cast({:error_raised, error, stack_trace}, state) do
-    Lager.error("An error has been raised: '#{inspect error}'")
+    Logger.error("An error has been raised: '#{inspect error}'")
     ErrorProcessorService.process_error(error, stack_trace)
     {:noreply, state}
   end
 
   def handle_cast({:error_raised, error, stack_trace, request_id}, state) do
-    Lager.error("An error has been raised: '#{inspect error}' for request #{request_id}")
+    Logger.error("An error has been raised: '#{inspect error}' for request #{request_id}")
     ErrorProcessorService.process_error(error, stack_trace, request_id)
     {:noreply, state}
   end

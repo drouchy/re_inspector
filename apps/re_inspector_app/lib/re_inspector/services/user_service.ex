@@ -1,11 +1,11 @@
 defmodule ReInspector.App.Services.UserService do
-  import Lager
+  import Logger
   import Ecto.Query, only: [from: 2]
 
   alias ReInspector.Repo
 
   def create(attributes) do
-    Lager.debug("inserting user: #{inspect attributes}")
+    Logger.debug("inserting user: #{inspect attributes}")
 
     attributes = Map.merge(attributes, %{created_at: now, updated_at: now})
     struct(ReInspector.User, attributes)
@@ -13,7 +13,7 @@ defmodule ReInspector.App.Services.UserService do
   end
 
   def update(user, attributes) do
-    Lager.debug("updating user: #{inspect user.id} with #{inspect attributes}")
+    Logger.debug("updating user: #{inspect user.id} with #{inspect attributes}")
 
     user = Map.merge(user, attributes) |> Map.put(:updated_at, now)
     :ok = user |> Repo.update
@@ -21,12 +21,12 @@ defmodule ReInspector.App.Services.UserService do
   end
 
   def find_by_token(token) do
-    Lager.debug("find user by token #{obfuscate token}")
+    Logger.debug("find user by token #{obfuscate token}")
     first_result from(u in ReInspector.User, where: u.access_token == ^token)
   end
 
   def find_by_login(login) do
-    Lager.debug("find user by login #{login}")
+    Logger.debug("find user by login #{login}")
     first_result from(u in ReInspector.User, where: u.login == ^login)
   end
 

@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.MessageCorrelatorWorker do
   use GenServer
-  import Lager
+  import Logger
 
   @doc """
   Starts the config worker.
@@ -11,7 +11,7 @@ defmodule ReInspector.App.Workers.MessageCorrelatorWorker do
 
   def handle_cast({:process, api_request_id}, correlators) do
     try do
-      Lager.info "launching correlation of request #{api_request_id}"
+      Logger.info "launching correlation of request #{api_request_id}"
       ReInspector.App.Services.MessageCorrelationService.process_api_request(api_request_id, correlators)
       GenServer.cast :re_inspector_message_broadcaster, {:new_request, api_request_id}
     rescue

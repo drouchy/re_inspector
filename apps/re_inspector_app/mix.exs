@@ -41,7 +41,6 @@ defmodule ReInspector.App.Mixfile do
       {:decimal, "~> 0.2.3"},
       {:ecto, github: "elixir-lang/ecto"},
       {:exredis, github: "artemeff/exredis"},
-      {:exlager, github: "khia/exlager"},
       {:jazz, "~> 0.2.0"},
       {:chronos, "~> 0.3.2"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
