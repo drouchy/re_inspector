@@ -84,5 +84,23 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
     assert correlation.id == inserted.id
   end
 
+  test "returns a new correlation when a previous correlation has been found but not at the same index" do
+    %ReInspector.Correlation{correlations: [nil, "24C43", "1234"]}
+    |> ReInspector.Repo.insert
+
+    correlation = MessageCorrelationService.persist_correlation ["24C43", nil, nil]
+
+    assert count_correlations == 2
+  end
+
+  test "returns a new correlation when a previous correlation has been found but can't be merged because of an additional entry" do
+    %ReInspector.Correlation{correlations: ["123", "24C43", nil]}
+    |> ReInspector.Repo.insert
+
+    correlation = MessageCorrelationService.persist_correlation ["456", "24C43", nil]
+
+    assert count_correlations == 2
+  end
+
   defp correlators, do: [ReInspector.Test.Service1Correlator, ReInspector.Test.Service2Correlator]
 end

@@ -57,15 +57,15 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
 
   defp find_previous_correlation(correlations) do
     correlations
-    |> Enum.filter(fn (value) -> value end)
-    |> Enum.map(fn (value) -> find_one_correlation(value) end)
-    |> Enum.filter(fn (value) -> value end)
+    |> Enum.map(fn (value) -> find_correlations(value) end)
+    |> List.flatten
+    |> Enum.filter(fn (value) -> ListUtils.merge(correlations, value.correlations) != :unmergeable end)
     |> List.first
   end
 
-  defp find_one_correlation(value) do
+  defp find_correlations(nil), do: []
+  defp find_correlations(value) do
     from(c in Correlation , where: ^value in c.correlations,  select: c)
     |> Repo.all
-    |> List.last
   end
 end
