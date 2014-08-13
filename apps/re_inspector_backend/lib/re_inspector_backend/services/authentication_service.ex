@@ -27,8 +27,7 @@ defmodule ReInspector.Backend.Services.AuthenticationService do
     UserService.update(existing_user, %{access_token: access_token})
   end
 
-
-  defp config, do: Application.get_all_env(:github)
+  defp config, do: Application.get_env(:re_inspector_backend, :github)
 
   defp check_correct_orginsation(nil, _login, _access_token), do: true
   defp check_correct_orginsation(organisation, url, access_token) do

@@ -11,7 +11,7 @@ defmodule ReInspector.Backend.Services.AuthenticationServiceTest do
   setup do
     clean_db
     on_exit fn ->
-      Application.put_env(:github, :organisation, nil)
+      Application.put_env(:re_inspector_backend, :github, [client_id: "GITHUB_CLIENT_ID", client_secret: "GITHUB_CLIENT_SECRET"])
       clean_db
     end
     :ok
@@ -52,21 +52,24 @@ defmodule ReInspector.Backend.Services.AuthenticationServiceTest do
   end
 
   test_with_mock "authenticates an user in the correct organisation", Github, github_mock do
-    Application.put_env(:github, :organisation, "org1")
+    Application.put_env(:re_inspector_backend, :github, [organisation: "org1", client_id: "GITHUB_CLIENT_ID", client_secret: "GITHUB_CLIENT_SECRET"])
+
     user = authenticate
 
     assert count_users == 1
   end
 
   test_with_mock "refuses to authenticate an user not in the correct organisation", Github, github_mock do
-    Application.put_env(:github, :organisation, "org3")
+    Application.put_env(:re_inspector_backend, :github, [organisation: "org3", client_id: "GITHUB_CLIENT_ID", client_secret: "GITHUB_CLIENT_SECRET"])
+
     user = authenticate
 
     assert count_users == 0
   end
 
   test_with_mock "authenticates an user in any organisation if there is no filter on it", Github, github_mock do
-    Application.put_env(:github, :organisation, nil)
+    Application.put_env(:re_inspector_backend, :github, [organisation: nil, client_id: "GITHUB_CLIENT_ID", client_secret: "GITHUB_CLIENT_SECRET"])
+
     user = authenticate
 
     assert count_users == 1

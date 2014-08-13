@@ -6,7 +6,7 @@ defmodule ReInspector.Backend.Controllers.AuthenticationController do
 
   def authenticate(conn, params) do
     conn
-    |> put_resp_header("Location", Github.authorization_url(Application.get_all_env(:github)))
+    |> put_resp_header("Location", Github.authorization_url(Application.get_env(:re_inspector_backend, :github)))
     |> text(302, "")
   end
 

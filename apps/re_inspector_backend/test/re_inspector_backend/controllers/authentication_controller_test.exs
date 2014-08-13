@@ -24,6 +24,12 @@ defmodule ReInspector.Backend.AuthenticationControllerTest do
     assert location == "github url"
   end
 
+  test_with_mock "reads the github settings from the config", Github, [authorization_url: fn(_) -> "github url" end] do
+    location = Plug.Conn.get_resp_header(execute_authenticate, "Location") |> List.first
+
+    assert called Github.authorization_url([client_id: "GITHUB_CLIENT_ID", client_secret: "GITHUB_CLIENT_SECRET"])
+  end
+
   # get :provider/call_back
   test_with_mock "GET version sends the request", AuthenticationService, mock_authentication do
     assert execute_callback.state == :sent

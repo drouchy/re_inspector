@@ -32,3 +32,7 @@ config :re_inspector_app,
 config :re_inspector_backend, :authentication,
   enabled: false,
   providers: []
+
+config :re_inspector_backend, :github,
+  client_id: "GITHUB_CLIENT_ID",
+  client_secret: "GITHUB_CLIENT_SECRET"
