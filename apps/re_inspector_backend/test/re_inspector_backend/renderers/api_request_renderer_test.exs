@@ -79,6 +79,10 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
     assert rendered["correlator_name"] == "Elixir.ReInspector.Test.Service2Correlator"
   end
 
+  test "renders the additional_information" do
+    assert rendered["additional_information"] == %{"field_1" => "value 1", "field_2" => "value 2", "field_3" => "value 3"}
+  end
+
   test "before rendering obfuscates the message with the correlator" do
     message = %{fixture | correlator_name: "Elixir.ReInspector.Test.Service1Correlator"}
 
@@ -111,6 +115,14 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
     assert rendered["response"]["headers"] == %{}
   end
 
+  test "does not crash if there is no additional information" do
+    message = %{fixture | additional_information: nil}
+
+    rendered = ApiRequestRenderer.render message
+
+    assert rendered["additional_information"] == %{}
+  end
+
   defp rendered, do: ApiRequestRenderer.render fixture
 
   defp fixture do
@@ -131,7 +143,8 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRendererTest do
       service_version: "service version",
       service_env: "service env",
       request_name: "request name",
-      correlator_name: "Elixir.ReInspector.Test.Service2Correlator"
+      correlator_name: "Elixir.ReInspector.Test.Service2Correlator",
+      additional_information: ["field_1", "value 1", "field_2", "value 2", "field_3", "value 3"]
     }
   end
 end

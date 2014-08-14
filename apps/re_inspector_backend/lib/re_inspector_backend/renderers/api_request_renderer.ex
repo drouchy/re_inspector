@@ -39,8 +39,9 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
         "version"   => api_request.service_version,
         "env"       => api_request.service_env
       },
-      "request_name"      => api_request.request_name,
-      "correlator_name"   => api_request.correlator_name
+      "request_name"           => api_request.request_name,
+      "correlator_name"        => api_request.correlator_name,
+      "additional_information" => convert_to_hash(api_request.additional_information)
     }
   end
 
@@ -71,4 +72,12 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   end
 
   defp compact(enum), do: Enum.filter(enum, fn(e) -> e end)
+
+  defp convert_to_hash(nil), do: %{}
+  defp convert_to_hash(list) do
+    list
+    |> Enum.chunk(2)
+    |> Enum.reduce(%{}, fn([name, value], accumulator) -> Map.put(accumulator, name, value) end)
+  end
+
 end
