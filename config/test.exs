@@ -45,3 +45,7 @@ config :re_inspector_app,
 config :exlager,
   level: :emergency,
   truncation_size: 8096
+
+config :re_inspector_backend, :github,
+  client_id: "GITHUB_CLIENT_ID",
+  client_secret: "GITHUB_CLIENT_SECRET"
