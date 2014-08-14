@@ -4,7 +4,7 @@
   "cowboy": {:package, "1.0.0"},
   "cowlib": {:package, "1.0.0"},
   "decimal": {:package, "0.2.4"},
-  "ecto": {:git, "git://github.com/elixir-lang/ecto.git", "10ab9e840e99d43d6fd26f6e59beeca9b20f27b4", []},
+  "ecto": {:package, "0.2.3"},
   "eredis": {:git, "git://github.com/wooga/eredis.git", "471dd471060daa1d98391cb69ae006f8ba79a042", [ref: "471dd"]},
   "ex_conf": {:package, "0.1.3"},
   "exactor": {:package, "0.6.0"},

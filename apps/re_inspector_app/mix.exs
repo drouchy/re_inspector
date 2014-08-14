@@ -39,7 +39,7 @@ defmodule ReInspector.App.Mixfile do
     [
       {:postgrex, "~> 0.5.3"},
       {:decimal, "~> 0.2.3"},
-      {:ecto, github: "elixir-lang/ecto"},
+      {:ecto, "~> 0.2.3"},
       {:exredis, github: "artemeff/exredis"},
       {:jazz, "~> 0.2.0"},
       {:chronos, "~> 0.3.2"},
