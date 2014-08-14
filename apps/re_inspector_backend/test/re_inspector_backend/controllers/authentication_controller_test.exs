@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.AuthenticationControllerTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
   use PlugHelper
 
   import Mock
