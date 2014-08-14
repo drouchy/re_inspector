@@ -16,13 +16,13 @@ config :re_inspector_app, :listeners,
     ]
   ],
   rabbitmq: [
-    [
-      name: "cloudamqp",
-      host: System.get_env("RABBITMQ_HOST"),
-      virtual_host: System.get_env("RABBITMQ_VHOST"),
-      username: System.get_env("RABBITMQ_USER"),
-      password: System.get_env("RABBITMQ_PASSWORD")
-    ]
+    # [
+    #   name: "cloudamqp",
+    #   host: System.get_env("RABBITMQ_HOST"),
+    #   virtual_host: System.get_env("RABBITMQ_VHOST"),
+    #   username: System.get_env("RABBITMQ_USER"),
+    #   password: System.get_env("RABBITMQ_PASSWORD")
+    # ]
   ]
 
 config :re_inspector_app, :worker_pools,

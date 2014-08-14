@@ -22,6 +22,8 @@ defmodule ReInspector.ApiRequest do
     field :request_name,    :string
     field :correlator_name, :string
 
+    field :additional_information,  {:array, :string}
+
     belongs_to :correlation, ReInspector.Correlation
   end
 
