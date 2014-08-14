@@ -17,9 +17,7 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
 
   #process_api_request/2
   test "launches the correlation process & stores the result" do
-    struct(ApiRequest, default_message)
-    |> Ecto.Model.put_primary_key(15)
-    |> Repo.insert
+    insert_example_request
 
     processed = MessageCorrelationService.process_api_request(15, correlators)
 
@@ -27,6 +25,15 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
     assert processed.correlation.get.id != nil
     assert processed.correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
     assert Enum.member?(processed.correlation.get.correlations, "24C43")
+  end
+
+  test "enriches the api request with the extra information collected by the correlator" do
+    insert_example_request
+
+    processed = MessageCorrelationService.process_api_request(15, correlators)
+
+    processed = load_api_request processed.id
+    assert processed.additional_information == ["field_1", "value 1"]
   end
 
   #launch_correlation/2
@@ -103,4 +110,9 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
   end
 
   defp correlators, do: [ReInspector.Test.Service1Correlator, ReInspector.Test.Service2Correlator]
+  defp insert_example_request do
+    struct(ApiRequest, default_message)
+    |> Ecto.Model.put_primary_key(15)
+    |> Repo.insert
+  end
 end

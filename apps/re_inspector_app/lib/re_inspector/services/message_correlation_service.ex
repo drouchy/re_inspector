@@ -37,7 +37,10 @@ defmodule ReInspector.App.Services.MessageCorrelationService do
   end
 
   defp enrich_request(api_request, correlator) do
-    %ApiRequest{api_request| request_name: correlator.request_name(api_request)}
+    %ApiRequest{api_request|
+                request_name:           correlator.request_name(api_request),
+                additional_information: correlator.additional_information(api_request)
+    }
   end
 
   defp find_correlator(api_request, correlators) do
