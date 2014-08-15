@@ -46,6 +46,10 @@ defmodule ReInspector.App.Mixfile do
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
       {:amqp, github: "pma/amqp"},
 
+      {:erlcloud, github: "gleber/erlcloud"},
+      {:meck, github: "eproxus/meck", override: true},
+      {:jsx, github: "talentdeficit/jsx", override: true},
+
       {:mock, github: "jjh42/mock", only: test_envs}
     ]
   end
