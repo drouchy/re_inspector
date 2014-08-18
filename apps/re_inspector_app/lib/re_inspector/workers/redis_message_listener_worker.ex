@@ -11,14 +11,9 @@ defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
 
   def init(redis_options) do
     Logger.info "starting the message listener #{redis_options[:list]}"
-    try do
-      redis_client = ReInspector.App.Connections.Redis.client(redis_options)
-      pid = spawn_link fn -> listen_redis(redis_client, redis_options[:list]) end
+    redis_client = ReInspector.App.Connections.Redis.client(redis_options)
+    pid = spawn_link fn -> listen_redis(redis_client, redis_options[:list]) end
     {:ok, pid }
-    rescue
-      e -> IO.inspect e
-      raise e
-    end
   end
 
   defp listen_redis(redis_client, redis_list) do
