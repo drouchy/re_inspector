@@ -18,7 +18,7 @@ defmodule ReInspector.App.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [
-      applications: [:postgrex, :ecto],
+      applications: [:postgrex, :ecto, :erlcloud],
       mod: {ReInspector.App, [] }
     ]
   end
