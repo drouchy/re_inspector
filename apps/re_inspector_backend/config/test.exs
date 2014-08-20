@@ -24,7 +24,8 @@ config :re_inspector_app, :database,
 
 config :re_inspector_app, :listeners,
   redis: [],
-  rabbitmq: []
+  rabbitmq: [],
+  aws: []
 
 config :re_inspector_app,
   correlators: []

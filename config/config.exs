@@ -25,7 +25,8 @@ config :re_inspector_app, :listeners,
       vhost: System.get_env("RABBITMQ_VHOST"),
       password: System.get_env("RABBITMQ_PASSWORD")
     ]
-  ]
+  ],
+  aws: []
 
 config :re_inspector_app, :worker_pools,
   search: [

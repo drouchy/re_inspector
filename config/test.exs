@@ -34,7 +34,8 @@ config :re_inspector_app, :listeners,
       username: "guest",
       password: "guest"
     ]
-  ]
+  ],
+  aws: []
 
 config :re_inspector_app,
   correlators: [

@@ -30,8 +30,8 @@ config :re_inspector_app, :listeners,
       access_client_id: System.get_env("AWS_CLIENT_ID"),
       access_client_secret: System.get_env("AWS_CLIENT_SECRET"),
       topic: "re_inspector-new_api_request-dev",
-      sqs_host: "sns.us-east-1.amazonaws.com",
-      sns_host: "sqs.us-east-1.amazonaws.com"
+      sqs_host: "queue.amazonaws.com",
+      sns_host: "sns.us-east-1.amazonaws.com"
     ]
   ]
 

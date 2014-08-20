@@ -14,6 +14,7 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
       worker(ReInspector.App.Workers.DataCleanerWorker,        [retention])
     ] ++ redis_workers
       ++ rabbitmq_workers
+      ++ aws_workers
     supervise(children, strategy: :one_for_one)
   end
 
@@ -28,6 +29,10 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
     worker(ReInspector.App.Workers.RabbitMQMessageListenerWorker, [rabbitmq_config[:name], Keyword.delete(rabbitmq_config, :name)])
   end
 
+  defp aws_worker(aws_config) do
+    worker(ReInspector.App.Workers.SQSMessageListenerWorker, [aws_config[:name], aws_config])
+  end
+
   defp retention, do: Application.get_env(:re_inspector_app, :retention_in_weeks)
 
   defp redis_workers do
@@ -36,6 +41,10 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
 
   defp rabbitmq_workers do
     Enum.map(config[:rabbitmq], fn(rabbitmq_config) -> rabbitmq_worker(rabbitmq_config) end)
+  end
+
+  defp aws_workers do
+    Enum.map(config[:aws], fn(aws_config) -> aws_worker(aws_config) end)
   end
 
   defp config, do: Application.get_env(:re_inspector_app, :listeners, [redis: [], rabbitmq: []])

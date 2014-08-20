@@ -20,4 +20,4 @@ script:
   - cd ../re_inspector_backend
   - mix do deps.get, deps.compile cowboy
   - cd ../..
-  - mix test
+  - mix do deps.get, test

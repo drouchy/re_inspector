@@ -33,10 +33,11 @@ defmodule ReInspector.Backend.Mixfile do
       {:httpoison, "~> 0.3.0"},
       {:hackney, github: "benoitc/hackney"},
 
-      {:mock, github: "jjh42/mock", only: test_envs},
       {:exvcr, "~> 0.3.0", only: test_envs},
       {:jsex, "~> 2.0.0", only: test_envs},
-      {:jsx, "~> 2.0", only: test_envs}
+
+      {:meck, github: "eproxus/meck", override: true},
+      {:jsx, github: "talentdeficit/jsx", override: true},
     ]
   end
 
