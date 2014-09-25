@@ -37,7 +37,7 @@ defmodule ReInspector.App.Mixfile do
 
   defp deps do
     [
-      {:postgrex, "~> 0.6.0"},
+      # {:postgrex, "~> 0.6.1"},
       {:decimal, "~> 0.2.5"},
       {:ecto, "~> 0.2.5"},
       {:exredis, github: "artemeff/exredis"},
@@ -46,6 +46,8 @@ defmodule ReInspector.App.Mixfile do
       {:chronos, "~> 0.3.2"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
       {:amqp, "~> 0.0.5"},
+
+      {:postgrex, github: "ericmj/postgrex", override: true},
 
       {:erlcloud, github: "gleber/erlcloud"},
       {:meck, github: "eproxus/meck", override: true},

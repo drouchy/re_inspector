@@ -8,7 +8,7 @@ defmodule ReInspector.Support.Redis do
   end
 
   def redis_connection do
-    Exredis.start(to_char_list(redis_options[:host]), redis_options[:port])
+    Exredis.start(redis_options[:host], redis_options[:port])
   end
 
   def query(args) do
