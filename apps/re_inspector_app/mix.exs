@@ -7,7 +7,7 @@ defmodule ReInspector.App.Mixfile do
       version: "0.0.1",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 0.15.0",
+      elixir: "~> 1.0.0",
       deps: deps,
       elixirc_paths: src_paths(Mix.env)
     ]
@@ -18,7 +18,7 @@ defmodule ReInspector.App.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [
-      applications: [:postgrex, :ecto, :erlcloud],
+      applications: [:postgrex, :ecto, :erlcloud, :logger],
       mod: {ReInspector.App, [] }
     ]
   end
@@ -37,14 +37,14 @@ defmodule ReInspector.App.Mixfile do
 
   defp deps do
     [
-      {:postgrex, "~> 0.5.3"},
-      {:decimal, "~> 0.2.3"},
-      {:ecto, "~> 0.2.3"},
+      {:postgrex, "~> 0.6.0"},
+      {:decimal, "~> 0.2.5"},
+      {:ecto, "~> 0.2.5"},
       {:exredis, github: "artemeff/exredis"},
-      {:jazz, "~> 0.2.0"},
+      {:jazz, "~> 0.2.1"},
       {:chronos, "~> 0.3.2"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
-      {:amqp, github: "pma/amqp"},
+      {:amqp, "~> 0.0.5"},
 
       {:erlcloud, github: "gleber/erlcloud"},
       {:meck, github: "eproxus/meck", override: true},

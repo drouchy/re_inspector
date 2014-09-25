@@ -6,7 +6,7 @@ mkdir -p $APP_DIR
 export PATH=${APP_DIR}/elixir/bin:$PATH
 
 mkdir -p ${APP_DIR}/elixir
-curl -L https://github.com/elixir-lang/elixir/releases/download/v0.15.0/Precompiled.zip > ${APP_DIR}/elixir.zip
+curl -L https://github.com/elixir-lang/elixir/releases/download/v1.0.0/Precompiled.zip > ${APP_DIR}/elixir.zip
 unzip -u ${APP_DIR}/elixir.zip -d ${APP_DIR}/elixir
 
 mix local.hex --force

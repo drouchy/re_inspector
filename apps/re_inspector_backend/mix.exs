@@ -5,7 +5,7 @@ defmodule ReInspector.Backend.Mixfile do
     [
       app: :re_inspector_backend,
       version: "0.0.1",
-      elixir: "~> 0.15.0",
+      elixir: "~> 1.0.0",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixirc_paths: src_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule ReInspector.Backend.Mixfile do
   def application do
     [
       mod: { ReInspector.Backend, [] },
-      applications: [:phoenix, :re_inspector_app, :httpoison]
+      applications: [:phoenix, :re_inspector_app, :httpoison, :logger]
     ]
   end
 
@@ -28,16 +28,17 @@ defmodule ReInspector.Backend.Mixfile do
   defp deps do
     [
       {:re_inspector_app, in_umbrella: true},
-      {:phoenix, github: "phoenixframework/phoenix"},
-      {:cowboy, "~> 1.0.0", optional: true},
-      {:httpoison, "~> 0.3.0"},
-      {:hackney, github: "benoitc/hackney"},
+      {:cowboy, "~> 1.0.0"},
+      {:phoenix, "~> 0.4.1"},
+      {:plug, "~> 0.7.0"},
+      {:httpoison, "~> 0.4.2"},
+      {:hackney, "~> 0.13.0"},
 
       {:exvcr, "~> 0.3.0", only: test_envs},
       {:jsex, "~> 2.0.0", only: test_envs},
 
       {:meck, github: "eproxus/meck", override: true},
-      {:jsx, github: "talentdeficit/jsx", override: true},
+      {:jsx, github: "talentdeficit/jsx", override: true}
     ]
   end
 

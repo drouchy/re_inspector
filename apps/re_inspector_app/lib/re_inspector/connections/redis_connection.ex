@@ -4,7 +4,7 @@ defmodule ReInspector.App.Connections.Redis do
 
   def client(opts) do
     Logger.debug "Connection to #{inspect(opts)}"
-    start(to_char_list(opts[:host]), opts[:port])
+    start(opts[:host], opts[:port])
   end
 
   def length(redis_client, list) do
