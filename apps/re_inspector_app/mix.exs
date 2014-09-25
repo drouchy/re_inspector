@@ -41,6 +41,7 @@ defmodule ReInspector.App.Mixfile do
       {:decimal, "~> 0.2.5"},
       {:ecto, "~> 0.2.5"},
       {:exredis, github: "artemeff/exredis"},
+      {:eredis, github: "wooga/eredis", override: true, ref: "a1cba24a8a901181044fbd1775e9cdbfa1c405d8"},
       {:jazz, "~> 0.2.1"},
       {:chronos, "~> 0.3.2"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
