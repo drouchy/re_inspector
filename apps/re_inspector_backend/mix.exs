@@ -34,7 +34,7 @@ defmodule ReInspector.Backend.Mixfile do
       {:httpoison, "~> 0.4.2"},
       {:hackney, "~> 0.13.0"},
 
-      {:exvcr, "~> 0.3.0", only: test_envs},
+      {:exvcr, github: "parroty/exvcr", only: test_envs},
       {:jsex, "~> 2.0.0", only: test_envs},
 
       {:meck, github: "eproxus/meck", override: true},
