@@ -33,12 +33,11 @@ defmodule ReInspector.Backend.Mixfile do
       {:plug, "~> 0.7.0"},
       {:httpoison, "~> 0.4.2"},
       {:hackney, "~> 0.13.0"},
+      {:erlcloud, github: "gleber/erlcloud"},
 
       {:exvcr, github: "parroty/exvcr", only: test_envs},
-      {:jsex, "~> 2.0.0", only: test_envs},
-
-      {:meck, github: "eproxus/meck", override: true},
-      {:jsx, github: "talentdeficit/jsx", override: true}
+      {:meck, github: "eproxus/meck", override: true, only: test_envs},
+      {:jsx, github: "talentdeficit/jsx", override: true, only: test_envs}
     ]
   end
 

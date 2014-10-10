@@ -45,15 +45,13 @@ defmodule ReInspector.App.Mixfile do
       {:jazz, "~> 0.2.1"},
       {:chronos, "~> 0.3.2"},
       {:poolboy, "~> 1.2.1", [hex_app: :poolboy]},
-      {:amqp, "~> 0.0.5"},
+      {:amqp, "~> 0.0.5", optional: true},
+      {:erlcloud, github: "gleber/erlcloud"},
 
       {:postgrex, github: "ericmj/postgrex", override: true},
-
-      {:erlcloud, github: "gleber/erlcloud"},
-      {:meck, github: "eproxus/meck", override: true},
-      {:jsx, github: "talentdeficit/jsx", override: true},
-
-      {:mock, github: "jjh42/mock", only: test_envs}
+      {:meck, github: "eproxus/meck", override: true, only: test_envs},
+      {:mock, github: "jjh42/mock", override: true, only: test_envs},
+      {:jsx, github: "talentdeficit/jsx", override: true, only: test_envs}
     ]
   end
 
