@@ -30,6 +30,7 @@ defmodule ReInspector.App.Services.SearchService do
     )
   end
 
+  defp limit_results(query, %{"limit" => "no_limit"}), do: query
   defp limit_results(query, %{"limit" => limit, "page" => page}) do
     query
     |> limit(limit)

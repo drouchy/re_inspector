@@ -51,6 +51,12 @@ defmodule ReInspector.Backend.Controllers.SearchControllerTest do
     assert called SearchService.search "to_search", %{"limit" => 30, "page" => 0, "path" => "/api/search"}
   end
 
+  test_with_mock "GET /api/search searches can search all result", SearchService, [search: fn("to_search", _) -> results end] do
+    simulate_request(:get, "/api/search?q=to_search&limit=no_limit")
+
+    assert called SearchService.search "to_search", %{"limit" => "no_limit", "page" => 0, "path" => "/api/search"}
+  end
+
   defp search_request,  do: simulate_request(:get, "/api/search?q=to_search")
 
   defp results do

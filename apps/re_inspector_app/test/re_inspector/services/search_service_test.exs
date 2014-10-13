@@ -44,6 +44,13 @@ defmodule ReInspector.App.Services.SearchServiceTest do
     assert service_names == ["service 10", "service 11", "service 12", "service 13", "service 14"]
   end
 
+  test "can disable the pagination" do
+    big_insert
+
+    result = SearchService.search("3", %{"limit" => "no_limit", "page" => 0})
+    assert Enum.count(result) == 20
+  end
+
   #count/2
   test "count the total number of entries despite the limit & page options" do
     big_insert

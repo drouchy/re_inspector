@@ -26,6 +26,7 @@ defmodule ReInspector.Backend.Controllers.SearchController do
 
   defp fetch(conn, _opts), do: fetch_params(conn)
 
+  defp parse_conn_params(%{"limit" => "no_limit"}), do: %{"limit" => "no_limit", "page"  => 0 }
   defp parse_conn_params(params) do
     %{
       "limit" => param_to_int(params["limit"]),
