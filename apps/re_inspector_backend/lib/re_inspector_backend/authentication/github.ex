@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Authentication.Github do
-  import Logger
+  require Logger
   use HTTPoison.Base
 
   alias ReInspector.App.JsonParser

@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.MessageCorrelatorWorker do
   use GenServer
-  import Logger
+  require Logger
 
   @doc """
   Starts the config worker.

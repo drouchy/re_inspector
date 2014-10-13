@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.UserService do
-  import Logger
+  require Logger
   import Ecto.Query, only: [from: 2]
 
   alias ReInspector.Repo

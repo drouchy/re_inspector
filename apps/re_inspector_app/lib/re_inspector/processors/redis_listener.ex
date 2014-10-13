@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Processors.RedisListener do
-  import Logger
+  require Logger
 
   alias ReInspector.App.Connections.Redis
   alias ReInspector.App.JsonParser

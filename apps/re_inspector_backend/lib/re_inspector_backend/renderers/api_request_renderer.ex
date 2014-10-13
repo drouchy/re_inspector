@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
-  import Logger
+  require Logger
 
   def render(api_request) do
     api_request

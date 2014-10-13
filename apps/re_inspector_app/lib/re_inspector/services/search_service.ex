@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.SearchService do
-  import Logger
+  require Logger
 
   import Ecto.Query
 

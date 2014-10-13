@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.MessageCorrelationService do
-  import Logger
+  require Logger
 
   alias ReInspector.Repo
   alias ReInspector.ApiRequest

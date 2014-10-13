@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.RabbitMQMessageListenerWorker do
   use GenServer
-  import Logger
+  require Logger
 
   alias ReInspector.App.Connections.RabbitMQ
 

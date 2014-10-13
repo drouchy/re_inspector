@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Services.AuthenticationService do
-  import Logger
+  require Logger
 
   alias ReInspector.Backend.Authentication.Github
   alias ReInspector.App.Services.UserService

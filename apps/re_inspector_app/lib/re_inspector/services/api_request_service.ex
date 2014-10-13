@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.ApiRequestService do
-  import Logger
+  require Logger
   import Ecto.Query
 
   alias ReInspector.ApiRequest

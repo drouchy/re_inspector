@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.DataCleanerWorker do
   use GenServer
-  import Logger
+  require Logger
 
   alias ReInspector.App.Services.CleaningService
 

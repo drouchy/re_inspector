@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.MessageProcessorWorker do
   use GenServer
-  import Logger
+  require Logger
 
   def start_link(_) do
     GenServer.start_link(__MODULE__, [])

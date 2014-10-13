@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Converters.ApiRequestMessageConverter do
-  import Logger
+  require Logger
   alias ReInspector.App.JsonParser
 
   def to_postgres(message) do

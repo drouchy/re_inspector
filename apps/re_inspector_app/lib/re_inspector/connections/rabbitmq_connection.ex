@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Connections.RabbitMQ do
-  import Logger
+  require Logger
 
   def create_connection(config) do
     Logger.info "create rabbitmq connection with #{inspect config}"

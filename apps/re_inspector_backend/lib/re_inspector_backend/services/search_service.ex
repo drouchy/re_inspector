@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.Services.SearchService do
-  import Logger
+  require Logger
 
   def search(term, options) do
     Logger.info "searching #{inspect term} using options #{inspect options}"

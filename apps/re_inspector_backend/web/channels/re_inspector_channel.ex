@@ -1,6 +1,6 @@
 defmodule ReInspector.Backend.Channels.ReInspectorChannel do
   use Phoenix.Channel
-  import Logger
+  require Logger
 
   alias ReInspector.App.Services.UserService
 

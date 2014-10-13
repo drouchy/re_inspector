@@ -1,6 +1,6 @@
 defmodule ReInspector.Repo do
   use Ecto.Repo, adapter: Ecto.Adapters.Postgres
-  import Logger
+  require Logger
 
   def conf do
     parse_url "ecto://#{login}:#{password}@#{host}/#{database}"

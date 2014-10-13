@@ -1,6 +1,6 @@
 defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
   use GenServer
-  import Logger
+  require Logger
 
   @doc """
   """

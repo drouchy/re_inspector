@@ -1,5 +1,5 @@
 defmodule ReInspector.App.Services.CleaningService do
-  import Logger
+  require Logger
 
   import Ecto.Query, only: [from: 2]
 

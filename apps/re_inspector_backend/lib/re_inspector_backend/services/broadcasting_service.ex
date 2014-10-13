@@ -1,5 +1,5 @@
 defmodule ReInspector.Backend.BroadcastingService do
-  import Logger
+  require Logger
 
   def new_request(api_request_id) do
     Logger.info "Broadcast event 'new request' - #{api_request_id}"
