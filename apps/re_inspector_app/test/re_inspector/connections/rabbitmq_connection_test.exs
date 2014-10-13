@@ -12,7 +12,7 @@ defmodule ReInspector.App.Connections.RabbitMQTest do
 
   #create_channel/1
   test "creates a channel on the connection" do
-    %{conn: connection, pid: pid} = RabbitMQ.create_channel rabbit_connection
+    %{pid: pid} = RabbitMQ.create_channel rabbit_connection
 
     assert pid != nil
   end

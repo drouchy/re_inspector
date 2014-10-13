@@ -11,12 +11,12 @@ defmodule ReInspector.App.Workers.SearchWorker do
     GenServer.start_link(__MODULE__, [], [])
   end
 
-  def handle_call({:search, query, options}, from, state) do
+  def handle_call({:search, query, options}, _from, state) do
     results = SearchService.search(query, options)
     {:reply, results, state}
   end
 
-  def handle_call({:count, query, options}, from, state) do
+  def handle_call({:count, query, options}, _from, state) do
     count = SearchService.count(query, options)
     {:reply, count, state}
   end

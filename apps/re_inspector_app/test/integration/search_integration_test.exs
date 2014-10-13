@@ -1,7 +1,6 @@
 defmodule ReInspector.Integration.SearchCorrelationTest do
   use ExUnit.Case, async: false
 
-  import ReInspector.Support.Redis
   import ReInspector.Support.Ecto
 
   alias ReInspector.Correlation
@@ -36,15 +35,15 @@ defmodule ReInspector.Integration.SearchCorrelationTest do
     correlation_2 = %Correlation{correlations: ["2", "4", nil]} |> Repo.insert
     correlation_3 = %Correlation{correlations: ["7", nil, "9"]} |> Repo.insert
 
-    Enum.each(1..3, fn(i) ->
+    Enum.each(1..3, fn(_) ->
       %ApiRequest{request_name: "test", correlation_id: correlation_1.id} |> Repo.insert
     end)
 
-    Enum.each(1..5, fn(i) ->
+    Enum.each(1..5, fn(_) ->
       %ApiRequest{request_name: "test3", correlation_id: correlation_3.id} |> Repo.insert
     end)
 
-    Enum.each(1..4, fn(i) ->
+    Enum.each(1..4, fn(_) ->
       %ApiRequest{request_name: "test2", correlation_id: correlation_2.id} |> Repo.insert
     end)
   end

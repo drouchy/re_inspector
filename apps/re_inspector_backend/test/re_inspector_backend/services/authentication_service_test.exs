@@ -77,18 +77,16 @@ defmodule ReInspector.Backend.Services.AuthenticationServiceTest do
 
   defp github_mock do
     [
-      request_access_token: fn (config, code) -> access_token end,
-      get_user_info: fn (config, "ACCESS_TOKEN") -> %{login: login, email: "user_name@example.com", organizations_url: "org url"} end,
-      get_user_orgs: fn (config, "ACCESS_TOKEN", "org url") -> [%{login: "org1"}, %{login: "org2"}] end
+      request_access_token: fn (_config, _code) -> access_token end,
+      get_user_info: fn (_config, "ACCESS_TOKEN") -> %{login: login, email: "user_name@example.com", organizations_url: "org url"} end,
+      get_user_orgs: fn (_config, "ACCESS_TOKEN", "org url") -> [%{login: "org1"}, %{login: "org2"}] end
     ]
   end
 
   defp authenticate, do: AuthenticationService.authenticate("github", %{"code" => code, "state" => "whatever"})
 
-  defp config, do: %{}
   defp access_token, do: "ACCESS_TOKEN"
   defp login, do: "user_name"
-  defp org_url, do: "org url"
   defp code, do: "code_send_by_github"
 
   defp count_users do

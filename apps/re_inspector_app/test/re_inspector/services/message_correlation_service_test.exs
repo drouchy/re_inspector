@@ -2,7 +2,6 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
   use ExUnit.Case
   import ReInspector.Support.Fixtures
   import ReInspector.Support.Ecto
-  import Ecto.Query, only: [from: 2]
 
   alias ReInspector.ApiRequest
   alias ReInspector.Repo
@@ -95,7 +94,7 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
     %ReInspector.Correlation{correlations: [nil, "24C43", "1234"]}
     |> ReInspector.Repo.insert
 
-    correlation = MessageCorrelationService.persist_correlation ["24C43", nil, nil]
+    MessageCorrelationService.persist_correlation ["24C43", nil, nil]
 
     assert count_correlations == 2
   end
@@ -104,7 +103,7 @@ defmodule ReInspector.App.Services.MessageCorrelationServiceTest do
     %ReInspector.Correlation{correlations: ["123", "24C43", nil]}
     |> ReInspector.Repo.insert
 
-    correlation = MessageCorrelationService.persist_correlation ["456", "24C43", nil]
+    MessageCorrelationService.persist_correlation ["456", "24C43", nil]
 
     assert count_correlations == 2
   end

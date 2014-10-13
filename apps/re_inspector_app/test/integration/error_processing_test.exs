@@ -5,7 +5,6 @@ defmodule ErrorProcessingTest do
 
   import ReInspector.Support.Redis
   import ReInspector.Support.Ecto
-  import ReInspector.Support.Fixtures
 
   setup do
     clear_redis

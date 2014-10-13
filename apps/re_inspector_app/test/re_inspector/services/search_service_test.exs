@@ -2,7 +2,6 @@ defmodule ReInspector.App.Services.SearchServiceTest do
   use ExUnit.Case
 
   import ReInspector.Support.Ecto
-  import Ecto.Query, only: [from: 2]
 
   alias ReInspector.ApiRequest
   alias ReInspector.Correlation

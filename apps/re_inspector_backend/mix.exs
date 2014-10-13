@@ -22,8 +22,8 @@ defmodule ReInspector.Backend.Mixfile do
   end
 
   defp src_paths(:travis), do: src_paths(:test)
-  defp src_paths(:test),   do: ["test/support", "../re_inspector_app/test/support"] ++ src_paths(:default)
-  defp src_paths(_),       do: ["lib", "web", "../re_inspector_app/test/support"]
+  defp src_paths(:test),   do: ["test/support"] ++ src_paths(:default)
+  defp src_paths(_),       do: ["lib", "web"]
 
   defp deps do
     [

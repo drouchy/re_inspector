@@ -3,10 +3,9 @@ defmodule ReInspector.App.Workers.ErrorProcessorServiceTest do
   import Mock
 
   import ReInspector.Support.Ecto
-  import Ecto.Query, only: [from: 2]
 
   alias ReInspector.Repo
-  alias ReInspector.ProcessingError
+  alias ReInspector.App.Services.ErrorProcessorService
 
   @now {{ 2013, 12, 21 }, {7, 23, 54}}
 
@@ -16,7 +15,6 @@ defmodule ReInspector.App.Workers.ErrorProcessorServiceTest do
     :ok
   end
 
-  alias ReInspector.App.Services.ErrorProcessorService
 
   #process_error/2
   test "persists an error" do
@@ -52,15 +50,12 @@ defmodule ReInspector.App.Workers.ErrorProcessorServiceTest do
   end
 
   test "supports an error without any description" do
-    error = %UndefinedFunctionError{arity: 1, function: :request_name, module: nil}
-
     assert process_error != nil
   end
 
   #process_error/3
   test "links the error with the api_request" do
     api_request = %ReInspector.ApiRequest{} |> Repo.insert
-    error = %UndefinedFunctionError{arity: 1, function: :request_name, module: nil}
 
     ErrorProcessorService.process_error(erlang_error, stacktrace, api_request.id)
     assert first_processing_error_with_api_request.api_request.get().id == api_request.id

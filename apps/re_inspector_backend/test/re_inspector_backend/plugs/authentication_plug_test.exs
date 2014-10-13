@@ -1,9 +1,7 @@
 defmodule ReInspector.Backend.Plugs.AuthenticationPlugTest do
   use ExUnit.Case
   use Plug.Test
-  import Mock
 
-  import ReInspector.Backend.Fixtures
   import ReInspector.Support.Ecto
 
   setup do
@@ -13,7 +11,6 @@ defmodule ReInspector.Backend.Plugs.AuthenticationPlugTest do
   end
 
   alias ReInspector.Backend.Plugs.AuthenticationPlug
-  alias ReInspector.Backend.Authentication.Github
 
   #init/1
   test "returns the args" do

@@ -11,7 +11,7 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   defp obfuscate(api_request, correlator_name) do
     apply(String.to_atom(correlator_name), :obfuscate, [api_request])
   rescue
-    e in UndefinedFunctionError -> api_request
+    _e in UndefinedFunctionError -> api_request
   end
 
   defp to_map(api_request) do

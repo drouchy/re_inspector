@@ -19,7 +19,6 @@ defmodule ReInspector.App.Supervisors.ProcessorsSupervisor do
   end
 
   defp correlators, do: Application.get_env(:re_inspector_app, :correlators)
-  defp redis_config, do: Application.get_env(:re_inspector_app, :listeners)[:redis] |> List.first
 
   defp redis_worker(redis_config) do
     worker(ReInspector.App.Workers.RedisMessageListenerWorker, [redis_config[:name], Keyword.delete(redis_config, :name)])

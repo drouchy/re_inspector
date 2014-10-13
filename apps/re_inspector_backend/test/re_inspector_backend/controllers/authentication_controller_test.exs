@@ -4,7 +4,6 @@ defmodule ReInspector.Backend.AuthenticationControllerTest do
 
   import Mock
 
-  alias ReInspector.Backend.Routers.AuthenticationRouter
   alias ReInspector.Backend.Services.AuthenticationService
   alias ReInspector.Backend.Authentication.Github
   alias ReInspector.User

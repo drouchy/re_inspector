@@ -73,7 +73,7 @@ defmodule ReInspector.App.Services.UserServiceTest do
 
   #find_by_token/1
   test "checks the entry in the db" do
-    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+    %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
     user = UserService.find_by_token("one token")
 
@@ -82,7 +82,7 @@ defmodule ReInspector.App.Services.UserServiceTest do
   end
 
   test "returns nil if not found in the db" do
-    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+    %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
     user = UserService.find_by_token("other token")
 
@@ -91,7 +91,7 @@ defmodule ReInspector.App.Services.UserServiceTest do
 
   #find_by_login/1
   test "checks the entry in the db for the login" do
-    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+    %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
     user = UserService.find_by_login("user test")
 
@@ -100,7 +100,7 @@ defmodule ReInspector.App.Services.UserServiceTest do
   end
 
   test "returns nil if no login found in the db" do
-    user = %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
+    %ReInspector.User{login: "user test", access_token: "one token"} |> Repo.insert
 
     user = UserService.find_by_login("other user")
 

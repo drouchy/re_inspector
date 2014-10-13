@@ -19,7 +19,7 @@ defmodule ReInspector.App.Services.CleaningServiceTest do
 
   # clean_old_api_requests/1
   test "removes hte api_requests before the cut-off" do
-    request_old = %ApiRequest{requested_at: %Ecto.DateTime{year: 2014, month: 8, day: 1, hour: 12, min: 38, sec: 4}} |> Repo.insert
+    %ApiRequest{requested_at: %Ecto.DateTime{year: 2014, month: 8, day: 1, hour: 12, min: 38, sec: 4}} |> Repo.insert
     request_new = %ApiRequest{requested_at: %Ecto.DateTime{year: 2014, month: 8, day: 6, hour: 16, min: 58, sec: 6}} |> Repo.insert
 
     CleaningService.clean_old_api_requests(cut_off)

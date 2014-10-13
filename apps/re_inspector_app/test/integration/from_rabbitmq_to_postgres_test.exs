@@ -38,7 +38,7 @@ defmodule FromRabbitmqToPostgresTest do
       assert count_uncorrelated_requests == 0
     end
 
-    [first_api_request|tail] = all_api_requests
+    [first_api_request|_] = all_api_requests
     assert first_api_request.service_name == "service 1"
     assert first_api_request.correlator_name == "Elixir.ReInspector.Test.Service1Correlator"
   end

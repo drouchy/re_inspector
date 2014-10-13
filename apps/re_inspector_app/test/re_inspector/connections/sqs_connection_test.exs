@@ -18,7 +18,7 @@ defmodule ReInspector.App.Connections.SQSTest do
     assert AWS.aws_config(config, :sqs_host) == 'sqs.us-east-1.amazonaws.com'
   end
 
-  test "generates a aws config with the sqs_host" do
+  test "generates a aws config with the sns_host" do
     assert AWS.aws_config(config, :sns_host) == 'sns.us-east-1.amazonaws.com'
   end
 

@@ -4,20 +4,18 @@ defmodule ReInspector.Backend.Controllers.AuthenticationController do
   alias ReInspector.Backend.Services.AuthenticationService
   alias ReInspector.Backend.Authentication.Github
 
-  def authenticate(conn, params) do
+  def authenticate(conn, _params) do
     conn
     |> put_resp_header("Location", Github.authorization_url(Application.get_env(:re_inspector_backend, :github)))
     |> text(302, "")
   end
 
-  def call_back(conn, params) do
+  def call_back(conn, _params) do
     user = AuthenticationService.authenticate(conn.params["provider"], conn.params)
 
     conn
     |> call_back_for(user)
   end
-
-  defp fetch(conn, _opts), do: fetch_params(conn)
 
   defp call_back_for(conn, nil), do: text(conn, 403, "")
   defp call_back_for(conn, user) do

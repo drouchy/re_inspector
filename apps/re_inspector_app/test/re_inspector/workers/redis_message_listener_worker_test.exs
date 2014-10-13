@@ -1,6 +1,5 @@
 defmodule ReInspector.App.Workers.RedisMessageListenerWorkerTest do
   use ExUnit.Case, async: true
-  import Mock
 
   alias ReInspector.App.Workers.RedisMessageListenerWorker
   import ReInspector.Support.Redis

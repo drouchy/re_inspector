@@ -86,7 +86,7 @@ defmodule Webtest.Case do
     try do
       func.()
     rescue
-      e in @retriable_exceptions ->  :timer.sleep(interval) ;  with_retries_do(retries - 1, interval, func)
+      _e in @retriable_exceptions ->  :timer.sleep(interval) ;  with_retries_do(retries - 1, interval, func)
     end
   end
 

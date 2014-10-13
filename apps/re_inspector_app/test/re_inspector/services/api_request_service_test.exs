@@ -2,8 +2,6 @@ defmodule ReInspector.App.Services.ApiRequestServiceTest do
   use ExUnit.Case
   import Mock
 
-  import Ecto.Query, only: [from: 2]
-
   @now {{ 2013, 12, 21 }, {7, 23, 54}}
 
   import ReInspector.Support.Ecto
