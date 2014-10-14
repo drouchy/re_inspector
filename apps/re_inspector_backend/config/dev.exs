@@ -25,10 +25,8 @@ config :re_inspector_app, :listeners,
       list: "re_inspector"
     ]
   ],
-  rabbitmq: []
-
-config :re_inspector_app, :database,
-  database: "re_inspector_development"
+  rabbitmq: [],
+  aws: []
 
 config :re_inspector_app,
   correlators: [

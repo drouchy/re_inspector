@@ -10,11 +10,8 @@ defmodule ReInspector.Mixfile do
 
   defp deps do
     [
-      {:meck, github: "eproxus/meck", override: true, only: test_envs},
-      {:jsx, github: "talentdeficit/jsx", override: true, only: test_envs}
+      {:meck, github: "eproxus/meck", override: true},
+      {:jsx, github: "talentdeficit/jsx", override: true}
     ]
   end
-
-  defp test_envs, do: [:test, :travis]
-
 end
