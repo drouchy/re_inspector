@@ -5,7 +5,7 @@ defmodule ReInspector.App.Services.UserService do
   alias ReInspector.Repo
 
   def create(attributes) do
-    Logger.debug("inserting user: #{inspect attributes}")
+    Logger.debug fn -> "inserting user: #{inspect attributes}" end
 
     attributes = Map.merge(attributes, %{created_at: now, updated_at: now})
     struct(ReInspector.User, attributes)
@@ -13,7 +13,7 @@ defmodule ReInspector.App.Services.UserService do
   end
 
   def update(user, attributes) do
-    Logger.debug("updating user: #{inspect user.id} with #{inspect attributes}")
+    Logger.debug fn -> "updating user: #{inspect user.id} with #{inspect attributes}" end
 
     user = Map.merge(user, attributes) |> Map.put(:updated_at, now)
     :ok = user |> Repo.update
@@ -21,12 +21,12 @@ defmodule ReInspector.App.Services.UserService do
   end
 
   def find_by_token(token) do
-    Logger.debug("find user by token #{obfuscate token}")
+    Logger.debug fn -> "find user by token #{obfuscate token}" end
     first_result from(u in ReInspector.User, where: u.access_token == ^token)
   end
 
   def find_by_login(login) do
-    Logger.debug("find user by login #{login}")
+    Logger.debug fn -> "find user by login #{login}" end
     first_result from(u in ReInspector.User, where: u.login == ^login)
   end
 

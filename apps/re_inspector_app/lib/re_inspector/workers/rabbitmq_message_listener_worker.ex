@@ -14,7 +14,7 @@ defmodule ReInspector.App.Workers.RabbitMQMessageListenerWorker do
   end
 
   def init(options) do
-    Logger.debug "init rabbit mq listener with #{inspect options}"
+    Logger.debug fn -> "init rabbit mq listener with #{inspect options}" end
     connection = RabbitMQ.create_connection options
     channel    = RabbitMQ.create_channel connection
 

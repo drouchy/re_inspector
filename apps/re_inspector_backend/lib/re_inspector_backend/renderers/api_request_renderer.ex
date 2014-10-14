@@ -11,11 +11,13 @@ defmodule ReInspector.Backend.Renderers.ApiRequestRenderer do
   defp obfuscate(api_request, correlator_name) do
     apply(String.to_atom(correlator_name), :obfuscate, [api_request])
   rescue
-    _e in UndefinedFunctionError -> api_request
+  _e in UndefinedFunctionError ->
+    Logger.error "undefined correlator #{correlator_name}"
+    api_request
   end
 
   defp to_map(api_request) do
-    Logger.debug "rendering: #{inspect api_request}"
+    Logger.debug fn -> "rendering: #{inspect api_request}" end
     %{
       "id"                => api_request.id,
       "requested_at"      => to_iso8601(api_request.requested_at),

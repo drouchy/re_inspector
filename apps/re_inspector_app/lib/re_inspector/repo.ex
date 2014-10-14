@@ -12,7 +12,7 @@ defmodule ReInspector.Repo do
 
   def log({:query, sql}, fun) do
     {time, result} = :timer.tc(fun)
-    Logger.debug "#{sql} - #{time}ms"
+    Logger.debug fn -> "#{sql} - #{time}ms" end
     result
   end
 

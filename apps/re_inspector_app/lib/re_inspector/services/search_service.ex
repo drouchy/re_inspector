@@ -17,7 +17,7 @@ defmodule ReInspector.App.Services.SearchService do
   end
 
   def count(query, _options) do
-    Logger.debug "counting total result for '#{query}'"
+    Logger.debug fn -> "counting total result for '#{query}'" end
     ecto_query(query)
     |> select([_c, q], count(q.id))
     |> Repo.one

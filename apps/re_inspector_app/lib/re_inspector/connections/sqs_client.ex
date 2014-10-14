@@ -28,7 +28,7 @@ defmodule ReInspector.App.Connections.SQS do
   end
 
   def delete_message(message_id, options, config) do
-    Logger.debug "deleting message #{message_id}"
+    Logger.debug fn -> "deleting message #{message_id}" end
     :erlcloud_sqs.delete_message(queue_name(options), message_id, config)
   end
 

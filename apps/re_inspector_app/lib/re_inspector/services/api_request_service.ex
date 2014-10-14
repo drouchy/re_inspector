@@ -11,7 +11,7 @@ defmodule ReInspector.App.Services.ApiRequestService do
   end
 
   def find(id) do
-    Logger.debug "find api_request with id #{id}"
+    Logger.debug fn -> "find api_request with id #{id}" end
     from(q in ApiRequest,
       where: q.id == ^id,
       left_join: c in q.correlation,

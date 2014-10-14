@@ -7,10 +7,10 @@ defmodule ReInspector.Backend.Channels.ReInspectorChannel do
   def join(socket, "api_request", message) do
     case UserService.find_by_token(message["authentication"]) do
       nil ->
-        Logger.debug "unauthorized connection: '#{message["authentication"]}'"
+        Logger.debug fn -> "unauthorized connection: '#{message["authentication"]}'" end
         {:error, socket, :unauthorized}
       _   ->
-        Logger.debug "successful connection: '#{message["authentication"]}'"
+        Logger.debug fn -> "successful connection: '#{message["authentication"]}'" end
         {:ok, socket}
     end
   end

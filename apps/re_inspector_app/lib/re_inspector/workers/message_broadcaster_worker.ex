@@ -10,7 +10,7 @@ defmodule ReInspector.App.Workers.MessageBroadcasterWorker do
   end
 
   def handle_cast({:new_request, api_request_id}, state) do
-    Logger.debug "broadcasting 'new_request' for api request id #{api_request_id}"
+    Logger.debug fn -> "broadcasting 'new_request' for api request id #{api_request_id}" end
 
     case Application.get_env(:re_inspector_app, :broadcast_command) do
       nil      -> nil
