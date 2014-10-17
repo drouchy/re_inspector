@@ -29,8 +29,8 @@ defmodule ReInspector.Backend.Mixfile do
     [
       {:re_inspector_app, in_umbrella: true},
       {:cowboy, "~> 1.0.0"},
-      {:phoenix, "~> 0.4.1"},
-      {:plug, "~> 0.7.0"},
+      {:phoenix, "~> 0.5.0"},
+      {:plug, "~> 0.8.0"},
       {:httpoison, "~> 0.4.2"},
       {:hackney, "~> 0.13.0"},
       {:erlcloud, github: "gleber/erlcloud"},
