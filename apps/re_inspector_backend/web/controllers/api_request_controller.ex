@@ -5,6 +5,8 @@ defmodule ReInspector.Backend.Controllers.ApiRequestController do
   alias ReInspector.App.JsonParser
   alias ReInspector.Backend.Renderers.ApiRequestRenderer
 
+  plug :action
+
   def show(conn, params) do
     api_request = ApiRequestService.find String.to_integer(params["id"])
 

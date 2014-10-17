@@ -3,6 +3,8 @@ defmodule ReInspector.Backend.Controllers.VersionController do
 
   alias ReInspector.App.JsonParser
 
+  plug :action
+
   def show(conn, _params) do
     json(conn, 200, json_response)
   end

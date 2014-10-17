@@ -1,6 +1,8 @@
 defmodule ReInspector.Backend.Controllers.AuthenticationController do
   use Phoenix.Controller
 
+  plug :action
+
   alias ReInspector.Backend.Services.AuthenticationService
   alias ReInspector.Backend.Authentication.Github
 

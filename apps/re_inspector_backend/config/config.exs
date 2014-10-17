@@ -1,15 +1,21 @@
 use Mix.Config
 
 config :phoenix, ReInspector.Backend.Router,
-  port: 4000,
-  ssl: false,
-  code_reload: false,
-  cookies: true,
-  session_key: "_re_inspector_backend_key",
-  session_secret: "5$9D78BBM(F3XWS^+IY*RYD+MQ!9_8G2Q!091P@XU%@96LB)G25B#CT0P1LSD($E*^4GKGX4U(Q#FVO"
+  url: [host: "localhost"],
+  http: [port: 4000],
+  https: false,
+  secret_key_base: "5$9D78BBM(F3XWS^+IY*RYD+MQ!9_8G2Q!091P@XU%@96LB)G25B#CT0P1LSD($E*^4GKGX4U(Q#FVO",
+  catch_errors: true,
+  debug_errors: false,
+  error_controller: ReInspector.Backend.PageController
 
-config :phoenix, :logger,
-  level: :error
+config :phoenix, ReInspector.Backend.Router,
+  session: [store: :cookie,
+            key: "_re_inspector/backend_key"]
+
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
 
 config :re_inspector_app, :worker_pools,
   search: [

@@ -1,6 +1,8 @@
 defmodule ReInspector.Backend.Controllers.HomeController do
   use Phoenix.Controller
 
+  plug :action
+
   alias ReInspector.App.JsonParser
 
   def index(conn, _params) do

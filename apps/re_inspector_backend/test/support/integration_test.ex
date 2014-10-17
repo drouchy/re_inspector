@@ -18,7 +18,7 @@ defmodule IntegrationTest.Case do
       end
 
       defp port do
-        Application.get_env(:phoenix, ReInspector.Backend.Router)[:port]
+        Application.get_env(:phoenix, ReInspector.Backend.Router)[:http][:port]
       end
     end
   end

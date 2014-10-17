@@ -6,6 +6,7 @@ defmodule ReInspector.Backend.Controllers.SearchController do
   alias ReInspector.Backend.Renderers.ApiRequestRenderer
 
   plug :fetch
+  plug :action
 
   def index(conn, _params) do
     conn = fetch_params(conn)

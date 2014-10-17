@@ -3,6 +3,10 @@ defmodule ReInspector.Backend do
 
   def start(), do: start(nil, nil)
   def start(_type, _args) do
-    ReInspector.Backend.Supervisor.start_link
+    import Supervisor.Spec, warn: false
+
+    children = []
+    opts = [strategy: :one_for_one, name: ReInspector.Backend.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end

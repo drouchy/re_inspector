@@ -9,6 +9,7 @@ defmodule ReInspector.Backend.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixirc_paths: src_paths(Mix.env),
+      compilers: [:phoenix] ++ Mix.compilers,
       deps: deps
     ]
   end
