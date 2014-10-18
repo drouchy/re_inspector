@@ -7,7 +7,7 @@ config :phoenix, ReInspector.Backend.Router,
   secret_key_base: "5$9D78BBM(F3XWS^+IY*RYD+MQ!9_8G2Q!091P@XU%@96LB)G25B#CT0P1LSD($E*^4GKGX4U(Q#FVO",
   catch_errors: true,
   debug_errors: false,
-  error_controller: ReInspector.Backend.PageController
+  error_controller: ReInspector.Backend.Controllers.HomeController
 
 config :phoenix, ReInspector.Backend.Router,
   session: [store: :cookie,
