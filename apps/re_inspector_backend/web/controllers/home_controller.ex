@@ -10,8 +10,10 @@ defmodule ReInspector.Backend.Controllers.HomeController do
   end
 
   def not_found(conn, _params) do
-    IO.puts "-----> not found"
-    render conn, "not_found"
+    case request_content_type(conn) do
+      "application/json" -> json conn, 404, ''
+      _                  -> render conn, "not_found"
+    end
   end
 
   # def error(conn, _params) do
@@ -19,4 +21,12 @@ defmodule ReInspector.Backend.Controllers.HomeController do
   # end
 
   defp json_response, do: JsonParser.encode %{"re_inspector": "OK"}
+
+  defp request_content_type(conn) do
+    Plug.Conn.get_resp_header(conn, "content-type")
+    |> List.first
+    |> String.split(";")
+    |> List.first
+    |> String.strip
+  end
 end

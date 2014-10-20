@@ -22,6 +22,8 @@ defmodule ReInspector.Backend.HomeControllerTest do
   end
 
   # get /not_found
+
+  ## JSON requests
   test "GET /not_found sends the request" do
     assert not_found_request.state == :sent
   end
@@ -36,10 +38,30 @@ defmodule ReInspector.Backend.HomeControllerTest do
     assert content_type == "application/json; charset=utf-8"
   end
 
-  # test "sets the status of the response" do
-  #   assert home_request.resp_body == "{\"re_inspector\":\"OK\"}"
-  # end
+  test "GET /not_found does not render any body" do
+    assert not_found_request.resp_body == ""
+  end
+
+  ## Html requests
+  test "html GET /not_found sends the request" do
+    assert html_not_found_request.state == :sent
+  end
+
+  test "html GET /not_found sets the status to 404" do
+    assert html_not_found_request.status == 404
+  end
+
+  test "html GET /not_found sets the content type" do
+    content_type = Plug.Conn.get_resp_header(html_not_found_request, "content-type") |> List.first
+
+    assert content_type == "text/html; charset=utf-8"
+  end
+
+  test "html GET /not_found rendere the view" do
+    assert Regex.match?(~r/does not exist/, html_not_found_request.resp_body)
+  end
 
   defp home_request, do: simulate_request(:get, "/")
   defp not_found_request, do: simulate_request(:get, "/not_found")
+  defp html_not_found_request, do: simulate_html_request(:get, "/not_found")
 end
