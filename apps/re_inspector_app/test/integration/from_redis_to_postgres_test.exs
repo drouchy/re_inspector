@@ -21,7 +21,7 @@ defmodule FromRedisToPostgresTest do
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
 
-    with_retries 8, 100 do
+    with_retries 300, 10 do
       assert count_api_requests == 2
     end
 
@@ -32,7 +32,7 @@ defmodule FromRedisToPostgresTest do
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
     redis_connection |> query ["RPUSH", redis_list, default_fixture]
 
-    with_retries 20, 100 do
+    with_retries 300, 10 do
       assert count_api_requests == 2
       assert count_uncorrelated_requests == 0
     end

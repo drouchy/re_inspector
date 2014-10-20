@@ -26,7 +26,7 @@ defmodule ReInspector.Backend.Controllers.HomeController do
   defp json_response, do: JsonParser.encode %{"re_inspector": "OK"}
 
   defp request_content_type(conn) do
-    Plug.Conn.get_resp_header(conn, "content-type")
+    Plug.Conn.get_req_header(conn, "accept")
     |> List.first
     |> String.split(";")
     |> List.first

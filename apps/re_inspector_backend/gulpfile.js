@@ -16,24 +16,29 @@ gulp.task('appJS', function() {
     .pipe(gulp.dest('./priv/static/scripts'))
 });
 
-gulp.task('testJS', function() {
-  gulp.src([
-      './test/web/**/*_test.js',
-      './test/web/**/*_test.coffee',
-      './test/web/support/*.coffee'
-    ])
-    .pipe(
-      gulpif(/[.]coffee$/,
-        coffee({bare: true})
-        .on('error', gutil.log)
-      )
-    )
-    .pipe(gulp.dest('./_build/test/web'))
-});
-
 gulp.task('test', function() {
-  // Be sure to return the stream
-  gulp.src(['./_build/test/web/**.js'])
+  gulp.src([
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/underscore/underscore.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.js',
+      'bower_components/highlightjs/highlight.pack.js',
+      'bower_components/angular-highlightjs/angular-highlightjs.js',
+      'bower_components/angular-highlightjs/angular-highlightjs.js',
+      'bower_components/momentjs/moment.js',
+      'web/app/scripts/**/*.coffee',
+      'priv/static/scripts/templates.js',
+      'test/web/support/**/*.coffee',
+      'test/web/mock/**/*.coffee',
+      'test/web/spec/**/*.coffee'
+    ])
     .pipe(karma({
       configFile: 'test/web/karma.conf.coffee',
       action: 'run'
@@ -135,4 +140,4 @@ gulp.task('watch',function() {
   gulp.watch(['./web/app/styles/**/*.less'],    ['appCSS']);
 });
 
-gulp.task('default', ['appJS', 'testJS', 'templates', 'appCSS', 'libCSS', 'fonts', 'index', 'libJS', 'libCSS', 'watch']);
+gulp.task('default', ['appJS', 'testJS', 'templates', 'appCSS', 'libCSS', 'fonts', 'index', 'libJS', 'libCSS']);

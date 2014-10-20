@@ -1,32 +1,21 @@
-# This file is responsible for configuring your application
-# and its dependencies. The Mix.Config module provides functions
-# to aid in doing so.
 use Mix.Config
 
-config :re_inspector_app, :database,
-  host: "localhost",
-  login: "re_inspector",
-  password: nil,
-  database: "re_inspector"
+config :phoenix, ReInspector.Backend.Router,
+  url: [host: "localhost"],
+  http: [port: 4000],
+  https: false,
+  secret_key_base: "5$9D78BBM(F3XWS^+IY*RYD+MQ!9_8G2Q!091P@XU%@96LB)G25B#CT0P1LSD($E*^4GKGX4U(Q#FVO",
+  catch_errors: true,
+  debug_errors: false,
+  error_controller: ReInspector.Backend.Controllers.HomeController
 
-config :re_inspector_app, :listeners,
-  redis: [
-    [
-      name: "local",
-      host: "localhost",
-      port: 16379,
-      list: "re_inspector"
-    ]
-  ],
-  rabbitmq: [
-    [
-      host: System.get_env("RABBITMQ_HOST"),
-      user: System.get_env("RABBITMQ_USER"),
-      vhost: System.get_env("RABBITMQ_VHOST"),
-      password: System.get_env("RABBITMQ_PASSWORD")
-    ]
-  ],
-  aws: []
+config :phoenix, ReInspector.Backend.Router,
+  session: [store: :cookie,
+            key: "_re_inspector/backend_key"]
+
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
 
 config :re_inspector_app, :worker_pools,
   search: [
@@ -38,16 +27,27 @@ config :re_inspector_app, :worker_pools,
     max_overflow: 5
   ]
 
-config :re_inspector_app,
-  retention_in_weeks: 6,
-  correlators: []
+config :re_inspector_app, :database,
+  host: "localhost",
+  login: "re_inspector",
+  password: nil,
+  database: "re_inspector"
+
+config :re_inspector_app, :listeners,
+  redis: [],
+  rabbitmq: [],
+  aws: []
+
+config :re_inspector_app, :re_inspector,
+  correlators: [],
+  retention_in_weeks: 6
 
 config :re_inspector_backend, :authentication,
-  enabled: false,
+  enabled: true,
   providers: ["github"]
 
 config :re_inspector_backend, :github,
-  client_id: "myclient_id",
-  client_secret: "myclientsecret"
+  client_id: System.get_env("GITHUB_CLIENT_ID"),
+  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
 
 import_config "#{Mix.env}.exs"

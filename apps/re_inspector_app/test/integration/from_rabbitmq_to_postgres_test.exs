@@ -22,7 +22,7 @@ defmodule FromRabbitmqToPostgresTest do
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
 
-    with_retries 20, 300 do
+    with_retries 300, 10 do
       assert count_api_requests == 2
     end
 
@@ -33,7 +33,7 @@ defmodule FromRabbitmqToPostgresTest do
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
     publish channel, "re_inspector.api_request", "re_inspector.new_request", default_fixture
 
-    with_retries 20, 300 do
+    with_retries 300, 10 do
       assert count_api_requests == 2
       assert count_uncorrelated_requests == 0
     end
