@@ -6,13 +6,16 @@ defmodule ReInspector.Backend.Controllers.HomeController do
   alias ReInspector.App.JsonParser
 
   def index(conn, _params) do
-    json(conn, 200, json_response)
+    case request_content_type(conn) do
+      "application/json" -> json conn, 200, json_response
+      "text/html"        -> render conn, "index"
+    end
   end
 
   def not_found(conn, _params) do
     case request_content_type(conn) do
       "application/json" -> json conn, 404, ''
-      _                  -> render conn, "not_found"
+      "text/html"        -> render conn, "not_found"
     end
   end
 

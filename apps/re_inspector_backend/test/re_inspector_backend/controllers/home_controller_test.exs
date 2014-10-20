@@ -3,6 +3,8 @@ defmodule ReInspector.Backend.HomeControllerTest do
   use PlugHelper
 
   # get /
+
+  ## JSON requests
   test "GET / sends the request" do
     assert home_request.state == :sent
   end
@@ -17,8 +19,27 @@ defmodule ReInspector.Backend.HomeControllerTest do
     assert content_type == "application/json; charset=utf-8"
   end
 
-  test "sets the status of the response" do
+  test "GET / render the json" do
     assert home_request.resp_body == "{\"re_inspector\":\"OK\"}"
+  end
+
+  ##json
+  test "html GET / sends the request" do
+    assert html_home_request.state == :sent
+  end
+
+  test "html GET / sets the status to 200" do
+    assert html_home_request.status == 200
+  end
+
+  test "html GET / sets the content type" do
+    content_type = Plug.Conn.get_resp_header(html_home_request, "content-type") |> List.first
+
+    assert content_type == "text/html; charset=utf-8"
+  end
+
+  test "html GET / renders the view" do
+    assert Regex.match?(~r/here later the app/, html_home_request.resp_body)
   end
 
   # get /not_found
@@ -62,6 +83,7 @@ defmodule ReInspector.Backend.HomeControllerTest do
   end
 
   defp home_request, do: simulate_request(:get, "/")
+  defp html_home_request, do: simulate_html_request(:get, "/")
   defp not_found_request, do: simulate_request(:get, "/not_found")
   defp html_not_found_request, do: simulate_html_request(:get, "/not_found")
 end
