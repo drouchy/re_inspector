@@ -129,17 +129,10 @@ gulp.task('watch',function() {
   });
 
   // watch files to build
-  gulp.watch(['./app/**/*.coffee', '!./app/**/*_test.coffee', './app/**/*.js', '!./app/**/*_test.js'], ['appJS']);
-  gulp.watch(['./app/**/*_test.coffee', './app/**/*_test.js'], ['testJS']);
-  gulp.watch(['!./app/index.jade', '!./app/index.html', './app/**/*.jade', './app/**/*.html'], ['templates']);
-  gulp.watch(['./app/**/*.less', './app/**/*.css'], ['appCSS']);
-  gulp.watch(['./app/index.jade', './app/index.html'], ['index']);
+  gulp.watch(['./web/app/scripts/**/*.coffee'], ['appJS', 'test']);
+  gulp.watch(['./test/web/**/*_test.coffee'],   ['testJS', 'test']);
+  gulp.watch(['./web/app/views/**/*.jade'],     ['templates']);
+  gulp.watch(['./web/app/styles/**/*.less'],    ['appCSS']);
 });
 
-gulp.task('connect', connect.server({
-  root: ['build'],
-  port: 9000,
-  livereload: true
-}));
-
-gulp.task('default', ['connect', 'appJS', 'testJS', 'templates', 'appCSS', 'libCSS', 'fonts', 'index', 'libJS', 'libCSS', 'watch']);
+gulp.task('default', ['appJS', 'testJS', 'templates', 'appCSS', 'libCSS', 'fonts', 'index', 'libJS', 'libCSS', 'watch']);
