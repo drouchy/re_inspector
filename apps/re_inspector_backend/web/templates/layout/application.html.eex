@@ -1,31 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Re-Inspector</title>
     <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Hello Phoenix!</title>
-    <link rel="stylesheet" href="/css/phoenix.css">
+    <meta name="viewport" content="width=device-width">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css" /> -->
+    <link rel="stylesheet" href="/styles/vendor.css">
+    <link rel="stylesheet" href="/styles/application.css">
+    <!-- endbuild -->
   </head>
+  <body ng-app="reInspectorWebApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-  <body>
-    <div class="container">
-      <div class="header">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="images/logo.png" alt="I'm Re-Inspector"></a>
+      </div>
+      <div class="navbar-collapse collapse">
         <ul class="nav nav-pills pull-right">
-          <li><a href="https://github.com/phoenixframework/phoenix">Get Started</a></li>
+          <li>
+            <a href="/live">
+              <i class="fa fa-bullhorn live-icon"></i>
+            </a>
+          </li>
+          <li><a ng-href="/about">About</a></li>
         </ul>
-        <span class="logo"></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="error" ng-controller="ErrorCtrl">
+        <div role="alert" ng-show="error" class="alert alert-danger">{{error}}</div>
       </div>
 
-      <%= @inner %>
+      <div ng-view="" />
 
       <div class="footer">
-        <p><a href="http://phoenixframework.org">phoenixframework.org</a></p>
+        <p><span class="glyphicon glyphicon-heart"></span> from the Re-Inspector team</p>
       </div>
+    </div>
 
-    </div> <!-- /container -->
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/es5-shim.js"></script>
+    <script src="/scripts/json3.min.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <script src="/scripts/vendor.js"></script>
+
+    <script src="/scripts/application.js"></script>
+    <script src="/scripts/templates.js"></script>
   </body>
 </html>

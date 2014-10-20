@@ -1,0 +1,38 @@
+{
+  "name": "re-inspector-webapp",
+  "main": "app.js",
+  "version": "0.0.0",
+  "authors": [ "David Rouchy <drouchy@gmail.com" ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.16",
+    "json3": "~3.3.1",
+    "es5-shim": "~3.1.0",
+    "bootstrap": "~3.2.0",
+    "angular-resource": "1.2.16",
+    "angular-cookies": "1.2.16",
+    "angular-sanitize": "1.2.16",
+    "angular-animate": "1.2.16",
+    "angular-touch": "1.2.16",
+    "angular-route": "1.2.16",
+    "angular-bootstrap": "0.11.0",
+    "underscore": "1.6.0",
+    "highlightjs": "8.0.0",
+    "angular-highlightjs": "0.3.0",
+    "momentjs": "2.7.0",
+    "font-awesome": "4.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.16",
+    "angular-scenario": "1.2.16"
+  }
+}
+

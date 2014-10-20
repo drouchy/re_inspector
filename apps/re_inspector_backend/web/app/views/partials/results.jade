@@ -1,0 +1,47 @@
+li.result-repeat.animate(ng-repeat='result in results')
+  .bs-callout(ng-class='result.responseType()')
+    h4(ng-click='result.toggle()') {{result.name}}
+    span.execution  - {{result.timeAgo()}}
+    div(collapse='!result.isCollapsed', style='clear: both;')
+      tabset(style='margin-top: 10px;')
+        tab(heading='info')
+          dl.information.regular-information
+            dt url:
+            dd {{result.url()}}
+            dt status:
+            dd {{result.data.response.status}}
+            dt requested at:
+            dd {{result.executedAt()}}
+            dt duration:
+            dd {{result.duration()}}
+            dt service:
+            dd {{result.service()}}
+            dt tags:
+            dd
+              span.label.label-primary(ng-repeat='tag in result.correlations() track by $index' style='margin-right: 5px;') {{tag}}
+
+        tab(heading='request')
+          h5 headers
+          dl.information.large-information
+            span(ng-repeat='(name, value) in result.requestHeaders()')
+              dt {{name}}
+              dd {{value | limitTo: 100}}
+          h5 body
+          div(hljs='hljs', source='result.requestBody()', ng-show='result.requestBody()')
+          div(ng-hide='result.requestBody()') the request does not have a body
+
+        tab(heading='response')
+          h5 headers
+          dl.information.large-information
+            span(ng-repeat='(name, value) in result.responseHeaders()')
+              dt {{name}}
+              dd {{value | limitTo: 100}}
+          h5 body
+          div(hljs='hljs', source='result.responseBody()', ng-show='result.responseBody()')
+          div(ng-hide='result.responseBody()') the response does not have a body
+
+        tab(heading='other')
+          dl.information.regular-information
+            span(ng-repeat='(name, value) in result.data.additional_information')
+              dt {{name}}
+              dd {{value | limitTo: 100}}

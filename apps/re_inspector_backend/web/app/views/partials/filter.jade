@@ -1,0 +1,7 @@
+.row.marketing
+  form.form-inline(role='form')
+    .form-group.col-md-10
+      input.form-control(type='text', style='width: 100%;', placeholder='Enter filter', ng-model='filter')
+    button.btn.btn-primary(type='submit', ng-click='filterResults()')
+      span Filter&nbsp;
+      i.fa.fa-filter.fa-lg

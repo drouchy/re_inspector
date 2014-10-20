@@ -1,0 +1,8 @@
+.row.marketing
+  form.form-inline(role='form')
+    .form-group.col-md-10
+      input.form-control(type='text', style='width: 100%;', placeholder='Enter query', ng-model='query')
+    button.btn.btn-primary(type='submit', ng-click='search()')
+      span Search&nbsp;
+      i.fa.fa-search.fa-lg(ng-hide='searching')
+      i.fa.fa-refresh.fa-spin(ng-show='searching')
