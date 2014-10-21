@@ -13,7 +13,7 @@ defmodule IntegrationTest.Case do
       end
 
       def fetch(path) do
-        response = HTTPoison.get "http://localhost:#{port}#{path}"
+        { :ok, response } = HTTPoison.get "http://localhost:#{port}#{path}"
         response.body
       end
 

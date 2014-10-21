@@ -12,20 +12,20 @@ defmodule ReInspector.Backend.Authentication.Github do
   end
 
   def request_access_token(config, code) do
-    response = access_token_url(config, code)
+    { :ok, response } = access_token_url(config, code)
     |> post('', [{"Accept", "application/json"}])
 
     JsonParser.decode(response.body)[:access_token]
   end
 
   def get_user_info(_config, access_token) do
-    response = HTTPoison.get("https://api.github.com/user", [{"Accept", "application/json"}, {"Authorization", "token #{access_token}"}])
+    { :ok, response } = HTTPoison.get("https://api.github.com/user", [{"Accept", "application/json"}, {"Authorization", "token #{access_token}"}])
 
     JsonParser.decode response.body
   end
 
   def get_user_orgs(_config, access_token, url) do
-    response = HTTPoison.get(url, [{"Accept", "application/json"}, {"Authorization", "token #{access_token}"}])
+    { :ok, response } = HTTPoison.get(url, [{"Accept", "application/json"}, {"Authorization", "token #{access_token}"}])
 
     JsonParser.decode response.body
   end

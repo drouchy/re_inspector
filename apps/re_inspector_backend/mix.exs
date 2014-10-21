@@ -32,8 +32,8 @@ defmodule ReInspector.Backend.Mixfile do
       {:cowboy, "~> 1.0.0"},
       {:phoenix, "~> 0.5.0"},
       {:plug, "~> 0.8.0"},
-      {:httpoison, "~> 0.4.2"},
-      {:hackney, "~> 0.13.0"},
+      {:httpoison, "~> 0.5.0"},
+      {:hackney, "~> 0.14.1"},
       {:erlcloud, github: "gleber/erlcloud"},
 
       {:exvcr, github: "parroty/exvcr", only: test_envs},
