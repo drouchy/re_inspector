@@ -32,7 +32,7 @@ defmodule ReInspector.Integration.CleaningDataIntegrationTest do
 
     ReInspector.App.clean_old_data
 
-    with_retries 300, 10 do
+    with_retries 50, 200 do
       nb_correlations = from(c in Correlation, []) |> Repo.all |> Enum.count
       assert nb_correlations < 3
     end

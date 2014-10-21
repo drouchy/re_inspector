@@ -140,4 +140,4 @@ gulp.task('watch',function() {
   gulp.watch(['./web/app/styles/**/*.less'],    ['appCSS']);
 });
 
-gulp.task('default', ['appJS', 'testJS', 'templates', 'appCSS', 'libCSS', 'fonts', 'index', 'libJS', 'libCSS']);
+gulp.task('default', ['appJS', 'templates', 'appCSS', 'libCSS', 'fonts', 'index', 'libJS', 'libCSS']);
