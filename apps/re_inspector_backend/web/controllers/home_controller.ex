@@ -30,6 +30,8 @@ defmodule ReInspector.Backend.Controllers.HomeController do
     |> List.first
     |> String.split(";")
     |> List.first
+    |> String.split(",")
+    |> List.first
     |> String.strip
   end
 end

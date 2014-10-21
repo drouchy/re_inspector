@@ -82,6 +82,15 @@ defmodule ReInspector.Backend.HomeControllerTest do
     assert Regex.match?(~r/does not exist/, html_not_found_request.resp_body)
   end
 
+  test "html GET / support the long accept header" do
+    conn = conn(:get, "/") |> put_req_header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+
+    request = ReInspector.Backend.Router.call(conn, [])
+
+    content_type = Plug.Conn.get_resp_header(request, "content-type") |> List.first
+    assert content_type == "text/html; charset=utf-8"
+  end
+
   defp home_request, do: simulate_request(:get, "/")
   defp html_home_request, do: simulate_html_request(:get, "/")
   defp not_found_request, do: simulate_request(:get, "/not_found")
