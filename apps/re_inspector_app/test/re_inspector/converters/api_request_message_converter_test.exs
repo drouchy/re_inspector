@@ -49,7 +49,7 @@ defmodule ReInspector.App.Converters.ApiRequestMessageConverterTest do
   end
 
   test "it converts the request headers" do
-    assert convert[:request_headers] == "{\"Authorization\":\"Bearer 234......4\",\"Content-type\":\"application/json\"}"
+    assert convert[:request_headers] == "{\"Content-type\":\"application/json\",\"Authorization\":\"Bearer 234......4\"}"
   end
 
   test "it converts the request body" do

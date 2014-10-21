@@ -23,7 +23,7 @@ defmodule JsonParsingTest do
   test "it returns a string from a dict" do
     json = JsonParser.encode %{ a: 1, b: 2 }
 
-    assert json == "{\"a\":1,\"b\":2}"
+    assert json == "{\"b\":2,\"a\":1}"
   end
 
   test "parsing & generating cancel each other" do
@@ -33,10 +33,10 @@ defmodule JsonParsingTest do
   end
 
   def regular_json do
-    "{\"a\":1,\"result\":[{\"test\":\"b\"}]}"
+    "{\"result\":[{\"test\":\"b\"}],\"a\":1}"
   end
 
   def invalid_json do
-    "{\"a\":1,\"result\":[\"test\":\"b\"]}"
+    "{\"result\":[\"test\":\"b\"],\"a\":1}"
   end
 end

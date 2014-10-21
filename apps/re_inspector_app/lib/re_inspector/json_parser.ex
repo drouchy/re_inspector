@@ -1,10 +1,9 @@
 defmodule ReInspector.App.JsonParser do
   require Logger
-  use Jazz
 
   def decode(message) do
     Logger.debug fn -> "parsing message #{message}" end
-    case JSON.decode(message, keys: :atoms) do
+    case Poison.decode(message, keys: :atoms) do
       { :ok, dict} -> dict
       _            -> :invalid
     end
@@ -12,7 +11,7 @@ defmodule ReInspector.App.JsonParser do
 
   def encode(dict) do
     Logger.debug fn -> "generating json #{inspect(dict)}" end
-    { :ok, string } = JSON.encode dict
+    { :ok, string } = Poison.encode dict
     string
   end
 
