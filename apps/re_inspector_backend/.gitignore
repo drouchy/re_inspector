@@ -2,8 +2,5 @@
 /deps
 erl_crash.dump
 *.ez
-priv/static/scripts
-priv/static/fonts
-priv/static/styles
 bower_components
 node_modules
