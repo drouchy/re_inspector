@@ -16,6 +16,7 @@ angular.module('reInspectorWebApp')
     $scope.pagination = {}
 
     $scope.search = ->
+      $scope.showAllResults = false
       $location.search("q", $scope.query)
       $location.path("/search")
       $scope.executeSearch()
@@ -30,8 +31,10 @@ angular.module('reInspectorWebApp')
       $scope.__search($scope.pagination.next_page)
 
     $scope.loadAll = ->
-      console.log "loading all #{$scope.pagination}"
-      # $scope.__search($scope.pagination.next_page)
+      console.log "showing all results #{$scope.pagination.all_results}"
+      $scope.showAllResults = true
+      $scope.__discard_results()
+      $scope.__search($scope.pagination.all_results)
 
     $scope.__search = (path) ->
       $scope.searching = true
@@ -45,6 +48,7 @@ angular.module('reInspectorWebApp')
           $scope.noResults = false
           $scope.searching = false
       )
+
     $scope.__discard_results = ->
       while($scope.results.length > 0)
         $scope.results.shift()

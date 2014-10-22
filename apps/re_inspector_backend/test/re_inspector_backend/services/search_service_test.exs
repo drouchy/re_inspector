@@ -53,6 +53,27 @@ defmodule ReInspector.Backend.Services.SearchServiceTest do
     assert pagination["next_page"] == nil
   end
 
+  test_with_mock "the pagination contains the link for a all results query", ReInspector.App, mock_search do
+    {_, pagination} = SearchService.search("to_search", %{"limit" => 20, "page" => 12, "path" => "/api/search"})
+
+    assert pagination["all_results"] == "/api/search?limit=no_limit&q=to_search"
+  end
+
+  test_with_mock "when searching all the results, there is no link in the pagination", ReInspector.App, mock_search do
+    {_, pagination} = SearchService.search("to_search", %{"limit" => "no_limit", "path" => "/api/search"})
+
+    assert pagination == %{"total" => 250}
+  end
+
+  test_with_mock "encodes the link for all result query", ReInspector.App, [
+      search: fn("to search", _) -> results end,
+      count:  fn("to search", _) -> 250 end
+  ] do
+    {_, pagination} = SearchService.search("to search", %{"limit" => 20, "page" => 12, "path" => "/api/search"})
+
+    assert pagination["all_results"] == "/api/search?limit=no_limit&q=to+search"
+  end
+
   defp mock_search do
     [
       search: fn("to_search", _) -> results end,

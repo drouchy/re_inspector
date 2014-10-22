@@ -135,7 +135,7 @@ gulp.task('watch',function() {
 
   // watch files to build
   gulp.watch(['./web/app/scripts/**/*.coffee'], ['appJS', 'test']);
-  gulp.watch(['./test/web/**/*_test.coffee'],   ['testJS', 'test']);
+  gulp.watch(['./test/web/**/*_test.coffee'],   ['test']);
   gulp.watch(['./web/app/views/**/*.jade'],     ['templates']);
   gulp.watch(['./web/app/styles/**/*.less'],    ['appCSS']);
 });

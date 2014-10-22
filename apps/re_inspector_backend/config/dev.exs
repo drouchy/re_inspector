@@ -2,7 +2,7 @@ use Mix.Config
 
 config :phoenix, ReInspector.Backend.Router,
   http: [port: 4000],
-  debug_errors: true
+  debug_errors: false
 
 config :phoenix, :code_reloader, true
 

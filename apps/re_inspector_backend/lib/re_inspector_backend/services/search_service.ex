@@ -7,6 +7,12 @@ defmodule ReInspector.Backend.Services.SearchService do
   end
 
   defp search_results(term, options), do: ReInspector.App.search(term, options)
+
+  defp pagination(term, %{"limit" => "no_limit"}) do
+    %{
+      "total"         => ReInspector.App.count(term, %{})
+    }
+  end
   defp pagination(term, options) do
     total = ReInspector.App.count(term, options)
     limit = options["limit"]
@@ -17,12 +23,17 @@ defmodule ReInspector.Backend.Services.SearchService do
       "total"         => total,
       "current_page"  => "#{path}?#{encode(term, limit, page)}",
       "next_page"     => link_to_next_page(term, path, limit, page, total),
-      "previous_page" => link_to_previous_page(term, path, limit, page)
+      "previous_page" => link_to_previous_page(term, path, limit, page),
+      "all_results"   => "#{path}?#{encode_no_limit(term)}"
     }
   end
 
   defp encode(term, limit, page) do
     URI.encode_query(%{"limit" => limit, "page" => page, "q" => term})
+  end
+
+  defp encode_no_limit(term) do
+    URI.encode_query(%{"limit" => :no_limit, "q" => term})
   end
 
   defp link_to_previous_page(_term, _path, _limit, 0), do: nil

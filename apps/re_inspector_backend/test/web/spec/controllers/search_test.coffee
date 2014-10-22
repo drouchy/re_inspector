@@ -57,6 +57,14 @@ describe 'Controller: SearchCtrl', ->
 
       expect(service.search).toHaveBeenCalledWith('/api/search?q=foo_bar')
 
+    it 'sets back the showAllResults flag', ->
+      scope.showAllResults = true
+      scope.query = 'foo'
+
+      scope.search()
+
+      expect(scope.showAllResults).toBe false
+
   describe 'search execution', ->
     it 'searches the query', ->
       expect(service.search).toHaveBeenCalledWith('/api/search?q=to_search')
@@ -112,6 +120,30 @@ describe 'Controller: SearchCtrl', ->
         scope.$apply()
 
         expect(scope.searching).toBe false
+
+  describe 'loadAll', ->
+    it 'sets the flag show all results', ->
+      scope.loadAll()
+
+      expect(scope.showAllResults).toBe true
+
+    it 'launches the search', ->
+      scope.pagination = { all_results: '/api/search?q=foo_bar' }
+
+      scope.loadAll()
+
+      expect(service.search).toHaveBeenCalledWith('/api/search?q=foo_bar')
+
+    it 'discard all results before searching', ->
+      results = ['new result 1', 'new result 2']
+      scope.results = ['result 1', 'result 2']
+      deferred.resolve({results: results})
+
+      scope.loadAll()
+      scope.$apply()
+
+      expect(_.contains(scope.results,('result 1'))).toBe false
+      expect(_.contains(scope.results,('result 2'))).toBe false
 
   buildPromise = (q, searchService) ->
     deferred = q.defer()
