@@ -6,10 +6,9 @@ defmodule ReInspector.Backend.Supervisor do
   end
 
   def init([]) do
-    children = []
-
-    # See http://elixir-lang.org/docs/stable/Supervisor.Behaviour.html
-    # for other strategies and supported options
+    children = [
+      worker(ReInspector.Backend.Worker, [])
+    ]
     supervise(children, strategy: :one_for_one)
   end
 end
