@@ -43,6 +43,33 @@ defmodule ReInspector.App.Services.SearchServiceTest do
     assert service_names == ["service 10", "service 11", "service 12", "service 13", "service 14"]
   end
 
+  test "by default orders the elements by requested_at ascending" do
+    big_insert
+
+    result = SearchService.search("3", %{"limit" => 5, "page" => 0})
+
+    service_names = Enum.map(result, fn(e) -> e.service_name end)
+    assert service_names == ["service 0", "service 1", "service 2", "service 3", "service 4"]
+  end
+
+  test "can order the elements by requested_at ascending" do
+    big_insert
+
+    result = SearchService.search("3", %{"limit" => 5, "page" => 0, "order" => "asc"})
+
+    service_names = Enum.map(result, fn(e) -> e.service_name end)
+    assert service_names == ["service 0", "service 1", "service 2", "service 3", "service 4"]
+  end
+
+  test "can order the elements by requested_at descending" do
+    big_insert
+
+    result = SearchService.search("3", %{"limit" => 5, "page" => 0, "order" => "desc"})
+
+    service_names = Enum.map(result, fn(e) -> e.service_name end)
+    assert service_names == ["service 19", "service 18", "service 17", "service 16", "service 15"]
+  end
+
   test "can disable the pagination" do
     big_insert
 

@@ -8,9 +8,11 @@ defmodule ReInspector.App.Services.SearchService do
 
   def search(query, options) do
     Logger.info "search '#{query}' with options: #{inspect options}"
+    order = Map.get(options, "order", "asc")
+
     ecto_query(query)
     |> select([c, q], {c,q})
-    |> order_by([_c, q], q.requested_at)
+    |> order_query(order)
     |> limit_results(options)
     |> Repo.all
     |> Enum.map fn({correlation, api_request}) -> %{api_request | correlation: correlation} end
@@ -37,4 +39,7 @@ defmodule ReInspector.App.Services.SearchService do
     |> offset(limit*page)
   end
   defp limit_results(query, _), do: query
+
+  defp order_query(query, "asc"),  do: query |> order_by([_c, q], [asc:  q.requested_at])
+  defp order_query(query, "desc"), do: query |> order_by([_c, q], [desc: q.requested_at])
 end
