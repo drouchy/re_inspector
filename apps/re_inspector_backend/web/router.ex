@@ -1,17 +1,18 @@
 defmodule ReInspector.Backend.Router do
   use Phoenix.Router
+  alias ReInspector.Backend.Controllers
 
   scope "/" do
     pipe_through :browser
 
-    get "/",            ReInspector.Backend.Controllers.HomeController,    :index, as: :root
-    get "/api/version", ReInspector.Backend.Controllers.VersionController, :show
-    get "/api/search",  ReInspector.Backend.Controllers.SearchController,  :index
+    get "/",            Controllers.HomeController,    :index, as: :root
+    get "/api/version", Controllers.VersionController, :show
+    get "/api/search",  Controllers.SearchController,  :index
 
-    get "/auth/:provider/authenticate", ReInspector.Backend.Controllers.AuthenticationController, :authenticate
-    get "/auth/:provider/call_back",    ReInspector.Backend.Controllers.AuthenticationController, :call_back
+    get "/auth/:provider/authenticate", Controllers.AuthenticationController, :authenticate
+    get "/auth/:provider/call_back",    Controllers.AuthenticationController, :call_back
 
-    get "/api/api_request/:id", ReInspector.Backend.Controllers.ApiRequestController, :show
+    get "/api/api_request/:id", Controllers.ApiRequestController, :show
   end
 
   use Phoenix.Router.Socket, mount: "/ws"
