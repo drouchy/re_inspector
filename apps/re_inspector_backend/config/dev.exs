@@ -6,6 +6,8 @@ config :phoenix, ReInspector.Backend.Router,
 
 config :phoenix, :code_reloader, true
 
+config :logger, level: :debug
+
 config :re_inspector_app, :listeners,
   redis: [
     [

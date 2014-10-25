@@ -1,5 +1,7 @@
 use Mix.Config
 
+config :logger, level: :debug
+
 config :phoenix, ReInspector.Backend.Router,
   http: [port: 4010],
   catch_errors: false
