@@ -25,6 +25,7 @@ defmodule ReInspector.Metrics.Mixfile do
   defp deps do
     [
       {:statman, github: "knutin/statman", override: true},
+      {:lhttpc, github: "ferd/lhttpc", override: true},
 
       {:cowboy, "~> 1.0.0", optional: true},
       {:plug, "~> 0.8.1", optional: true},
