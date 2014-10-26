@@ -5,7 +5,7 @@ defmodule ReInspector.Metrics do
 
   def start(), do: start(nil, nil)
   def start(_type, _args) do
-    ReInspector.Metrics.Supervisor.start_link
+    ReInspector.Metrics.Supervisors.Supervisor.start_link
   end
 
   def register_web_transaction(path, total) do

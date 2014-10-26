@@ -6,9 +6,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :re_inspector_metrics,
+config :metrics,
   enabled: true,
-  provider: "new_relic",
+  backend: "new_relic",
   application_name: "re_inspector_metrics_app",
   license_key: "newrelic-license-key"
 
