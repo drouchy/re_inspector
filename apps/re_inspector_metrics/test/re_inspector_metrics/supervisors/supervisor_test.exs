@@ -1,5 +1,5 @@
 defmodule ReInspector.Metrics.Supervisors.SupervisorTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
   use Webtest.Case
 
   test "it starts the redis message listener worker" do
@@ -17,4 +17,9 @@ defmodule ReInspector.Metrics.Supervisors.SupervisorTest do
       assert new_pid != pid
     end
   end
+
+  test "it starts the stats worker" do
+    assert Process.whereis(:stats_worker) != nil
+  end
+
 end
