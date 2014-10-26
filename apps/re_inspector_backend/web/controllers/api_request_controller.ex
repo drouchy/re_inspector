@@ -1,5 +1,6 @@
 defmodule ReInspector.Backend.Controllers.ApiRequestController do
   use Phoenix.Controller
+  plug ReInspector.Metrics.Plug.Instrumentation, []
 
   alias ReInspector.App.Services.ApiRequestService
   alias ReInspector.App.JsonParser

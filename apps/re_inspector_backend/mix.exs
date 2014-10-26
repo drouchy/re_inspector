@@ -29,6 +29,8 @@ defmodule ReInspector.Backend.Mixfile do
   defp deps do
     [
       {:re_inspector_app, in_umbrella: true},
+      {:re_inspector_metrics, in_umbrella: true},
+
       {:cowboy, "~> 1.0.0"},
       {:phoenix, "~> 0.5.0"},
       {:plug, "~> 0.8.0"},
@@ -36,6 +38,7 @@ defmodule ReInspector.Backend.Mixfile do
       {:hackney, "~> 0.14.1"},
       {:erlcloud, github: "gleber/erlcloud"},
 
+      {:lhttpc, github: "ferd/lhttpc", override: true},
       {:exvcr, github: "parroty/exvcr", only: test_envs},
       {:meck, github: "eproxus/meck", override: true},
       {:jsx, github: "talentdeficit/jsx", override: true}

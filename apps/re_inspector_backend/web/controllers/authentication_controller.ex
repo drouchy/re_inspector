@@ -1,6 +1,7 @@
 defmodule ReInspector.Backend.Controllers.AuthenticationController do
   use Phoenix.Controller
 
+  plug ReInspector.Metrics.Plug.Instrumentation, []
   plug :action
 
   alias ReInspector.Backend.Services.AuthenticationService
