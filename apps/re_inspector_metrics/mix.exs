@@ -41,6 +41,7 @@ defmodule ReInspector.Metrics.Mixfile do
       {:plug, "~> 0.8.1", optional: true},
 
       {:newrelic, github: "wooga/newrelic-erlang", optional: true},
+      # {:con_cache, "~> 0.6.0"},
 
       {:meck, github: "eproxus/meck", override: true, only: test_envs},
       {:mock, github: "jjh42/mock", override: true, only: test_envs},

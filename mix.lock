@@ -17,7 +17,7 @@
   "idna": {:hex, :idna, "1.0.1"},
   "jiffy": {:git, "https://github.com/davisp/jiffy.git", "b0fc299119f8cbd8553484e513bf605db3e774fc", [ref: "master"]},
   "jsex": {:hex, :jsex, "2.0.0"},
-  "jsx": {:git, "git://github.com/talentdeficit/jsx.git", "507fa4c41db33c81e925ab53f4d789d234aaff2f", []},
+  "jsx": {:hex, :jsx, "2.1.1"},
   "lhttpc": {:git, "git://github.com/ferd/lhttpc.git", "de7e48fb1045bbe522fa01f7c2c7839d89f04f88", []},
   "linguist": {:hex, :linguist, "0.1.2"},
   "meck": {:git, "git://github.com/eproxus/meck.git", "b1f313b4cecc3df05a477a93641bf0a24d858590", []},
