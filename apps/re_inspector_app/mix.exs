@@ -18,7 +18,7 @@ defmodule ReInspector.App.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [
-      applications: [:postgrex, :ecto, :erlcloud, :logger],
+      applications: [:postgrex, :ecto, :erlcloud, :logger, :re_inspector_metrics],
       mod: {ReInspector.App, [] }
     ]
   end
@@ -37,6 +37,10 @@ defmodule ReInspector.App.Mixfile do
 
   defp deps do
     [
+      {:re_inspector_metrics, in_umbrella: true},
+      {:statman, github: "knutin/statman", override: true},
+      {:newrelic, github: "wooga/newrelic-erlang", override: true},
+
       # {:postgrex, "~> 0.6.1"},
       {:decimal, "~> 0.2.5"},
       {:ecto, "~> 0.2.5"},

@@ -49,4 +49,10 @@ config :re_inspector_app,
   correlators: [],
   retention_in_weeks: 10
 
+config :metrics,
+  enabled: true,
+  backend: "new_relic",
+  application_name: "re_inspector_metrics_app",
+  license_key: "newrelic-license-key"
+
 import_config "#{Mix.env}.exs"
