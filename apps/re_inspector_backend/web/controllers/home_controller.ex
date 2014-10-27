@@ -1,6 +1,8 @@
 defmodule ReInspector.Backend.Controllers.HomeController do
   use Phoenix.Controller
+
   plug ReInspector.Metrics.Plug.Instrumentation, []
+  plug :action
 
   alias ReInspector.App.JsonParser
 

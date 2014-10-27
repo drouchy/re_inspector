@@ -18,7 +18,7 @@ defmodule ReInspector.Backend.Mixfile do
   def application do
     [
       mod: { ReInspector.Backend, [] },
-      applications: [:phoenix, :re_inspector_app, :httpoison, :logger]
+      applications: [:phoenix, :re_inspector_app, :httpoison, :logger, :newrelic, :re_inspector_metrics]
     ]
   end
 
@@ -30,6 +30,9 @@ defmodule ReInspector.Backend.Mixfile do
     [
       {:re_inspector_app, in_umbrella: true},
       {:re_inspector_metrics, in_umbrella: true},
+
+      {:statman, github: "knutin/statman", override: true},
+      {:newrelic, github: "wooga/newrelic-erlang", override: true},
 
       {:cowboy, "~> 1.0.0"},
       {:phoenix, "~> 0.5.0"},
