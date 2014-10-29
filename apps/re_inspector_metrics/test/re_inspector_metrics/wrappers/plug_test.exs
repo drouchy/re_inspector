@@ -15,7 +15,7 @@ defmodule ReInspector.Metrics.PlugTest do
 
   # call/2
   test_with_mock "capture the elapsed time and send it to statman", ReInspector.Metrics,
-  [ register_web_transaction: fn(_path, total) -> assert_in_delta(total, 50000, 10000) ; :ok end] do
+  [ report_transaction_execution: fn(_name, total) -> assert_in_delta(total, 50000, 10000) ; :ok end] do
     with_retries 2, 100 do
       conn = Instrumentation.call(conn(:get, "/path"), @opts)
       :timer.sleep 50

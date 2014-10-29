@@ -8,12 +8,9 @@ defmodule ReInspector.Metrics do
     ReInspector.Metrics.Supervisors.Supervisor.start_link
   end
 
-  def register_web_transaction(path, total) do
-    Logger.debug "register web transaction: #{path} - #{total/1000}ms"
-    GenServer.cast(:stats_worker, {:web_transaction, [path: path, total: total]})
+  def report_transaction_execution(name, total) do
+    Logger.debug "report transaction execution: #{name} - #{total/1000}ms"
+    GenServer.cast(:stats_worker, {:report_transaction, [name: name, total: total]})
   end
 
-  def instrument_web_transaction(path, function) do
-    Logger.debug "instrument web transaction #{path}"
-  end
 end

@@ -12,7 +12,7 @@ defmodule ReInspector.Metrics.Plug.Instrumentation do
   defp monitor_result(conn, start_time) do
     elapsed_time = :timer.now_diff :erlang.now, start_time
     Logger.debug "Instrumented #{path(conn)} - #{div(elapsed_time,1000)}ms"
-    ReInspector.Metrics.register_web_transaction(path(conn), elapsed_time)
+    ReInspector.Metrics.report_transaction_execution(path(conn), elapsed_time)
     conn
   end
 

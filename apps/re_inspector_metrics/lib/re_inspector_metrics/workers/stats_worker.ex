@@ -7,18 +7,18 @@ defmodule ReInspector.Metrics.Workers.StatsWorker do
     GenServer.start_link(__MODULE__, [], [name: :stats_worker])
   end
 
-  def handle_cast({:web_transaction, [path: path, total: total]}, state) do
-    send_to_statman(path, total)
+  def handle_cast({:report_transaction, [name: name, total: total]}, state) do
+    send_to_statman(name, total)
     {:noreply, state}
   end
 
-  def handle_cast({:web_transaction, [path: path, from: from, to: to]}, state) do
+  def handle_cast({:report_transaction, [name: name, from: from, to: to]}, state) do
     total = :timer.now_diff(to, from)
-    send_to_statman(path, total)
+    send_to_statman(name, total)
     {:noreply, state}
   end
 
-  defp send_to_statman(path, total) do
-    Statman.histogram {path, :total}, total
+  defp send_to_statman(name, total) do
+    Statman.histogram {name, :total}, total
   end
 end
