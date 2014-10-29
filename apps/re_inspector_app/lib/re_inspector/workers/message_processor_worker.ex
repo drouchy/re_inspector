@@ -1,13 +1,14 @@
 defmodule ReInspector.App.Workers.MessageProcessorWorker do
   use GenServer
   require Logger
+  import ReInspector.Metrics.Instrumentation
 
   def start_link(_) do
     GenServer.start_link(__MODULE__, [])
   end
 
   def handle_cast({:process, message}, state) do
-    process(message)
+    instrument {:background, "message_processor" } , process(message)
     {:noreply, state}
   end
 
