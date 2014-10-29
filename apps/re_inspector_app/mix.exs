@@ -58,7 +58,6 @@ defmodule ReInspector.App.Mixfile do
       {:jsx, "~> 2.1.1", override: true},
 
       {:lhttpc, github: "ferd/lhttpc", override: true}
-
     ]
   end
 

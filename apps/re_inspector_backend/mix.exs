@@ -44,7 +44,7 @@ defmodule ReInspector.Backend.Mixfile do
       {:lhttpc, github: "ferd/lhttpc", override: true},
       {:exvcr, github: "parroty/exvcr", only: test_envs},
       {:meck, github: "eproxus/meck", override: true},
-      {:jsx, github: "talentdeficit/jsx", override: true}
+      {:jsx, "~> 2.1.1", override: true}
     ]
   end
 
