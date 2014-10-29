@@ -9,7 +9,7 @@ defmodule ReInspector.Metrics do
   end
 
   def report_transaction_execution(name, total) do
-    Logger.debug "report transaction execution: #{name} - #{total/1000}ms"
+    Logger.debug "report transaction execution: #{inspect name} - #{total/1000}ms"
     GenServer.cast(:stats_worker, {:report_transaction, [name: name, total: total]})
   end
 
