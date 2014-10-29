@@ -20,7 +20,6 @@ defmodule ReInspector.App.Workers.RedisMessageListenerWorker do
     ReInspector.App.Processors.RedisListener.listen(redis_client, redis_list)
     |> process
 
-    :timer.sleep 300
     listen_redis(redis_client, redis_list)
   end
 

@@ -23,8 +23,8 @@ config :re_inspector_app, :worker_pools,
     max_overflow: 5
   ],
   processor: [
-    size: 3,
-    max_overflow: 5
+    size: 30,
+    max_overflow: 50
   ]
 
 config :re_inspector_app, :database,

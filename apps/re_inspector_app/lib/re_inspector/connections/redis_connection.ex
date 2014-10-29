@@ -15,7 +15,7 @@ defmodule ReInspector.App.Connections.Redis do
 
   def pop(redis_client, list) do
     redis_client
-    |> query(["RPOP", list])
+    |> query(["BRPOP", list, "1"])
     |> to_message
   end
 
@@ -33,6 +33,7 @@ defmodule ReInspector.App.Connections.Redis do
   end
 
   defp to_message(:undefined), do: :none
+  defp to_message([key,value]), do: to_message(value)
   defp to_message(value) do
     case Regex.run ~r/^ERR|WRONG.*/, value do
       nil -> value

@@ -7,6 +7,7 @@ defmodule ReInspector.App.Workers.MessageProcessorWorker do
   end
 
   def handle_cast({:process, message}, state) do
+    Logger.debug "processing message from #{inspect self}"
     process(message)
     {:noreply, state}
   end
