@@ -55,7 +55,7 @@ defmodule ReInspector.App.Mixfile do
       {:postgrex, github: "ericmj/postgrex", override: true},
       {:meck, github: "eproxus/meck", override: true, only: test_envs},
       {:mock, github: "jjh42/mock", override: true, only: test_envs},
-      {:jsx, github: "talentdeficit/jsx", override: true, only: test_envs},
+      {:jsx, "~> 2.1.1", override: true},
 
       {:lhttpc, github: "ferd/lhttpc", override: true}
 
