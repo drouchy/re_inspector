@@ -9,7 +9,6 @@ defmodule ReInspector.App.Workers.MessageProcessorWorker do
 
   def handle_cast({:process, message}, state) do
     instrument {:background, "message_processor" } , process(message)
-    process(message)
     {:noreply, state}
   end
 
