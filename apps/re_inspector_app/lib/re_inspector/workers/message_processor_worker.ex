@@ -9,10 +9,12 @@ defmodule ReInspector.App.Workers.MessageProcessorWorker do
 
   def handle_cast({:process, message}, state) do
     instrument {:background, "message_processor" } , process(message)
+    process(message)
     {:noreply, state}
   end
 
   defp process(message) do
+    Logger.debug "processing message from #{inspect self}"
     try do
       message
       |> ReInspector.App.Converters.ApiRequestMessageConverter.to_postgres

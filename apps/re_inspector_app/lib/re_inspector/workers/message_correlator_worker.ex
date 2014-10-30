@@ -4,7 +4,7 @@ defmodule ReInspector.App.Workers.MessageCorrelatorWorker do
   import ReInspector.Metrics.Instrumentation
 
   def start_link(correlators) do
-    GenServer.start_link(__MODULE__, correlators, [name: :re_inspector_message_correlator])
+    GenServer.start_link(__MODULE__, correlators)
   end
 
   def handle_cast({:process, api_request_id}, correlators) do

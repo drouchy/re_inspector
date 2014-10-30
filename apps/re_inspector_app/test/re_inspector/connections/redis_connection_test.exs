@@ -1,12 +1,14 @@
 defmodule ReInspector.App.Connections.RedisTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
 
   import ReInspector.Support.Redis
 
+  @redis_list "redis_list"
+
   setup do
-    clear_redis
+    clear_redis(@redis_list)
     on_exit fn ->
-      clear_redis
+      clear_redis(@redis_list)
     end
   end
 
@@ -22,58 +24,58 @@ defmodule ReInspector.App.Connections.RedisTest do
 
   # length
   test "returns 0 if there is nothing in the list" do
-    assert Redis.length(redis_connection, redis_list) == 0
+    assert Redis.length(redis_connection, @redis_list) == 0
   end
 
   test "returns the length of the list" do
-    query ["LPUSH", redis_list, default_message]
-    query ["LPUSH", redis_list, "other #{default_message}"]
+    query ["LPUSH", @redis_list, default_message]
+    query ["LPUSH", @redis_list, "other #{default_message}"]
 
-    assert Redis.length(redis_connection, redis_list) == 2
+    assert Redis.length(redis_connection, @redis_list) == 2
   end
 
   test "returns :invalid if the entry is not a list" do
-    query ["DEL", redis_list]
-    query ["SET", redis_list, default_message]
+    query ["DEL", @redis_list]
+    query ["SET", @redis_list, default_message]
 
-    assert Redis.length(redis_connection, redis_list) == :invalid
+    assert Redis.length(redis_connection, @redis_list) == :invalid
   end
 
   # pop
   test "it returns the first element in the list" do
-    query ["LPUSH", redis_list, default_message]
-    query ["LPUSH", redis_list, "other #{default_message}"]
+    query ["LPUSH", @redis_list, default_message]
+    query ["LPUSH", @redis_list, "other #{default_message}"]
 
-    assert Redis.pop(redis_connection, redis_list) == default_message
+    assert Redis.pop(redis_connection, @redis_list) == default_message
   end
 
   test "it only removes the first element" do
-    query ["LPUSH", redis_list, default_message]
-    query ["LPUSH", redis_list, "other #{default_message}"]
+    query ["LPUSH", @redis_list, default_message]
+    query ["LPUSH", @redis_list, "other #{default_message}"]
 
-    Redis.pop(redis_connection, redis_list)
+    Redis.pop(redis_connection, @redis_list)
 
-    assert Redis.length(redis_connection, redis_list) == 1
+    assert Redis.length(redis_connection, @redis_list) == 1
   end
 
   test "returns :none if trying to pop and the entry is not a list" do
-    query ["DEL", redis_list]
-    query ["SET", redis_list, "bar"]
+    query ["DEL", @redis_list]
+    query ["SET", @redis_list, "bar"]
 
-    assert Redis.pop(redis_connection, redis_list) == :none
+    assert Redis.pop(redis_connection, @redis_list) == :none
   end
 
   test "returns :none if the list does not exist" do
-    query ["DEL", redis_list]
+    query ["DEL", @redis_list]
 
-    assert Redis.pop(redis_connection, redis_list) == :none
+    assert Redis.pop(redis_connection, @redis_list) == :none
   end
 
   test "returns :none if the list is empty" do
-    query ["LPUSH", redis_list, default_message]
-    query ["RPOP", redis_list]
+    query ["LPUSH", @redis_list, default_message]
+    query ["RPOP", @redis_list]
 
-    assert Redis.pop(redis_connection, redis_list) == :none
+    assert Redis.pop(redis_connection, @redis_list) == :none
   end
 
   # push
@@ -92,5 +94,5 @@ defmodule ReInspector.App.Connections.RedisTest do
 
   defp default_message, do: "one message in redis"
 
-  defp opts, do: ReInspector.Support.Redis.redis_options
+  defp opts, do: Keyword.merge(ReInspector.Support.Redis.redis_options, [list: @redis_list])
 end

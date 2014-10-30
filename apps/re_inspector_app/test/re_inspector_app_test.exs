@@ -9,13 +9,6 @@ defmodule ReInspector.AppTest do
     assert version == ReInspector.App.Mixfile.project[:version]
   end
 
-  #process_api_request/1
-  test_with_mock "cast a message for processing", GenServer, [cast: fn(:re_inspector_message_correlator, {:process, 10}) -> :ok end] do
-    ReInspector.App.process_api_request(10)
-
-    assert called GenServer.cast(:re_inspector_message_correlator, {:process, 10})
-  end
-
   #process_error/2
   test_with_mock "call a message for processing error", GenServer, [cast: fn(:re_inspector_error_processor, {:error_raised, :error, :trace, :id}) -> :ok end] do
     ReInspector.App.process_error(:error, :trace, :id)

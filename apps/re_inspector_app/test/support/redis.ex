@@ -1,9 +1,10 @@
 defmodule ReInspector.Support.Redis do
   use Exredis
 
-  def clear_redis do
+  def clear_redis(additional_list \\ nil) do
     redis_connection |> query ["DEL", redis_list]
     redis_connection |> query ["DEL", failure_list]
+    redis_connection |> query ["DEL", additional_list]
     :ok
   end
 

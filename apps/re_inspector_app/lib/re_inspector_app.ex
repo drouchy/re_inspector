@@ -11,7 +11,10 @@ defmodule ReInspector.App do
 
   # client methods
   def process_api_request(api_request_id) do
-    GenServer.cast :re_inspector_message_correlator, {:process, api_request_id}
+    #GenServer.cast :re_inspector_message_correlator, {:process, api_request_id}
+    :poolboy.transaction(:message_correlator_worker_pool, fn(worker) ->
+      GenServer.cast(worker, {:process, api_request_id})
+    end)
   end
 
   def process_error(error, stack_trace, api_request_id \\ nil) do
