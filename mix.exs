@@ -10,8 +10,7 @@ defmodule ReInspector.Mixfile do
 
   defp deps do
     [
-      {:meck, github: "eproxus/meck", override: true},
-      {:jsx, github: "talentdeficit/jsx", override: true}
+      {:lhttpc, github: "ferd/lhttpc", override: true}
     ]
   end
 end

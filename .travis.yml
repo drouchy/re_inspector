@@ -20,7 +20,7 @@ script:
   - cd ../re_inspector_backend
   - mix do deps.get, deps.compile cowboy
   - cd ../..
-  - mix do deps.get, test
+  - MIX_ENV=test mix do deps.get, test
   - cd apps/re_inspector_backend
   - gulp
   - gulp test
