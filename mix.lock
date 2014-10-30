@@ -1,5 +1,5 @@
-%{"amqp": {:hex, :amqp, "0.0.5"},
-  "amqp_client": {:hex, :amqp_client, "3.3.5"},
+%{"amqp": {:hex, :amqp, "0.0.6"},
+  "amqp_client": {:hex, :amqp_client, "3.4.0"},
   "chronos": {:hex, :chronos, "0.3.7"},
   "cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.0"},
@@ -29,6 +29,6 @@
   "poison": {:hex, :poison, "1.2.0"},
   "poolboy": {:hex, :poolboy, "1.2.1"},
   "postgrex": {:git, "git://github.com/ericmj/postgrex.git", "bb12d101b659d3383eb8c701f975ce20ec64c46a", []},
-  "rabbit_common": {:hex, :rabbit_common, "3.3.5"},
+  "rabbit_common": {:hex, :rabbit_common, "3.4.0"},
   "ranch": {:hex, :ranch, "1.0.0"},
   "statman": {:git, "git://github.com/knutin/statman.git", "d3820e209e0f164f83a3ae126045c683a666b2d2", []}}
