@@ -6,13 +6,16 @@ defmodule ReInspector.Metrics.Plug.Instrumentation do
 
   def call(conn, opts) do
     start_time = :erlang.now
+    request_path = path(conn)
+    ReInspector.Metrics.TransactionRegistry.current_transaction request_path
     Plug.Conn.register_before_send(conn, fn(c) -> monitor_result(c, start_time) end)
   end
 
   defp monitor_result(conn, start_time) do
     elapsed_time = :timer.now_diff :erlang.now, start_time
-    Logger.debug "Instrumented #{path(conn)} - #{div(elapsed_time,1000)}ms"
-    ReInspector.Metrics.report_transaction_execution(path(conn), elapsed_time)
+    request_path = path(conn)
+    Logger.debug fn -> "Instrumented #{request_path} - #{div(elapsed_time,1000)}ms" end
+    ReInspector.Metrics.report_transaction_execution(request_path, elapsed_time)
     conn
   end
 
