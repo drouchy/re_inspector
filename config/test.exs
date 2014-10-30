@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :logger, level: :debug
+config :logger, level: :error
 
 config :phoenix, ReInspector.Backend.Router,
   http: [port: 4010],
