@@ -10,7 +10,6 @@ defmodule ReInspector.Metrics.Supervisors.Supervisor do
     children = [
       supervisor(ReInspector.Metrics.Supervisors.NewRelicSupervisor, []),
       worker(ReInspector.Metrics.Workers.StatsWorker, []),
-      worker(ReInspector.Metrics.TransactionRegistry, []),
       worker(:statman_aggregator, [])
     ]
 
