@@ -6,8 +6,7 @@ defmodule ReInspector.Metrics.Plug.Instrumentation do
 
   def call(conn, opts) do
     start_time = :erlang.now
-    request_path = path(conn)
-    ReInspector.Metrics.TransactionRegistry.current_transaction request_path
+    ReInspector.Metrics.TransactionRegistry.current_transaction path(conn)
     Plug.Conn.register_before_send(conn, fn(c) -> monitor_result(c, start_time) end)
   end
 

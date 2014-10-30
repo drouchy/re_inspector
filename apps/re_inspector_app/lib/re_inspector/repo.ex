@@ -12,7 +12,8 @@ defmodule ReInspector.Repo do
 
   def log({:query, sql}, fun) do
     {time, result} = :timer.tc(fun)
-    Logger.debug fn -> "#{sql} - #{time}ms" end
+    Logger.debug fn -> "#{sql} - #{time}us" end
+    send_execution_stat(ReInspector.Metrics.TransactionRegistry.current_transaction, time)
     result
   end
 
@@ -23,4 +24,10 @@ defmodule ReInspector.Repo do
   defp password, do: config[:password]
   defp host,     do: config[:host]
   defp database, do: config[:database]
+
+  defp send_execution_stat(:none, _), do: :none
+  defp send_execution_stat(transaction_name, total) do
+    IO.inspect ReInspector.Metrics.TransactionRegistry.current_transaction
+    ReInspector.Metrics.report_transaction_execution {transaction_name, {:db, "db query"}}, total
+  end
 end
