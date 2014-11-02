@@ -6,14 +6,14 @@ config :phoenix, ReInspector.Backend.Router,
 
 config :phoenix, :code_reloader, true
 
-config :logger, level: :debug
+config :logger, level: :info
 
 config :re_inspector_app, :listeners,
   redis: [
     [
       name: "local",
       host: "localhost",
-      port: 6379,
+      port: 16379,
       list: "re_inspector"
     ]
   ],

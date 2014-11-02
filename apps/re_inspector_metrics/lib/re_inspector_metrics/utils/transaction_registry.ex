@@ -8,7 +8,7 @@ defmodule ReInspector.Metrics.TransactionRegistry do
   end
 
   def current_transaction do
-    Logger.debug fn -> "requesting current transaction" end
+    Logger.debug fn -> "requesting current transaction #{inspect Process.get(@transaction_id_key)}" end
     case Process.get(@transaction_id_key) do
       nil            -> :none
       transaction_id -> transaction_id

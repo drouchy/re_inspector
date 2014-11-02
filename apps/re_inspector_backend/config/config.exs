@@ -50,4 +50,10 @@ config :re_inspector_backend, :github,
   client_id: System.get_env("GITHUB_CLIENT_ID"),
   client_secret: System.get_env("GITHUB_CLIENT_SECRET")
 
+config :metrics,
+  enabled: true,
+  backend: "new_relic",
+  application_name: 'V2::Staging::Inspector',
+  license_key: '8cba93cae6afd6afc7aea6e61611f63aa54ac360'
+
 import_config "#{Mix.env}.exs"

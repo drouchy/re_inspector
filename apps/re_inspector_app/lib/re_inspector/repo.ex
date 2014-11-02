@@ -27,7 +27,6 @@ defmodule ReInspector.Repo do
 
   defp send_execution_stat(:none, _), do: :none
   defp send_execution_stat(transaction_name, total) do
-    IO.inspect ReInspector.Metrics.TransactionRegistry.current_transaction
-    ReInspector.Metrics.report_transaction_execution {transaction_name, {:db, "db query"}}, total
+    ReInspector.Metrics.report_transaction_execution {transaction_name, {"db", "db query"}}, total
   end
 end

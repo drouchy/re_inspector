@@ -13,7 +13,7 @@ config :re_inspector_app, :listeners,
     [
       name: "test",
       host: "localhost",
-      port: 6379,
+      port: 16379,
       list: "re_inspector_test"
     ]
   ],
